@@ -1,23 +1,8 @@
 <?php
 
 abstract class DbConnect {
-	
-	protected static function executerRequete($sql) {
 
-		try {
-			$query = self::connexion()->prepare($sql);
-			$query->execute();
-			return $query;
-		}
-		catch(Exception $e) {
-			return $e->getMessage()."<br>Impossible de récupérer les données sur la table : messages";
-		}
-		
-		$query->closeCursor();
-		self::connexion()->close();
-	}
-
-	private static function connexion() {
+	protected static function connexion() {
 		
 		try {
             $dsn = 'mysql:host=' . DB_HOST .';dbname=' . DB_DATABASE;
@@ -28,7 +13,22 @@ abstract class DbConnect {
         } catch (PDOException $e) {
             die("Erreur de connexion PDO ");
         }		
-	}
+	  }
 	
 }
+
+	/* protected static function executerRequete($sql) { */
+
+	/* 	try { */
+	/* 		$query = self::connexion()->prepare($sql); */
+	/* 		$query->execute(); */
+	/* 		return $query; */
+	/* 	} */
+	/* 	catch(Exception $e) { */
+	/* 		return $e->getMessage()."<br>Impossible de récupérer les données sur la table : messages"; */
+	/* 	} */
+		
+	/* 	$query->closeCursor(); */
+	/* 	self::connexion()->close(); */
+	/* } */
 
