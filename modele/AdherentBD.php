@@ -73,7 +73,7 @@ class AdherentBD extends DbConnect {
 
     // TODO avoir le password hache, et determiner le format pour la date, retourner vrai ou faux
     // ?? sinon passer un objet adherent en parametre
-    public static function creerAdherent($new_nom, $new_prenom, $new_id_ville, $new_mail, $new_password, $new_points, $new_date_creation, $new_compte) {
+    public static function creerAdherent($nom, $prenom, $id_ville, $mail, $password, $points, $date_creation, $compte) {
 
       // colones à inserer
       $colones = [self::$nom, self::$prenom, self::$mail, self::$password, self::$points, self::$date_creation, self::$compte];
@@ -85,7 +85,7 @@ class AdherentBD extends DbConnect {
       try {
             $query = self::$db->prepare("INSERT INTO ".self::$table. " (" . $nomColones . ") VALUES (" .$placeholders. ") ");
 
-        $query->execute([$new_nom, $new_prenom, $new_id_ville, $new_mail, $new_password, $new_points, $new_date_creation, $new_compte]);
+        $query->execute([$nom, $prenom, $id_ville, $mail, $password, $points, $date_creation, $compte]);
 
         $ligne = $query->fetch(PDO::FETCH_ASSOC); while ($ligne) {
             $resultat[] = $ligne;
@@ -97,7 +97,7 @@ class AdherentBD extends DbConnect {
     }
 
     // retourner quelque chose ? un objet adherent ?
-    public static function modifierAdherent($idA, $new_nom, $new_prenom, $new_id_ville, $new_mail, $new_password, $new_points, $new_date_creation, $new_compte) {
+    public static function modifierAdherent($idA, $nom, $prenom, $id_ville, $mail, $password, $points, $date_creation, $compte) {
 
       // colones à inserer
       $colones = [self::$nom, self::$prenom, self::$mail, self::$password, self::$points, self::$date_creation, self::$compte];
@@ -109,7 +109,7 @@ class AdherentBD extends DbConnect {
       try {
         $query = self::$db->prepare("INSERT INTO ".self::$table." (".$nomColones.") VALUES (".$placeholders.") WHERE id=".$idA);
 
-        $query->execute([$new_nom, $new_prenom, $new_id_ville, $new_mail, $new_password, $new_points, $new_date_creation, $new_compte]);
+        $query->execute([$nom, $prenom, $id_ville, $mail, $password, $points, $date_creation, $compte]);
 
         $ligne = $query->fetch(PDO::FETCH_ASSOC); while ($ligne) {
             $resultat[] = $ligne;
