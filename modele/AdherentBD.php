@@ -4,11 +4,6 @@ class AdherentBD extends DbConnect {
 
     private $table = "Adherent";
 
-    private $db = self::connexion(); // ?? mettre dans un constructeur peut etre
-
-    // ?? est ce qu'on met chaque element de la base comme ca, pour ensuite simplifier la manipulation des
-    // tableau retourné par cette classe ?
-    // par example: $adherentListe[0][$nom];
     public $nom = "nom";
     public $prenom = "prenom";
     public $mail = "mail";
@@ -18,6 +13,7 @@ class AdherentBD extends DbConnect {
     public $compte = "compte";
 
     public static function getAdherent() {
+      $db = self::connexion();
       $resultat = [];
       try {
         $query = self::$db->prepare("SELECT * FROM " . self::$table);
@@ -31,11 +27,15 @@ class AdherentBD extends DbConnect {
       } catch (PDOException $e) {
           die( "Erreur !: " . $e->getMessage() );
       }
+      $db = null;
       return $resultat;
     }
 
     public static function getAdherentById(int $idA) {
-    $resultat = [];
+      $resultat = [];
+
+      $db = self::connexion();
+
       try {
         $query = self::$db->prepare("SELECT * FROM " . self::$table . " WHERE id = :idA");
         $query->bindValue(':idA', $idA, PDO::PARAM_INT);
@@ -48,13 +48,17 @@ class AdherentBD extends DbConnect {
       } catch (PDOException $e) {
           die( "Erreur !: " . $e->getMessage() );
       }
-      return $resultat;
 
-    $resultat;
+      $db = null;
+
+      return $resultat;
     }
 
     // TODO retourner vrai ou faux
-    public static function supprimerAdherent(int $idA) { 
+    public static function deleteAdherent(int $idA) { 
+      
+      $db = self::connexion();
+
       try {
         $query = self::$db->prepare("DELETE FROM ".self::$table." WHERE id = :idA");
         $query->bindValue(':idA', $idA, PDO::PARAM_INT);
@@ -68,12 +72,16 @@ class AdherentBD extends DbConnect {
           die( "Erreur !: " . $e->getMessage() );
       }
 
+      $db = null;
+
     }
 
 
     // TODO avoir le password hache, et determiner le format pour la date, retourner vrai ou faux
     // ?? sinon passer un objet adherent en parametre
-    public static function creerAdherent($new_nom, $new_prenom, $new_id_ville, $new_mail, $new_password, $new_points, $new_date_creation, $new_compte) {
+    public static function addAdherent($new_nom, $new_prenom, $new_id_ville, $new_mail, $new_password, $new_points, $new_date_creation, $new_compte) {
+      
+      $db = self::connexion();
 
       // colones à inserer
       $colones = [self::$nom, self::$prenom, self::$mail, self::$password, self::$points, self::$date_creation, self::$compte];
@@ -94,10 +102,14 @@ class AdherentBD extends DbConnect {
       } catch (PDOException $e) {
           die( "Erreur !: " . $e->getMessage() );
       }
+
+      $db = null;
     }
 
     // retourner quelque chose ? un objet adherent ?
-    public static function modifierAdherent($idA, $new_nom, $new_prenom, $new_id_ville, $new_mail, $new_password, $new_points, $new_date_creation, $new_compte) {
+    public static function updateAdherent($idA, $new_nom, $new_prenom, $new_id_ville, $new_mail, $new_password, $new_points, $new_date_creation, $new_compte) {
+
+      $db = self::connexion();
 
       // colones à inserer
       $colones = [self::$nom, self::$prenom, self::$mail, self::$password, self::$points, self::$date_creation, self::$compte];
@@ -118,6 +130,8 @@ class AdherentBD extends DbConnect {
       } catch (PDOException $e) {
           die( "Erreur !: " . $e->getMessage() );
       }
+
+      $db = null;
     }
 
 }
