@@ -1,5 +1,6 @@
 <?php
 
+include_once("./controleur/config.php");
 require_once "./modele/DbConnect.php";
 
 class FilmBD extends DbConnect {
@@ -10,15 +11,15 @@ class FilmBD extends DbConnect {
     public static function addFilm($table, $titre, $desc, $droit, $date, $duree, $affiche, $etat) {
       try {
         $db = self::connexion();
-        $query = $db->prepare("INSERT INTO $table (titre, desc, droit, dateSortie, duree, affiche, etat)
-                              VALUES (:titre, :desc, :droit, :date, :dateSortie, :duree, :affiche, :etat)");
+        $query = $db->prepare("INSERT INTO $table (titre, description, duree, etat, id_affiche, date_sortie, date_expiration)
+                              VALUES (:titre, :desc, :duree, :etat, :affiche, :dateSortie, :droit)");
         $query->bindValue(':titre', $titre, PDO::PARAM_STR);
         $query->bindValue(':desc', $desc, PDO::PARAM_STR);
         $query->bindValue(':droit', $droit, PDO::PARAM_STR); //Apparemment on passe la date en string => on verra au test
         $query->bindValue(':dateSortie', $date, PDO::PARAM_STR);
         $query->bindValue(':duree', $duree, PDO::PARAM_STR);
         $query->bindValue(':affiche', $affiche, PDO::PARAM_INT); //Id_affiche int ou string ?
-        $query->bindValue(':etat', $etat, PDO::PARAM_BOOL); // cinéma ou streaming avec un boolean ?
+        $query->bindValue(':etat', $etat, PDO::PARAM_STR);
         $query->execute();
 
       } catch (PDOException $e) {
