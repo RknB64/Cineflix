@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.5deb2
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le : Dim 11 fév. 2024 à 13:45
--- Version du serveur :  11.2.2-MariaDB
--- Version de PHP : 7.3.21
+-- Hôte : localhost:3306
+-- Généré le : jeu. 15 fév. 2024 à 18:50
+-- Version du serveur :  10.3.39-MariaDB-0ubuntu0.20.04.2
+-- Version de PHP : 7.3.33-14+ubuntu20.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -27,18 +28,14 @@ SET time_zone = "+00:00";
 -- Structure de la table `achat`
 --
 
-DROP TABLE IF EXISTS `achat`;
-CREATE TABLE IF NOT EXISTS `achat` (
-  `id_billet` int(20) NOT NULL AUTO_INCREMENT,
-  `horaire_date` timestamp(6) NOT NULL,
-  `date_d’achat` timestamp(6) NOT NULL,
+CREATE TABLE `achat` (
+  `id_billet` int(20) NOT NULL,
+  `horaire_date` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `date_d’achat` timestamp(6) NOT NULL DEFAULT '0000-00-00 00:00:00.000000',
   `nb_places_achetees` int(10) NOT NULL,
   `id_adherent` int(20) NOT NULL,
-  `id_seance` int(20) NOT NULL,
-  PRIMARY KEY (`id_billet`),
-  KEY `fk_achat_seance` (`id_seance`),
-  KEY `fk_achat_adhernet` (`id_adherent`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `id_seance` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `achat`
@@ -53,20 +50,17 @@ INSERT INTO `achat` (`id_billet`, `horaire_date`, `date_d’achat`, `nb_places_a
 -- Structure de la table `adherent`
 --
 
-DROP TABLE IF EXISTS `adherent`;
-CREATE TABLE IF NOT EXISTS `adherent` (
-  `id` int(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `adherent` (
+  `id` int(20) NOT NULL,
   `nom` varchar(20) NOT NULL,
   `prenom` varchar(20) NOT NULL,
   `mail` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `points` int(10) NOT NULL,
-  `date_creation` timestamp NOT NULL,
+  `date_creation` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `compte` varchar(20) NOT NULL,
-  `id_ville` int(20) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_adherent_ville` (`id_ville`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `id_ville` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `adherent`
@@ -81,14 +75,11 @@ INSERT INTO `adherent` (`id`, `nom`, `prenom`, `mail`, `password`, `points`, `da
 -- Structure de la table `cinema`
 --
 
-DROP TABLE IF EXISTS `cinema`;
-CREATE TABLE IF NOT EXISTS `cinema` (
-  `id` int(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `cinema` (
+  `id` int(20) NOT NULL,
   `nom` varchar(50) NOT NULL,
-  `id_ville` int(20) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_cinema_ville` (`id_ville`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `id_ville` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `cinema`
@@ -103,18 +94,16 @@ INSERT INTO `cinema` (`id`, `nom`, `id_ville`) VALUES
 -- Structure de la table `film`
 --
 
-DROP TABLE IF EXISTS `film`;
-CREATE TABLE IF NOT EXISTS `film` (
-  `Id` int(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `film` (
+  `Id` int(20) NOT NULL,
   `titre` varchar(20) NOT NULL,
   `description` varchar(255) NOT NULL,
   `duree` varchar(5) NOT NULL,
   `etat` enum('cinema','streaming') NOT NULL,
   `id_affiche` int(20) NOT NULL,
-  `date_sortie` timestamp NOT NULL,
-  `date_expiration` timestamp NOT NULL,
-  PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `date_sortie` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `date_expiration` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `film`
@@ -129,14 +118,11 @@ INSERT INTO `film` (`Id`, `titre`, `description`, `duree`, `etat`, `id_affiche`,
 -- Structure de la table `salle`
 --
 
-DROP TABLE IF EXISTS `salle`;
-CREATE TABLE IF NOT EXISTS `salle` (
-  `id` int(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `salle` (
+  `id` int(20) NOT NULL,
   `id_cinema` int(20) NOT NULL,
-  `nb_place` int(20) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_salle_cinema` (`id_cinema`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `nb_place` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `salle`
@@ -151,16 +137,12 @@ INSERT INTO `salle` (`id`, `id_cinema`, `nb_place`) VALUES
 -- Structure de la table `seance`
 --
 
-DROP TABLE IF EXISTS `seance`;
-CREATE TABLE IF NOT EXISTS `seance` (
-  `id` int(20) NOT NULL AUTO_INCREMENT,
-  `horaire_date` timestamp NOT NULL,
+CREATE TABLE `seance` (
+  `id` int(20) NOT NULL,
+  `horaire_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `id_film` int(20) NOT NULL,
-  `id_salle` int(20) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_seance_film` (`id_film`),
-  KEY `fk_seance_salle` (`id_salle`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `id_salle` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `seance`
@@ -175,15 +157,12 @@ INSERT INTO `seance` (`id`, `horaire_date`, `id_film`, `id_salle`) VALUES
 -- Structure de la table `stream`
 --
 
-DROP TABLE IF EXISTS `stream`;
-CREATE TABLE IF NOT EXISTS `stream` (
-  `date_achat` timestamp(6) NOT NULL,
-  `date_expiration` timestamp(6) NOT NULL,
+CREATE TABLE `stream` (
+  `date_achat` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `date_expiration` timestamp(6) NOT NULL DEFAULT '0000-00-00 00:00:00.000000',
   `id_film` int(20) NOT NULL,
-  `id_adherent` int(20) NOT NULL,
-  KEY `fk_stream_film` (`id_film`),
-  KEY `fk_stream_adherent` (`id_adherent`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `id_adherent` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `stream`
@@ -198,15 +177,12 @@ INSERT INTO `stream` (`date_achat`, `date_expiration`, `id_film`, `id_adherent`)
 -- Structure de la table `tarif`
 --
 
-DROP TABLE IF EXISTS `tarif`;
-CREATE TABLE IF NOT EXISTS `tarif` (
+CREATE TABLE `tarif` (
   `id_cinema` int(20) NOT NULL,
   `id_film` int(20) NOT NULL,
   `prix_semaine` float NOT NULL,
-  `prix_weekend` float NOT NULL,
-  KEY `fk_tarif_cinema` (`id_cinema`),
-  KEY `fk_tarif_film` (`id_film`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `prix_weekend` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `tarif`
@@ -221,13 +197,11 @@ INSERT INTO `tarif` (`id_cinema`, `id_film`, `prix_semaine`, `prix_weekend`) VAL
 -- Structure de la table `ville`
 --
 
-DROP TABLE IF EXISTS `ville`;
-CREATE TABLE IF NOT EXISTS `ville` (
-  `id` int(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ville` (
+  `id` int(20) NOT NULL,
   `nom` varchar(20) NOT NULL,
-  `region` enum('Bretagne-56','Normandie-28') NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `region` enum('Bretagne-56','Normandie-28') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `ville`
@@ -238,8 +212,128 @@ INSERT INTO `ville` (`id`, `nom`, `region`) VALUES
 (2, 'lorient', 'Bretagne-56');
 
 --
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `achat`
+--
+ALTER TABLE `achat`
+  ADD PRIMARY KEY (`id_billet`),
+  ADD KEY `fk_achat_seance` (`id_seance`),
+  ADD KEY `fk_achat_adherent` (`id_adherent`) USING BTREE;
+
+--
+-- Index pour la table `adherent`
+--
+ALTER TABLE `adherent`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_adherent_ville` (`id_ville`);
+
+--
+-- Index pour la table `cinema`
+--
+ALTER TABLE `cinema`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_cinema_ville` (`id_ville`);
+
+--
+-- Index pour la table `film`
+--
+ALTER TABLE `film`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Index pour la table `salle`
+--
+ALTER TABLE `salle`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_salle_cinema` (`id_cinema`);
+
+--
+-- Index pour la table `seance`
+--
+ALTER TABLE `seance`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_seance_film` (`id_film`),
+  ADD KEY `fk_seance_salle` (`id_salle`);
+
+--
+-- Index pour la table `stream`
+--
+ALTER TABLE `stream`
+  ADD KEY `fk_stream_film` (`id_film`),
+  ADD KEY `fk_stream_adherent` (`id_adherent`);
+
+--
+-- Index pour la table `tarif`
+--
+ALTER TABLE `tarif`
+  ADD KEY `fk_tarif_cinema` (`id_cinema`),
+  ADD KEY `fk_tarif_film` (`id_film`);
+
+--
+-- Index pour la table `ville`
+--
+ALTER TABLE `ville`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `achat`
+--
+ALTER TABLE `achat`
+  MODIFY `id_billet` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `adherent`
+--
+ALTER TABLE `adherent`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `cinema`
+--
+ALTER TABLE `cinema`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `film`
+--
+ALTER TABLE `film`
+  MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `salle`
+--
+ALTER TABLE `salle`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `seance`
+--
+ALTER TABLE `seance`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `ville`
+--
+ALTER TABLE `ville`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- Contraintes pour les tables déchargées
 --
+
+--
+-- Contraintes pour la table `achat`
+--
+ALTER TABLE `achat`
+  ADD CONSTRAINT `achat_ibfk_1` FOREIGN KEY (`id_adherent`) REFERENCES `adherent` (`id`),
+  ADD CONSTRAINT `achat_ibfk_2` FOREIGN KEY (`id_seance`) REFERENCES `seance` (`id`);
 
 --
 -- Contraintes pour la table `adherent`

@@ -22,7 +22,7 @@ class AdherentBD extends DbConnect {
     {
 
       $db = self::connexion();
-      $resultat;
+      $resultat=null;
 
       try {
         $query = $db->prepare("SELECT * FROM " . self::$table);
@@ -46,7 +46,7 @@ class AdherentBD extends DbConnect {
 
     public static function getAdherentById(int $idA) : array 
     {
-      $resultat;
+      $resultat=null;
 
       $db = self::connexion();
 

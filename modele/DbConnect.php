@@ -1,10 +1,5 @@
 <?php
 
-define('DB_HOST',       'localhost');
-define('DB_USERNAME',   'root');
-define('DB_PASSWORD',   'root@sio');
-define('DB_DATABASE',   'db_cineflix');
-
 abstract class DbConnect {
 
 
