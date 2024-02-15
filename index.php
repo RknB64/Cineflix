@@ -22,7 +22,7 @@ echo '</pre>';
 
 echo 'TEST 2 : Get tout les films après Create';
 echo '<pre>';
-print_r($testGetall);
+print_r($testGetAll);
 echo '</pre>';
 
 echo 'TEST 3 : Get le film créé';
