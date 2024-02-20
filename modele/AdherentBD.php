@@ -114,8 +114,7 @@ class AdherentBD extends DbConnect {
             $query = $db->prepare("INSERT INTO ".self::$table. " (" . $nomColones . ") 
                                         VALUES (" .$placeholders. ") ");
 
-            $res = $query->execute([$new_nom, $new_prenom, $new_id_ville, $new_mail, 
-                              $new_password, $new_points, $new_date_creation, $new_compte]); // TODO trouver un moyen de pas mettre ca a la main
+            $res = $query->execute(func_get_arg()); // func_get_arg crée une array avec les arg
 
       } catch (PDOException $e) {
           die("Erreur !: " . $e->getMessage()); // TODO enlever les die()
@@ -147,8 +146,7 @@ class AdherentBD extends DbConnect {
         $query = $db->prepare("UPDATE ".self::$table." SET ".$colonnes." WHERE id=".$idA);
         echo "UPDATE ".self::$table." SET ".$colonnes." WHERE id=".$idA;
     
-        $res = $query->execute([$new_nom, $new_prenom, $new_id_ville, $new_mail, $new_password, 
-                                $new_points, $new_date_creation, $new_compte]);
+        $res = $query->execute(func_get_arg());
 
       } catch (PDOException $e) {
           die( "Erreur !: " . $e->getMessage() );
