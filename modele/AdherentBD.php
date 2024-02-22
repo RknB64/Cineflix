@@ -1,6 +1,7 @@
 <?php
 
 include './DbConnect.php';
+include_once '../controleur/config.php';
 
 class AdherentBD extends DbConnect {
 
@@ -95,12 +96,13 @@ class AdherentBD extends DbConnect {
 
     // TODO avoir le password hache, et determiner le format pour la date, retourner vrai ou faux
     // ?? sinon passer un objet adherent en parametre
-    public static function addAdherent($new_nom, $new_prenom, $new_id_ville, $new_mail, 
-                                        $new_password, $new_points, $new_date_creation, $new_compte) : bool
+    public static function addAdherent($nom, $prenom, $id_ville, $mail, 
+                                        $password, $points, $date_creation, $compte) : bool
     {
       
       $db   = self::connexion();
       $res  = true;
+      $args = func_get_args(); // func_get_arg crée une array avec les arg
 
       // colones à inserer
       $colones = [self::$nom, self::$prenom, self::$id_ville, self::$mail, self::$password, 
@@ -114,7 +116,7 @@ class AdherentBD extends DbConnect {
             $query = $db->prepare("INSERT INTO ".self::$table. " (" . $nomColones . ") 
                                         VALUES (" .$placeholders. ") ");
 
-            $res = $query->execute(func_get_arg()); // func_get_arg crée une array avec les arg
+            $res = $query->execute($args); 
 
       } catch (PDOException $e) {
           die("Erreur !: " . $e->getMessage()); // TODO enlever les die()
@@ -128,12 +130,13 @@ class AdherentBD extends DbConnect {
 
 
     // retourner un objet adherent ?
-    public static function updateAdherent($idA, $new_nom, $new_prenom, $new_id_ville, $new_mail, 
-                                          $new_password, $new_points, $new_date_creation, $new_compte) : bool 
+    public static function updateAdherent($idA, $nom, $prenom, $id_ville, $mail, 
+                                          $password, $points, $date_creation, $compte) : bool 
     {
 
       $db = self::connexion();
       $res = true;
+      $args = func_get_args();
 
       // colones à inserer
       $colones = [self::$nom, self::$prenom, self::$id_ville, self::$mail, self::$password, self::$points, 
@@ -144,9 +147,9 @@ class AdherentBD extends DbConnect {
 
       try {
         $query = $db->prepare("UPDATE ".self::$table." SET ".$colonnes." WHERE id=".$idA);
-        echo "UPDATE ".self::$table." SET ".$colonnes." WHERE id=".$idA;
-    
-        $res = $query->execute(func_get_arg());
+
+        array_shift($args); // on shift l'array des arguments pour enlever l'id
+        $res = $query->execute($args);
 
       } catch (PDOException $e) {
           die( "Erreur !: " . $e->getMessage() );
