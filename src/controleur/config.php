@@ -5,7 +5,9 @@
  define('DB_PASSWORD', 'root@sio');
  define('DB_DATABASE', 'db_cineflix');
  
- define('DB_HOST', 'localhost');
+// use mariadb for docker, and local host for vm
+ define('DB_HOST', 'mariadb');
+ /* define('DB_HOST', 'localhost'); */
 
 define("RACINE", dirname(__DIR__));
 
