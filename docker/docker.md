@@ -11,7 +11,7 @@ define('DB_HOST', 'mariadb');
 
 ## Commandes
 
-Start docker : `docker-compose up -d`
+Start docker : `docker-compose up -d` (run dans le dossier /Cineflix)
 
 Stop : `docker-compose down`
 
@@ -19,7 +19,7 @@ List docker qui tourne : `docker ps`
 
 ## Fonctionnalités
 
-- Appli php accessible à : `localhost:80`
+- Appli php accessible à : `localhost:81`
 - Myadmin accessible à : `localhost:8080`
 - Changement dans le fichier `src` sont appliqués quand on refresh la page
 - Données de la bd persitentes
