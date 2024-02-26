@@ -1,3 +1,15 @@
+
+    <form class="d-flex d-inline-block justify-content-evenly mt-4">
+        <div class="d-flex d-inline-block">
+            <input class="form-control me-2" type="search" placeholder="Rechercher par titre..." aria-label="Search">
+            <button class="btn btn-dark btn-sm" type="submit">Search</button>
+        </div>
+        <div class="d-flex d-inline-block">
+            <input class="form-control me-2" type="search" placeholder="Rechercher par ville..." aria-label="Search">
+            <button class="btn btn-dark btn-sm" type="submit">Search</button>
+        </div>
+    </form>
+
 <br>
 <div id="carouselInterval" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
