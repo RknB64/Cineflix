@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : jeu. 15 fév. 2024 à 18:50
+-- Généré le : ven. 01 mars 2024 à 18:28
 -- Version du serveur :  10.3.39-MariaDB-0ubuntu0.20.04.2
 -- Version de PHP : 7.3.33-14+ubuntu20.04.1+deb.sury.org+1
 
@@ -42,7 +42,10 @@ CREATE TABLE `achat` (
 --
 
 INSERT INTO `achat` (`id_billet`, `horaire_date`, `date_d’achat`, `nb_places_achetees`, `id_adherent`, `id_seance`) VALUES
-(1, '2024-02-22 19:28:49.000000', '2024-02-21 19:28:49.000000', 2, 1, 1);
+(1, '2024-02-22 19:28:49.000000', '2024-02-21 19:28:49.000000', 2, 1, 1),
+(2, '2024-03-07 19:17:41.000000', '2024-03-01 18:18:42.623468', 3, 2, 1),
+(3, '2024-04-11 19:27:14.000000', '2024-03-07 19:27:14.000000', 1, 4, 5),
+(4, '2024-03-07 19:27:14.000000', '2024-05-08 19:27:14.000000', 2, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -67,7 +70,10 @@ CREATE TABLE `adherent` (
 --
 
 INSERT INTO `adherent` (`id`, `nom`, `prenom`, `mail`, `password`, `points`, `date_creation`, `compte`, `id_ville`) VALUES
-(1, 'moatasm', 'hajjo', 'hajjo.dev@gmail.com', '2015', 4, '2024-02-29 16:24:32', 'admin', 2);
+(1, 'moatasm', 'hajjo', 'hajjo.dev@gmail.com', '2015', 4, '2024-02-29 16:24:32', 'admin', 2),
+(2, 'Le Reurti', 'Mickey', '187killa@jamel.com', 'mdptropdur', 30, '2024-03-01 18:12:55', 'adherent', 1),
+(3, 'Jon', 'Johnny', 'jone.jones@jon.jo', 'JonJon', 50, '2024-03-01 18:15:20', 'adherent', 1),
+(4, 'Kazama', 'Jin', 'jin.kazama@tekken.co', 'devil', 30000, '2024-03-01 18:15:20', 'adherent', 1);
 
 -- --------------------------------------------------------
 
@@ -86,7 +92,9 @@ CREATE TABLE `cinema` (
 --
 
 INSERT INTO `cinema` (`id`, `nom`, `id_ville`) VALUES
-(1, 'city', 1);
+(1, 'city', 1),
+(2, 'cineville', 2),
+(3, 'garenne', 1);
 
 -- --------------------------------------------------------
 
@@ -110,7 +118,11 @@ CREATE TABLE `film` (
 --
 
 INSERT INTO `film` (`Id`, `titre`, `description`, `duree`, `etat`, `id_affiche`, `date_sortie`, `date_expiration`) VALUES
-(1, 'Fast and Furious ', 'action ', '1H50', 'cinema', 1, '2024-02-14 18:44:26', '2024-02-22 18:44:26');
+(1, 'Fast and Furious ', 'action ', '1H50', 'cinema', 1, '2024-02-14 18:44:26', '2024-02-22 18:44:26'),
+(2, 'John Wick', 'Un homme d\'une extrême concentration', '2H00', 'streaming', 2, '2024-03-01 17:57:41', '2025-01-01 13:14:09'),
+(3, 'Pirates des Caraibes', 'Fantastique', '2H30', 'cinema', 3, '2024-03-01 17:57:48', '2025-03-01 18:52:39'),
+(4, 'Casino', 'Mafia', '3H00', 'cinema', 4, '2024-03-01 18:02:08', '2025-03-01 18:52:39'),
+(5, 'Public Enemies', 'Biopic', '2H20', 'cinema', 5, '2024-03-01 18:05:04', '2025-08-01 19:04:18');
 
 -- --------------------------------------------------------
 
@@ -129,7 +141,15 @@ CREATE TABLE `salle` (
 --
 
 INSERT INTO `salle` (`id`, `id_cinema`, `nb_place`) VALUES
-(1, 1, 2);
+(1, 1, 2),
+(2, 2, 50),
+(3, 3, 40),
+(4, 1, 30),
+(5, 1, 40),
+(6, 2, 50),
+(7, 2, 60),
+(8, 3, 40),
+(9, 3, 30);
 
 -- --------------------------------------------------------
 
@@ -149,7 +169,11 @@ CREATE TABLE `seance` (
 --
 
 INSERT INTO `seance` (`id`, `horaire_date`, `id_film`, `id_salle`) VALUES
-(1, '2024-02-22 19:30:13', 1, 1);
+(1, '2024-02-22 19:30:13', 1, 1),
+(2, '2024-03-14 19:24:16', 2, 5),
+(3, '2024-03-30 19:24:16', 5, 8),
+(4, '2024-05-09 19:25:07', 3, 5),
+(5, '2024-05-15 19:25:07', 3, 7);
 
 -- --------------------------------------------------------
 
@@ -286,37 +310,37 @@ ALTER TABLE `ville`
 -- AUTO_INCREMENT pour la table `achat`
 --
 ALTER TABLE `achat`
-  MODIFY `id_billet` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_billet` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `adherent`
 --
 ALTER TABLE `adherent`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `cinema`
 --
 ALTER TABLE `cinema`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `film`
 --
 ALTER TABLE `film`
-  MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `salle`
 --
 ALTER TABLE `salle`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `seance`
 --
 ALTER TABLE `seance`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `ville`
