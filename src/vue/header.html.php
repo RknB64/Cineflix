@@ -8,6 +8,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">   
     <link rel="stylesheet" href="static/css/style.css" type="text/css" media="screen" />
+
+    <?php if (isset($stylesheet)): ?>
+      <link rel="stylesheet" href="static/css/<?=$stylesheet?>.css" type="text/css" media="screen" />
+    <?php endif; ?>
+
 </head>
 
 <body class="body bg-secondary">
