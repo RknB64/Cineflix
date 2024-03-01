@@ -13,7 +13,7 @@ $fields = [
 
 ?>
 
-<div class="form-container">
+<div class="form-wrapper">
   <form action="" method="post">
       <?php
         foreach ($fields as $field) {
