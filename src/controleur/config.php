@@ -13,6 +13,4 @@ define("RACINE", dirname(__DIR__));
 
 //filmParams
 define('DB_FILM_TABLE', 'film');
-
-
 ?>

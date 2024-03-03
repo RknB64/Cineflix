@@ -2,7 +2,7 @@
 
 function redirect($action) {
 
-echo $action;
+/* echo $action; */
 switch ($action) {
 
 	case 'signIn':
