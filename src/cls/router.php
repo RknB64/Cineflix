@@ -12,7 +12,9 @@ switch ($action) {
 	case 'page1':
 		$fichier = "page1_ctl.php";
 		break;
-	
+	case 'stream':
+		$fichier = 'StreamController.php';
+		break;
 	default:
 		$fichier = "page404_ctl.php";
 		break;
