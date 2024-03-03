@@ -13,6 +13,10 @@ define("RACINE", dirname(__DIR__));
 
 //filmParams
 define('DB_FILM_TABLE', 'film');
+define('DB_STREAM_TABLES' ,  'stream');
+
+
+
 
 
 ?>

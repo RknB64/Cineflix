@@ -1,14 +1,13 @@
-
-    <form class="d-flex d-inline-block justify-content-evenly mt-4">
-        <div class="d-flex d-inline-block">
-            <input class="form-control me-2" type="search" placeholder="Rechercher par titre..." aria-label="Search">
-            <button class="btn btn-dark btn-sm" type="submit">Search</button>
-        </div>
-        <div class="d-flex d-inline-block">
-            <input class="form-control me-2" type="search" placeholder="Rechercher par ville..." aria-label="Search">
-            <button class="btn btn-dark btn-sm" type="submit">Search</button>
-        </div>
-    </form>
+<form class="d-flex d-inline-block justify-content-evenly mt-4">
+    <div class="d-flex d-inline-block">
+        <input class="form-control me-2" type="search" placeholder="Rechercher par titre..." aria-label="Search">
+        <button class="btn btn-dark btn-sm" type="submit">Search</button>
+    </div>
+    <div class="d-flex d-inline-block">
+        <input class="form-control me-2" type="search" placeholder="Rechercher par ville..." aria-label="Search">
+        <button class="btn btn-dark btn-sm" type="submit">Search</button>
+    </div>
+</form>
 
 <br>
 <div id="carouselInterval" class="carousel slide" data-bs-ride="carousel">
@@ -39,10 +38,10 @@
 
     <?php
 
-        if( count($listeFilms) === 0 ) echo "Aucun film trouvé.";
+    if (count($listeFilms) === 0) echo "Aucun film trouvé.";
 
-        for ($i = 0; $i < count($listeFilms); $i++) {
-        
+    for ($i = 0; $i < count($listeFilms); $i++) {
+
     ?>
         <div class="filmCard border border-light-50 border-1 rounded px-2 py-2  my-1 shadow">
             <img src="static/img/<?= $listeFilms[$i]['id_affiche'] ?>.jpg" class="card-img rounded" alt="...">
@@ -66,9 +65,42 @@
                 <p class="card-text d-flex justify-content-between"><small class="text-muted fst-italic">Durée : <?= $listeFilms[$i]['duree'] ?></small><a href="#" class="btn btn-dark">Voir détails</a></p>
             </div>
         </div>
-        <?php
+    <?php
+    }
+    ?>
+
+</div>
+
+<!-- list de streams -->
+<div class="d-flex d-inline-block justify-content-between">
+    <h1 class="fw-bold mx-4 my-4 pe-4 ps-2 shadow flex-grow-1">Liste des Streams</h1>
+    <a href="#" class="mx-4 my-4 px-4 pt-3 shadow text-secondary-emphasis">Voir tous les streams</a>
+</div>
+
+<div class="streamCards d-flex flex-wrap row-cols-md-4 align-content-start">
+
+    <?php
+    if (empty($listeStreams)) {
+        echo "Aucun stream trouvé.";
+    } else {
+        foreach ($listeStreams as $stream) {
+    ?>
+            <div class="streamCard border border-light-50 border-1 rounded px-2 py-2 my-1 shadow">
+                <div class="card-body">
+                    <!-- <h5 class="card-title text-white-70 fw-bold px-2 py-2">Stream ID: <?= $stream['id'] ?></h5> -->
+                   <!-- Add the image tag here -->
+                   <img src="static/img/fast-furious-9.jpg" alt="Stream Image" class="card-img">
+                    <!-- Other stream details -->
+                    <hr>
+                    
+                    <p class="card-text text-white-70 px-2 py-2">Film ID: <?= $stream['id_film'] ?></p>
+                    <p class="card-text text-white-70 px-2 py-2">Adherent ID: <?= $stream['id_adherent'] ?></p>
+                    <p class="card-text text-white-70 px-2 py-2">Date d'expiration: <?php echo date('Y-m-d H:i:s', strtotime($stream['date_expiration'])); ?></p>
+                    <p class="card-text text-white-70 px-2 py-2">Date d'achat:<?php echo date('Y-m-d H:i:s', strtotime($stream['date_expiration'])); ?></p>
+                </div>
+            </div>
+    <?php
+        }
     }
     ?>
 </div>
-
-
