@@ -1,0 +1,15 @@
+
+input {
+  /* min-width: 900px; */
+}
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  background-color: blue;
+}
+
+.form-part {
+  background-color: red;
+  color: blue;
+}

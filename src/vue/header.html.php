@@ -8,6 +8,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">   
     <link rel="stylesheet" href="static/css/style.css" type="text/css" media="screen" />
+
+    <?php if (isset($stylesheet)): ?>
+      <link rel="stylesheet" href="static/css/<?=$stylesheet?>.css" type="text/css" media="screen" />
+    <?php endif; ?>
+
 </head>
 
 <body class="body bg-secondary">
@@ -30,23 +35,14 @@
                     </li>
                 </ul>
                 <form class="d-flex flex-column" role="connexion">
-                    
-                        <button class="btn btn-secondary btn-sm" type="submit">Sign In / Sing Up</button>
-                    
+                  <button class="btn btn-secondary btn-sm" type="submit">
+                    <a href="?action=signIn"> 
+                      Sign In / Sing Up
+                    </a>
+                  </button>
                 </form>
             </div>
         </div>
     </nav>
-
-    <form class="d-flex d-inline-block justify-content-evenly mt-4">
-        <div class="d-flex d-inline-block">
-            <input class="form-control me-2" type="search" placeholder="Rechercher par titre..." aria-label="Search">
-            <button class="btn btn-dark btn-sm" type="submit">Search</button>
-        </div>
-        <div class="d-flex d-inline-block">
-            <input class="form-control me-2" type="search" placeholder="Rechercher par ville..." aria-label="Search">
-            <button class="btn btn-dark btn-sm" type="submit">Search</button>
-        </div>
-    </form>
 
     <div id="corps">

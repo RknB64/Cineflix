@@ -1,0 +1,34 @@
+version: "3.7"
+
+services:
+  web:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
+    restart: 'always'
+    depends_on:
+      - mariadb
+    ports:
+      - '81:80'
+    links:
+      - mariadb
+    volumes: 
+      - "./src/:/var/www/html/"
+  mariadb:
+    image: "mariadb:10.4"
+    restart: 'always'
+    volumes: 
+      - "./docker/data:/var/lib/mysql"
+      - "./db:/docker-entrypoint-initdb.d"
+    environment:
+      MYSQL_ROOT_PASSWORD: "root@sio"
+      MYSQL_DATABASE: "db_cineflix"
+  myadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_HOST=mariadb
+      - PMA_PORT=3306 
+    ports:
+      - "8080:80"
+    links:
+      - mariadb
