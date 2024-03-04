@@ -73,6 +73,49 @@ class FilmBD extends DbConnect {
       $query->closeCursor();
       return $resultat;
   }
+
+
+  //UPDATE
+
+  public static function updateFilm($table, $id, $titre, $desc, $droit, $date, $duree, $affiche, $etat) {
+    try {
+      $db = self::connexion();
+      $query = $db->prepare("UPDATE $table SET titre = :titre, description = :desc, duree = :duree, etat = :etat,
+                            id_affiche = :affiche, date_sortie = :dateSortie, date_expiration = :droit)
+                            WHERE id = :id");
+      $query->bindValue(':id', $id, PDO::PARAM_INT);
+      $query->bindValue(':titre', $titre, PDO::PARAM_STR);
+      $query->bindValue(':desc', $desc, PDO::PARAM_STR);
+      $query->bindValue(':droit', $droit, PDO::PARAM_STR);
+      $query->bindValue(':dateSortie', $date, PDO::PARAM_STR);
+      $query->bindValue(':duree', $duree, PDO::PARAM_STR);
+      $query->bindValue(':affiche', $affiche, PDO::PARAM_INT);
+      $query->bindValue(':etat', $etat, PDO::PARAM_STR);
+      $query->execute();
+
+    } catch (PDOException $e) {
+      die( "Erreur !: " . $e->getMessage() );
+    }
+
+    $query->closeCursor();
+  }
+
+  //DELETE
+
+  public static function deleteFilm($table, $id) {
+    try {
+      $db = self::connexion();
+      $query = $db->prepare("DELETE FROM $table WHERE id = :id");
+      $query->bindValue(':id', $id, PDO::PARAM_INT);
+      $query->execute();
+
+    } catch (PDOException $e) {
+      die( "Erreur !: " . $e->getMessage() );
+    }
+
+    $query->closeCursor();
+  }
+  
 }
 
 ?>

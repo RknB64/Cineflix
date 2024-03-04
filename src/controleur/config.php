@@ -7,11 +7,12 @@
  
 // use mariadb for docker, and local host for vm
  define('DB_HOST', 'mariadb');
- /* define('DB_HOST', 'localhost'); */
+// define('DB_HOST', 'localhost');
 
 define("RACINE", dirname(__DIR__));
 
-//filmParams
-define('DB_FILM_TABLE', 'film');
 
+define('DB_FILM_TABLE', 'film');
+define('DB_TARIF_TABLE', 'tarif');
+define('DB_VILLE_TABLE', 'ville');
 define('DB_STREAM_TABLES' ,  'stream');
