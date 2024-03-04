@@ -1,22 +1,33 @@
 <?php
 
-include './DbConnect.php';
-include_once '../controleur/config.php';
+/* include_once './DbConnect.php'; */
+/* include_once '../controleur/config.php'; */
 
 class AdherentBD extends DbConnect {
 
     private static $table = "adherent";
 
-    public static $id               = "id";
-    public static $nom              = "nom";
-    public static $prenom           = "prenom";
-    public static $mail             = "mail";
-    public static $id_ville         = "id_ville";
-    public static $password         = "password";
-    public static $points           = "points";
-    public static $date_creation    = "date_creation";
-    public static $compte           = "compte";
+    public const ID             = "id";
+    public const NOM            = "nom";
+    public const PRENOM         = "prenom";
+    public const MAIL           = "mail";
+    public const ID_VILLE        = "id_ville";
+    public const PASSWORD       = "password";
+    public const POINTS         = "points";
+    public const DATE_CREATION   = "date_creation";
+    public const COMPTE         = "compte";
 
+    private static $columns = array(
+        self::ID,
+        self::NOM,
+        self::PRENOM,
+        self::MAIL,
+        self::ID_VILLE,
+        self::PASSWORD,
+        self::POINTS,
+        self::DATE_CREATION,
+        self::COMPTE
+    );
 
 
     public static function getAdherent() : array 
@@ -94,19 +105,16 @@ class AdherentBD extends DbConnect {
 
 
 
-    // TODO avoir le password hache, et determiner le format pour la date, retourner vrai ou faux
-    // ?? sinon passer un objet adherent en parametre
-    public static function addAdherent($nom, $prenom, $id_ville, $mail, 
-                                        $password, $points, $date_creation, $compte) : bool
+    // TODO avoir le password hache, et determiner le format pour la date
+    // TODO gérer les clef inexistante dans l'arry param 
+    public static function addAdherent(array $adh) : bool
     {
       
       $db   = self::connexion();
-      $res  = true;
-      $args = func_get_args(); // func_get_arg crée une array avec les arg
+      $isAdded  = true;
 
       // colones à inserer
-      $colones = [self::$nom, self::$prenom, self::$id_ville, self::$mail, self::$password, 
-                  self::$points, self::$date_creation, self::$compte];
+      $colones = self::$columns;
 
       // formate les colones à insérer pour la requête et les ?
       $nomColones = implode(', ', $colones);
@@ -116,22 +124,22 @@ class AdherentBD extends DbConnect {
             $query = $db->prepare("INSERT INTO ".self::$table. " (" . $nomColones . ") 
                                         VALUES (" .$placeholders. ") ");
 
-            $res = $query->execute($args); 
+            $isAdded = $query->execute($adh);  // TODO map les valeurs de $columns aux clefs de $adh pour avoir le bon ordre
 
       } catch (PDOException $e) {
           die("Erreur !: " . $e->getMessage()); // TODO enlever les die()
-          $res = false;
+          $isAdded = false;
       }
 
       $db = null;
-      return $res;
+      return $isAdded;
     }
 
 
 
     // retourner un objet adherent ?
-    public static function updateAdherent($idA, $nom, $prenom, $id_ville, $mail, 
-                                          $password, $points, $date_creation, $compte) : bool 
+    public static function updateAdherent($idA, $nom, $prenom, $idVille, $mail, 
+                                          $password, $points, $dateCreation, $compte) : bool 
     {
 
       $db = self::connexion();
@@ -139,8 +147,8 @@ class AdherentBD extends DbConnect {
       $args = func_get_args();
 
       // colones à inserer
-      $colones = [self::$nom, self::$prenom, self::$id_ville, self::$mail, self::$password, self::$points, 
-                  self::$date_creation, self::$compte];
+      $colones = [self::$nom, self::$prenom, self::$idVille, self::$mail, self::$password, self::$points, 
+                  self::$dateCreation, self::$compte];
 
       // formate les colones à insérer pour la requête et les ?
       $colonnes = implode('= ? , ', $colones) . "= ? ";
