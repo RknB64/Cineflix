@@ -1,12 +1,12 @@
 <?php
 
 include 'AdherentBD.php';
-
-$test = array("bob", "test", 2, "test@mail.com", "qwe", 12, "2024-01-12", "dk");
+include 'SalleBD.php';
 
 $adherent1 = new Adherent();
 
-$adherent1->nom = "bob";
+$adherent1->id = 2;
+$adherent1->nom = "jean";
 $adherent1->prenom = "test$";
 $adherent1->id_ville = 2;
 $adherent1->mail = "test@mail.com";
@@ -15,8 +15,16 @@ $adherent1->points = 12;
 $adherent1->date_creation = "2024-01-12";
 $adherent1->compte = "dk";
 
-AdherentBD::addAdherent($adherent1);
+$t = new Salle();
+$t->id_cinema = 2;
+$t->nb_place = 2;
 
-$liste = AdherentBD::getAdherent();
+$s = new SalleBD();
+
+$s::getAll();
+
+/* AdherentBD::updateAdherent($adherent1); */
+
+/* $liste = AdherentBD::getAdherent(); */
 
 ?>

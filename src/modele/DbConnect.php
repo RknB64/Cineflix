@@ -16,19 +16,3 @@ abstract class DbConnect {
 	  }
 	
 }
-
-	/* protected static function executerRequete($sql) { */
-
-	/* 	try { */
-	/* 		$query = self::connexion()->prepare($sql); */
-	/* 		$query->execute(); */
-	/* 		return $query; */
-	/* 	} */
-	/* 	catch(Exception $e) { */
-	/* 		return $e->getMessage()."<br>Impossible de récupérer les données sur la table : messages"; */
-	/* 	} */
-		
-	/* 	$query->closeCursor(); */
-	/* 	self::connexion()->close(); */
-	/* } */
-

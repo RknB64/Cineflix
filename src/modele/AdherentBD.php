@@ -9,18 +9,20 @@ class Adherent
   public int    $id;
   public string $nom;
   public string $prenom;
-  public string $mail = "";
+  public string $mail;
   public int    $id_ville;
   public string $password;
   public int    $points;
-  public string $date_creation;
+  public string $date_creation; // format "yyyy-mm-dd"
   public string $compte; // a retirer de la bd je pense
 }
 
 class AdherentBD extends DbConnect
 {
 
-  private static $table = "adherent";
+  // todo ajouter un tableau d'adherents
+
+  private static string $table = "adherent";
 
   public const ID             = "id";
   public const NOM            = "nom";
@@ -32,7 +34,7 @@ class AdherentBD extends DbConnect
   public const DATE_CREATION  = "date_creation";
   public const COMPTE         = "compte";
 
-  private static $columns = array(
+  private static array $columns = array(
     self::NOM,
     self::PRENOM,
     self::MAIL,
@@ -127,8 +129,7 @@ class AdherentBD extends DbConnect
 
 
 
-  // TODO avoir le password hache, et determiner le format pour la date
-  // TODO gérer les clef inexistante dans l'array param 
+  // TODO avoir le password hache
   public static function addAdherent(Adherent $newAdherent): bool
   {
 
@@ -140,11 +141,12 @@ class AdherentBD extends DbConnect
     $placeholders       = implode(', ', array_fill(0, count(self::$columns), '?'));
 
     try {
-      $query = $db->prepare("INSERT INTO " . self::$table . " (" . $columnsFormated . ") 
-                             VALUES (" . $placeholders . ") ");
+      $query = $db->prepare("INSERT INTO " . self::$table . 
+                            " (" .$columnsFormated. ") 
+                             VALUES (" .$placeholders. ") ");
 
       // crée une array avec les valeurs à ajouter en s'assurant que ce soit dans le même ordre que les colonnes
-      $newValues = array_map(fn($key) => $newAdherent->$key, self::$columns);
+      $newValues = array_map(fn($propertiy) => $newAdherent->$key, self::$columns);
 
       $isAdded = $query->execute($newValues);
 
@@ -160,42 +162,28 @@ class AdherentBD extends DbConnect
 
 
   // retourner un objet adherent ?
-  public static function updateAdherent(
-    $idA,
-    $nom,
-    $prenom,
-    $idVille,
-    $mail,
-    $password,
-    $points,
-    $dateCreation,
-    $compte
-  ): bool {
+  // quoi faire si l'objet adherent en arg n'est pas complet
+  public static function updateAdherent(Adherent $adherent): bool {
 
     $db = self::connexion();
-    $res = true;
-    $args = func_get_args();
-
-    // colonnes à inserer
-    $colonnes = [
-      self::$nom, self::$prenom, self::$idVille, self::$mail, self::$password, self::$points,
-      self::$dateCreation, self::$compte
-    ];
+    $isUpdated = true;
 
     // formate les colonnes à insérer pour la requête et les ?
-    $colonnes = implode('= ? , ', $colonnes) . "= ? ";
+    $columnsFormated = implode('= ?,  ', self::$columns) . "= ? ";
 
     try {
-      $query = $db->prepare("UPDATE " . self::$table . " SET " . $colonnes . " WHERE id=" . $idA);
+      $query = $db->prepare("UPDATE " . self::$table . " SET " . $columnsFormated . " WHERE id=" . $adherent->id);
 
-      array_shift($args); // on shift l'array des arguments pour enlever l'id
-      $res = $query->execute($args);
+      $newValues = array_map(fn($propertiy) => $adherent->$propertiy, self::$columns);
+
+      $isUpdated = $query->execute($newValues);
+
     } catch (PDOException $e) {
       die("Erreur !: " . $e->getMessage());
-      $res = false;
+      $isUpdated = false;
     }
 
     $db = null;
-    return $res;
+    return $isUpdated;
   }
 }
