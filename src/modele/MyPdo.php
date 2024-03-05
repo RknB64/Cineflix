@@ -1,11 +1,11 @@
 <?php
 
-abstract class Pdo extends DbConnect
+abstract class MyPdo extends DbConnect
 {
 
-  private static string $table;
-
-  private static array $columns;
+  abstract protected function table();
+  abstract protected function columns();
+  abstract protected function id();
 
 
   public function getAll(): array
@@ -15,7 +15,7 @@ abstract class Pdo extends DbConnect
     $resultat = null;
 
     try {
-      $query = $db->prepare("SELECT * FROM " . self::$table);
+      $query = $db->prepare("SELECT * FROM " . $this->table());
       $query->execute();
 
       $ligne = $query->fetch(PDO::FETCH_ASSOC);
@@ -34,14 +34,14 @@ abstract class Pdo extends DbConnect
 
 
 
-  public static function delete(int $id): bool
+  public function delete(int $id): bool
   {
 
     $db = self::connexion();
     $res = true;
 
     try {
-      $query = $db->prepare("DELETE FROM " . self::$table . " WHERE id = :id");
+      $query = $db->prepare("DELETE FROM " .$this->table(). " WHERE ".$this->id()." = :id");
       $query->bindValue(':id', $id, PDO::PARAM_INT);
       $res = $query->execute();
     } catch (PDOException $e) {
@@ -57,23 +57,25 @@ abstract class Pdo extends DbConnect
 
 
 
-  public static function add(object $object): bool
+  public function add(object $object): bool
   {
 
     $db         = self::connexion();
     $isAdded    = true;
 
+    $columns = $this->columns();
+
     // formate les colones à insérer pour la requête et les ?
-    $columnsFormated    = implode(', ', self::$columns);
-    $placeholders       = implode(', ', array_fill(0, count(self::$columns), '?'));
+    $columnsFormated    = implode(', ', $columns);
+    $placeholders       = implode(', ', array_fill(0, count($columns), '?'));
 
     try {
-      $query = $db->prepare("INSERT INTO " . self::$table . 
+      $query = $db->prepare("INSERT INTO " . $this->table() . 
                             " (" .$columnsFormated. ") 
                              VALUES (" .$placeholders. ") ");
 
       // crée une array avec les valeurs à ajouter en s'assurant que ce soit dans le même ordre que les colonnes
-      $newValues = array_map(fn($propertiy) => $object->$key, self::$columns);
+      $newValues = array_map(fn($property) => $object->$property, $columns);
 
       $isAdded = $query->execute($newValues);
 
@@ -89,19 +91,21 @@ abstract class Pdo extends DbConnect
 
 
 
-  public static function updateAdherent(object $object): bool 
+  public function update(object $object): bool 
   {
 
     $db = self::connexion();
     $isUpdated = true;
 
+    $columns = $this->columns();
+
     // formate les colonnes à insérer pour la requête et les ?
-    $columnsFormated = implode('= ?,  ', self::$columns) . "= ? ";
+    $columnsFormated = implode('= ?,  ', $columns) . "= ? ";
 
     try {
-      $query = $db->prepare("UPDATE " . self::$table . " SET " . $columnsFormated . " WHERE id=" . $object->id);
+      $query = $db->prepare("UPDATE " . $this->table() . " SET " . $columnsFormated . " WHERE id=" . $this->id());
 
-      $newValues = array_map(fn($propertiy) => $object->$propertiy, self::$columns);
+      $newValues = array_map(fn($propertiy) => $object->$propertiy, $columns);
 
       $isUpdated = $query->execute($newValues);
 

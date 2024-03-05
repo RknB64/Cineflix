@@ -1,23 +1,21 @@
 <?php
 
-
-class Salle
+class Ville
 {
-  public int $id;
-  public int $id_cinema;
-  public int $nb_place;
+  public int    $id;
+  public string $nom;
+  public int    $region; // voir comment gerer l'enum qui est dans la table
 }
 
-class SalleBD extends MyPdo
+class VilleBD extends MyPdo
 {
-  private static string $table  = "salle";
+  private static string $table  = "ville";
   private static int    $id     = "id";
 
   private static array $columns = array(
-    "id_cinema",
-    "nb_place"
+    "nom",
+    "region",
   );
-
 
   protected function table()
   {
