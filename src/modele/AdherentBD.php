@@ -19,6 +19,7 @@ class AdherentBD extends MyPdo
 
   private static string $table  = "adherent";
   private static string $id     = "id";
+  private static string $class  = "Adherent";
 
   public const ID = "id";
 
@@ -33,6 +34,10 @@ class AdherentBD extends MyPdo
     "compte",
   );
 
+  protected function ClassName()
+  {
+    return self::$class;
+  }
 
   protected function table()
   {
@@ -48,5 +53,4 @@ class AdherentBD extends MyPdo
   {
     return self::$id;
   }
-
 }

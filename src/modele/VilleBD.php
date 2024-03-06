@@ -12,10 +12,17 @@ class VilleBD extends MyPdo
   private static string $table  = "ville";
   private static string $id     = "id";
 
+  private static string $class  = "region";
+
   private static array $columns = array(
     "nom",
     "region",
   );
+
+  protected function ClassName()
+  {
+    return self::$class;
+  }
 
   protected function table()
   {

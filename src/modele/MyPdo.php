@@ -7,6 +7,8 @@ abstract class MyPdo extends DbConnect
   abstract protected function columns();
   abstract protected function id();
 
+  abstract protected function ClassName();
+
 
   public function getAll(): array
   {
@@ -35,7 +37,7 @@ abstract class MyPdo extends DbConnect
 
 
 
-  public function getById(int $id): array
+  public function getById(int $id): object
   {
 
     $db = self::connexion();
@@ -45,11 +47,21 @@ abstract class MyPdo extends DbConnect
       $query = $db->prepare("SELECT * FROM " .$this->table(). " WHERE " .$this->id(). " = ?");
       $query->execute([$id]);
 
+      // TODO faire une fonction fetch object
       $ligne = $query->fetch(PDO::FETCH_ASSOC);
       while ($ligne) {
-        $resultat[] = $ligne;
+        /* $resultat[] = $ligne; */
+
+        $class = $this->ClassName();
+        $resultat = new $class();
+
+        foreach($ligne as $key => $value) {
+          $resultat->$key = $value;
+        }
+
         $ligne = $query->fetch(PDO::FETCH_ASSOC);
       }
+
     } catch (PDOException $e) {
       die("Erreur !: " . $e->getMessage());
 

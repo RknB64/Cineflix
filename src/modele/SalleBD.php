@@ -12,12 +12,18 @@ class SalleBD extends MyPdo
 {
   private static string $table  = "salle";
   private static string $id     = "id";
+  private static string $class  = "Salle";
 
   private static array $columns = array(
     "id_cinema",
     "nb_place"
   );
 
+
+  protected function ClassName()
+  {
+    return self::$class;
+  }
 
   protected function table()
   {

@@ -9,14 +9,15 @@ $t = new AdherentBD();
 
 /* $sbd = new SeanceBD(); */
 
-$x = $t->getById(1);
+/* $x = $t->getById(1); */
 
-echo "<pre>".var_dump($x)."</pre>";
 
 $ad = new Adherent();
 
-$ad->nom = "test";
 
-$t->selectWhere($ad);
+$ad = $t->getById(1);
+
+echo $ad->nom;
+echo var_dump($ad);
 
 ?>
