@@ -41,9 +41,11 @@ abstract class MyPdo extends DbConnect
     $res = true;
 
     try {
-      $query = $db->prepare("DELETE FROM " .$this->table(). " WHERE ".$this->id()." = :id");
-      $query->bindValue(':id', $id, PDO::PARAM_INT);
-      $res = $query->execute();
+      $query = $db->prepare("DELETE FROM " .$this->table(). 
+                           " WHERE ".$this->id()." = ?");
+
+      $res = $query->execute($id);
+
     } catch (PDOException $e) {
       die("Erreur !: " . $e->getMessage());
       $res = false;
@@ -71,10 +73,11 @@ abstract class MyPdo extends DbConnect
 
     try {
       $query = $db->prepare("INSERT INTO " . $this->table() . 
-                            " (" .$columnsFormated. ") 
+                           " (" .$columnsFormated. ") 
                              VALUES (" .$placeholders. ") ");
 
-      // crée une array avec les valeurs à ajouter en s'assurant que ce soit dans le même ordre que les colonnes
+      // crée une array avec les valeurs à ajouter 
+      // en s'assurant que ce soit dans le même ordre que les colonnes
       $newValues = array_map(fn($property) => $object->$property, $columns);
 
       $isAdded = $query->execute($newValues);
@@ -103,7 +106,9 @@ abstract class MyPdo extends DbConnect
     $columnsFormated = implode('= ?,  ', $columns) . "= ? ";
 
     try {
-      $query = $db->prepare("UPDATE " . $this->table() . " SET " . $columnsFormated . " WHERE id=" . $this->id());
+      $query = $db->prepare("UPDATE " . $this->table() . 
+                           " SET " . $columnsFormated . 
+                           " WHERE id=" . $this->id());
 
       $newValues = array_map(fn($propertiy) => $object->$propertiy, $columns);
 
