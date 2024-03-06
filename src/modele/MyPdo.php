@@ -25,9 +25,38 @@ abstract class MyPdo extends DbConnect
       }
     } catch (PDOException $e) {
       die("Erreur !: " . $e->getMessage());
+
+    } finally {
+      $db = null;
     }
 
-    $db = null;
+    return $resultat;
+  }
+
+
+
+  public function getById(int $id): array
+  {
+
+    $db = self::connexion();
+    $resultat = null;
+
+    try {
+      $query = $db->prepare("SELECT * FROM " .$this->table(). " WHERE " .$this->id(). " = ?");
+      $query->execute([$id]);
+
+      $ligne = $query->fetch(PDO::FETCH_ASSOC);
+      while ($ligne) {
+        $resultat[] = $ligne;
+        $ligne = $query->fetch(PDO::FETCH_ASSOC);
+      }
+    } catch (PDOException $e) {
+      die("Erreur !: " . $e->getMessage());
+
+    } finally {
+      $db = null;
+    }
+
     return $resultat;
   }
 
@@ -44,14 +73,15 @@ abstract class MyPdo extends DbConnect
       $query = $db->prepare("DELETE FROM " .$this->table(). 
                            " WHERE ".$this->id()." = ?");
 
-      $res = $query->execute($id);
+      $res = $query->execute([$id]);
 
     } catch (PDOException $e) {
       die("Erreur !: " . $e->getMessage());
       $res = false;
-    }
 
-    $db = null;
+    } finally {
+      $db = null;
+    }
 
     return $res;
   }
@@ -85,9 +115,11 @@ abstract class MyPdo extends DbConnect
     } catch (PDOException $e) {
       die("Erreur !: " . $e->getMessage()); // TODO enlever les die()
       $isAdded = false;
+
+    } finally {
+      $db = null;
     }
 
-    $db = null;
     return $isAdded;
   }
 
@@ -117,9 +149,11 @@ abstract class MyPdo extends DbConnect
     } catch (PDOException $e) {
       die("Erreur !: " . $e->getMessage());
       $isUpdated = false;
+
+    } finally {
+      $db = null;
     }
 
-    $db = null;
     return $isUpdated;
   }
 }

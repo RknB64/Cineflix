@@ -11,7 +11,7 @@ class Seance
 class SeanceBD extends MyPdo
 {
   private static string $table  = "seance";
-  private static int     $id     = "id";
+  private static string $id     = "id";
 
   private static array $columns = array(
     "id_film",

@@ -11,7 +11,7 @@ class Salle
 class SalleBD extends MyPdo
 {
   private static string $table  = "salle";
-  private static int    $id     = "id";
+  private static string $id     = "id";
 
   private static array $columns = array(
     "id_cinema",

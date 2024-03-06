@@ -1,19 +1,22 @@
 <?php
 
-include 'PDO.php';
+include 'MyPdo.php';
 include 'AdherentBD.php';
 include 'SalleBD.php';
 include 'SeanceBD.php';
 
-$t = new Seance();
+$t = new AdherentBD();
 
-$t->id = 1;
-$t->id_film = 1;
-$t->id_salle = 5;
-$t->horaire_date = "2024-03-22";
+/* $sbd = new SeanceBD(); */
 
-$sbd = new SeanceBD();
+$x = $t->getById(1);
 
-$sbd->update($t);
+echo "<pre>".var_dump($x)."</pre>";
+
+$ad = new Adherent();
+
+$ad->nom = "test";
+
+$t->selectWhere($ad);
 
 ?>

@@ -18,7 +18,7 @@ class AdherentBD extends MyPdo
 {
 
   private static string $table  = "adherent";
-  private static int    $id     = "id";
+  private static string $id     = "id";
 
   public const ID = "id";
 

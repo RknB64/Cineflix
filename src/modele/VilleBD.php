@@ -10,7 +10,7 @@ class Ville
 class VilleBD extends MyPdo
 {
   private static string $table  = "ville";
-  private static int    $id     = "id";
+  private static string $id     = "id";
 
   private static array $columns = array(
     "nom",
