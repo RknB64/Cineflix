@@ -5,28 +5,31 @@ include_once '../controleur/config.php';
 
 class AdherentBD extends DbConnect {
 
-    private static $table = "adherent";
+    public const TABLE          = "adherent";
 
-    public static $id               = "id";
-    public static $nom              = "nom";
-    public static $prenom           = "prenom";
-    public static $mail             = "mail";
-    public static $id_ville         = "id_ville";
-    public static $password         = "password";
-    public static $points           = "points";
-    public static $date_creation    = "date_creation";
-    public static $compte           = "compte";
+    public const ID             = "id";
+
+    public const NOM            = "nom";
+    public const PRENOM         = "prenom";
+    public const MAIL           = "mail";
+    public const ID_VILLE       = "id_ville";
+    public const PASSWORD       = "password";
+    public const POINTS         = "points";
+    public const DATE_CREATION  = "date_creation";
+    public const COMPTE         = "compte";
+
+    private static array $colones = [self::NOM, self::PRENOM, self::ID_VILLE, self::MAIL, self::PASSWORD, 
+                              self::POINTS, self::DATE_CREATION, self::COMPTE];
 
 
-
-    public static function getAdherent() : array 
+    public static function getAdherents() : array 
     {
 
       $db = self::connexion();
       $resultat=null;
 
       try {
-        $query = $db->prepare("SELECT * FROM " . self::$table);
+        $query = $db->prepare("SELECT * FROM " . self::TABLE);
         $query->execute();
 
         $ligne = $query->fetch(PDO::FETCH_ASSOC);
@@ -45,15 +48,15 @@ class AdherentBD extends DbConnect {
 
 
 
-    public static function getAdherentById(int $idA) : array 
+    public static function getAdherentById(int $id) : array 
     {
       $resultat=null;
 
       $db = self::connexion();
 
       try {
-        $query = $db->prepare("SELECT * FROM " . self::$table . " WHERE id = :idA");
-        $query->bindValue(':idA', $idA, PDO::PARAM_INT);
+        $query = $db->prepare("SELECT * FROM " . self::TABLE . " WHERE ".self::ID." = :idA");
+        $query->bindValue(':idA', $id, PDO::PARAM_INT);
         $query->execute();
 
         $ligne = $query->fetch(PDO::FETCH_ASSOC); while ($ligne) {
@@ -71,15 +74,15 @@ class AdherentBD extends DbConnect {
 
 
 
-    public static function deleteAdherent(int $idA): bool 
+    public static function deleteAdherent(int $id): bool 
     {
       
       $db = self::connexion();
       $res = true;
 
       try {
-        $query = $db->prepare("DELETE FROM ".self::$table." WHERE id = :idA");
-        $query->bindValue(':idA', $idA, PDO::PARAM_INT);
+        $query = $db->prepare("DELETE FROM ".self::TABLE." WHERE ".self::ID." = :idA");
+        $query->bindValue(':idA', $id, PDO::PARAM_INT);
         $res = $query->execute();
 
       } catch (PDOException $e) {
@@ -104,13 +107,10 @@ class AdherentBD extends DbConnect {
       $res  = true;
       $args = func_get_args(); // func_get_arg crée une array avec les arg
 
-      // colones à inserer
-      $colones = [self::$nom, self::$prenom, self::$id_ville, self::$mail, self::$password, 
-                  self::$points, self::$date_creation, self::$compte];
 
       // formate les colones à insérer pour la requête et les ?
-      $nomColones = implode(', ', $colones);
-      $placeholders = implode(', ', array_fill(0, count($colones), '?'));
+      $nomColones = implode(', ', self::$colones);
+      $placeholders = implode(', ', array_fill(0, count(self::$colones), '?'));
                 
       try {
             $query = $db->prepare("INSERT INTO ".self::$table. " (" . $nomColones . ") 
@@ -130,7 +130,7 @@ class AdherentBD extends DbConnect {
 
 
     // retourner un objet adherent ?
-    public static function updateAdherent($idA, $nom, $prenom, $id_ville, $mail, 
+    public static function updateAdherent($id, $nom, $prenom, $id_ville, $mail, 
                                           $password, $points, $date_creation, $compte) : bool 
     {
 
@@ -138,15 +138,12 @@ class AdherentBD extends DbConnect {
       $res = true;
       $args = func_get_args();
 
-      // colones à inserer
-      $colones = [self::$nom, self::$prenom, self::$id_ville, self::$mail, self::$password, self::$points, 
-                  self::$date_creation, self::$compte];
 
       // formate les colones à insérer pour la requête et les ?
-      $colonnes = implode('= ? , ', $colones) . "= ? ";
+      $colonnes = implode('= ? , ', self::$colones) . "= ? ";
 
       try {
-        $query = $db->prepare("UPDATE ".self::$table." SET ".$colonnes." WHERE id=".$idA);
+        $query = $db->prepare("UPDATE ".self::$table." SET ".$colonnes." WHERE ".self::ID."=".$id);
 
         array_shift($args); // on shift l'array des arguments pour enlever l'id
         $res = $query->execute($args);
