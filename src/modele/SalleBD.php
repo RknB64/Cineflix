@@ -20,7 +20,7 @@ class SalleBD extends MyPdo
   );
 
 
-  protected function ClassName() : string
+  protected function className() : string
   {
     return self::CLASS_OBJ;
   }

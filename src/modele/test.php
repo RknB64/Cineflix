@@ -14,9 +14,11 @@ $t = new AdherentBD();
 
 $ad = new Adherent();
 
+$ad->nom = "bob";
+$ad->prenom = "test";
 
-$ad = $t->getAll();
+$arr = $t->selectWhere($ad);
 
-echo var_dump($ad);
+echo var_dump($arr);
 
 ?>

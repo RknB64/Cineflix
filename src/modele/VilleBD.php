@@ -18,7 +18,7 @@ class VilleBD extends MyPdo
     "region",
   );
 
-  protected function ClassName() : string
+  protected function className() : string
   {
     return self::CLASS_OBJ;
   }
