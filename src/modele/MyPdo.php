@@ -3,11 +3,13 @@
 abstract class MyPdo extends DbConnect
 {
 
-  abstract protected function table();
-  abstract protected function columns();
-  abstract protected function id();
+  abstract protected function table()       : string;   // return child table name
 
-  abstract protected function ClassName();
+  abstract protected function id()          : string;   // return child table id name
+
+  abstract protected function columns()     : array;    // return child columns names
+
+  abstract protected function className()   : string;   // return child associated object class (ex: for AdherentBD it's "Adherent")
 
 
   public function getAll(): array
@@ -161,10 +163,12 @@ abstract class MyPdo extends DbConnect
 
 
   // retourne à partir d'une ligne de query, l'objet associé.
+  // repose sur le fait que le nom des variables des objets sont les mêmes que le nom des colonnes sql
+  // par exemple Adherent->nom marche car dans sql la colonnes s'appelle aussi 'nom'
   protected function createObject(array $line) : object
   {
 
-      $class = $this->ClassName();
+      $class = $this->className();
       $obj = new $class();
 
       foreach($line as $key => $value) {

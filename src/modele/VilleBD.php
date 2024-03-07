@@ -18,22 +18,22 @@ class VilleBD extends MyPdo
     "region",
   );
 
-  protected function ClassName()
+  protected function ClassName() : string
   {
     return self::CLASS_OBJ;
   }
 
-  protected function table()
+  protected function table() : string
   {
     return self::TABLE;
   }
 
-  protected function columns()
+  protected function columns() : array
   {
     return self::$columns;
   }
 
-  protected function id()
+  protected function id() : string
   {
     return self::ID;
   }
