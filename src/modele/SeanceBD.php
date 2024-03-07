@@ -10,10 +10,9 @@ class Seance
 
 class SeanceBD extends MyPdo
 {
-  private static string $table  = "seance";
-  private static string $id     = "id";
-
-  private static string $class  = "Seance";
+  public const TABLE        = "seance";
+  public const ID           = "id";
+  public const CLASS_OBJ    = "Seance";
 
   private static array $columns = array(
     "id_film",
@@ -23,12 +22,12 @@ class SeanceBD extends MyPdo
 
   protected function ClassName()
   {
-    return self::$class;
+    return self::CLASS_OBJ;
   }
 
   protected function table()
   {
-    return self::$table;
+    return self::TABLE;
   }
 
   protected function columns()
@@ -38,6 +37,7 @@ class SeanceBD extends MyPdo
 
   protected function id()
   {
-    return self::$id;
+    return self::ID;
   }
+
 }

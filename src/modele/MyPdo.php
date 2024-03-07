@@ -20,10 +20,9 @@ abstract class MyPdo extends DbConnect
       $query = $db->prepare("SELECT * FROM " . $this->table());
       $query->execute();
 
-      $ligne = $query->fetch(PDO::FETCH_ASSOC);
-      while ($ligne) {
-        $resultat[] = $ligne;
-        $ligne = $query->fetch(PDO::FETCH_ASSOC);
+      while ($ligne = $query->fetch(PDO::FETCH_ASSOC)) {
+
+        $resultat[] = $this->createObject($ligne);
       }
     } catch (PDOException $e) {
       die("Erreur !: " . $e->getMessage());
@@ -47,19 +46,8 @@ abstract class MyPdo extends DbConnect
       $query = $db->prepare("SELECT * FROM " .$this->table(). " WHERE " .$this->id(). " = ?");
       $query->execute([$id]);
 
-      // TODO faire une fonction fetch object
-      $ligne = $query->fetch(PDO::FETCH_ASSOC);
-      while ($ligne) {
-        /* $resultat[] = $ligne; */
-
-        $class = $this->ClassName();
-        $resultat = new $class();
-
-        foreach($ligne as $key => $value) {
-          $resultat->$key = $value;
-        }
-
-        $ligne = $query->fetch(PDO::FETCH_ASSOC);
+      while ($ligne = $query->fetch(PDO::FETCH_ASSOC)) {
+        $resultat = $this->createObject($ligne);
       }
 
     } catch (PDOException $e) {
@@ -168,4 +156,24 @@ abstract class MyPdo extends DbConnect
 
     return $isUpdated;
   }
+
+
+
+
+  // retourne à partir d'une ligne de query, l'objet associé.
+  protected function createObject(array $line) : object
+  {
+
+      $class = $this->ClassName();
+      $obj = new $class();
+
+      foreach($line as $key => $value) {
+        $obj->$key = $value;
+      }
+
+    return $obj;
+
+  }
+
+
 }

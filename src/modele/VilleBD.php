@@ -9,10 +9,9 @@ class Ville
 
 class VilleBD extends MyPdo
 {
-  private static string $table  = "ville";
-  private static string $id     = "id";
-
-  private static string $class  = "region";
+  public const TABLE        = "ville";
+  public const ID           = "id";
+  public const CLASS_OBJ    = "region";
 
   private static array $columns = array(
     "nom",
@@ -21,12 +20,12 @@ class VilleBD extends MyPdo
 
   protected function ClassName()
   {
-    return self::$class;
+    return self::CLASS_OBJ;
   }
 
   protected function table()
   {
-    return self::$table;
+    return self::TABLE;
   }
 
   protected function columns()
@@ -36,6 +35,6 @@ class VilleBD extends MyPdo
 
   protected function id()
   {
-    return self::$id;
+    return self::ID;
   }
 }

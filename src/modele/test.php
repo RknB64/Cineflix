@@ -15,9 +15,8 @@ $t = new AdherentBD();
 $ad = new Adherent();
 
 
-$ad = $t->getById(1);
+$ad = $t->getAll();
 
-echo $ad->nom;
 echo var_dump($ad);
 
 ?>
