@@ -4,7 +4,6 @@
 
 </body>
 <footer class="border border-light-50 border-1 rounded px-2 py-2 shadow">
-  <span><a href="?action=admin">gg</a></span>
 
   <span>About us</span>
   <span>CGU</span>

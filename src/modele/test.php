@@ -29,11 +29,8 @@ $newSalle = new Salle;
 
 $newSalle->nb_place = 8;
 $newSalle->id_cinema = 3;
-$newSalle->nb_place
+
 
 $sa->add($newSalle);
 
 $vileBd = new VilleBD();
-
-
-?>
