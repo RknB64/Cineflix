@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1); // rajouter ca ??
-
 // class pour manipuler les adherents, les noms des variables doivent etre les memes que dans la bd
 class Adherent
 {
