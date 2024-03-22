@@ -1,0 +1,43 @@
+Affichage de l'état actuel du dossier:
+- git status
+
+Au commencement d'une tâche:
+- git checkout -b nom-de-la-branche-personnelle-de-travail
+
+Après avoir fini la tâche:
+- git status (affiche la branche actuelle et les modifications)
+- git add -p (permet de choisir un par un les fichiers à add ou pas) ou git add . (pour tout ajouter)
+- git commit -m message-explicite-de-la-modification-apportée
+- git push (à ce moment, le terminal propose une ligne de commande "git push setupstream ..." => copier et entrer cette commande pour push)
+
+Ensuite, revenir sur le main avec toutes les modifications:
+- git checkout master (ou main si appelé main)
+- git pull
+
+
+S'il y a eu des modifications sur le main pendant qu'on travaillait sur notre branche personnelle
+(en supposant que nos tâches soient bien distinctes et qu'il n'y a, à priori, pas de raison qu'il y ait un conflit):
+- git pull --rebase origin master
+=> si une erreur est renvoyée à ce moment:
+- git add .
+- git commit -m message-explicite-de-la-modification-apportée
+- git pull --rebase origin master
+
+Si on a commit et on veut éditer ce commit (push pas encore fait):
+- git add .
+- git commit --amend
+
+Si on a push mais on veut corriger quelque chose avant de merge:
+- git add .
+- git commit --amend --no-edit
+- git push --force
+
+Si la merge request est en cours:
+- continuer à travailler sur sa branche jusqu'à ce que la merge request soit terminée.
+- Si on a fait des modifications entre temps:
+- git stash (met les modifications de côté)
+- git checkout master
+- git pull (pour mettre sa base à jour)
+- git stash pop
+- git checkout -b nom-d-une-nouvelle-branche-personnelle-de-travail
+Et la boucle est bouclée
