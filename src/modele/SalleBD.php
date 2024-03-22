@@ -1,6 +1,5 @@
 <?php
 
-
 class Salle
 {
   public int $id;
@@ -39,4 +38,5 @@ class SalleBD extends MyPdo
   {
     return self::ID;
   }
+
 }
