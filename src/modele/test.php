@@ -17,8 +17,23 @@ $ad = new Adherent();
 $ad->nom = "bob";
 $ad->prenom = "test";
 
-$arr = $t->selectWhere($ad);
+$arr = $t->selectAll();
 
 echo var_dump($arr);
+
+
+
+$sa = new SalleBD();
+
+$newSalle = new Salle;
+
+$newSalle->nb_place = 8;
+$newSalle->id_cinema = 3;
+$newSalle->nb_place
+
+$sa->add($newSalle);
+
+$vileBd = new VilleBD();
+
 
 ?>
