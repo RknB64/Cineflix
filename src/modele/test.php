@@ -36,4 +36,3 @@ $sa->add($newSalle);
 $vileBd = new VilleBD();
 
 
-?>
