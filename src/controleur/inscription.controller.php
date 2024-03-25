@@ -1,9 +1,5 @@
 <?php
 
-require RACINE . '/modele/MyPdo.php';
-require RACINE . '/modele/AdherentBD.php';
-require RACINE . '/modele/cls/UserManager.php';
-
 // inputs qui seront affichés
 $fields = [
     //  label                       type            name
