@@ -13,7 +13,7 @@
 
                 <div class="w-75 mx-auto mb-3">
                     <label for='<?= $id ?>'> <?= $field[LABEL] ?> </label>
-                    <input class="form-control" type="<?= $field[TYPE] ?>" value="" id="<?= $id ?>" required>
+                <input class="form-control" type="<?= $field[TYPE] ?>" name="<?=$field[NAME]?>" id="<?= $id ?>" required>
                 </div>
             <?php endforeach; ?>
 
