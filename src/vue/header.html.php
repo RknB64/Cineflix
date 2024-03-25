@@ -62,7 +62,7 @@
                         <a href="" class="modal-title fs-5 link-offset-2 link-underline link-underline-opacity-0 text-white" id="exampleModalLabel">Se connecter</a>
                     </div>
                     <div>
-                        <a href="" class="modal-title fs-5 link-offset-2 link-underline link-underline-opacity-0 text-white" id="exampleModalLabel">S'enregistrer</a>
+                        <a href="?action=signIn" class="modal-title fs-5 link-offset-2 link-underline link-underline-opacity-0 text-white" id="exampleModalLabel">S'enregistrer</a>
                     </div>
                     <div>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
