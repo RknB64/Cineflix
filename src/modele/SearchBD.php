@@ -30,7 +30,8 @@ class SearchBD extends MyPdo {
             INNER JOIN salle ON seance.id_salle = salle.id
             INNER JOIN cinema ON cinema.id = salle.id_cinema
             INNER JOIN ville ON ville.id = cinema.id_ville
-            WHERE ville.nom = :ville");
+            WHERE ville.nom = :ville
+            Group by film.id ");
     
             // Bind the parameter using named parameter syntax
             $query->bindParam(':ville', $ville, PDO::PARAM_STR);
