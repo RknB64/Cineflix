@@ -141,8 +141,3 @@
 
 
 
-</script>
-
-
-
-<!-- live serach  -->
