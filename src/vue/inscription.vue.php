@@ -6,14 +6,14 @@
     </div>
 
     <div class="container bg-dark text-white p-4 mt-3 rounded border border-secondary">
-        <form action="" method="post">
+        <form  method="post" action="#">
 
             <?php foreach ($fields as $field) :
                 $id = str_replace(" ", "_", $field[LABEL]); ?>
 
                 <div class="w-75 mx-auto mb-3">
                     <label for='<?= $id ?>'> <?= $field[LABEL] ?> </label>
-                <input class="form-control" type="<?= $field[TYPE] ?>" name="<?=$field[NAME]?>" id="<?= $id ?>" required>
+                <input class="form-control" type="<?= $field[TYPE] ?>" name="<?=$field[NAME]?>" id="<?= $id ?>" >
                 </div>
             <?php endforeach; ?>
 
