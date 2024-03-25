@@ -101,33 +101,16 @@
 
     <div id="corps">
 
-    <script>
-$(document).ready(function() {
-    // Function to fetch autocomplete suggestions
-    function fetchSuggestions(query) {
-        // Make an AJAX request to fetch suggestions from the server
-        $.ajax({
-            url: 'Resultats_recherche.php', // Change this to the URL of your autocomplete PHP script
-            method: 'GET',
-            data: { query: query },
-            success: function(response) {
-                // Populate suggestions dropdown with the response data
-                $('#search-input').autocomplete({
-                    source: response
-                });
-            },
-            error: function(xhr, status, error) {
-                console.error('Error fetching autocomplete suggestions:', error);
-            }
-        });
-    }
+   <!-- jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    // Attach autocomplete functionality to the search input
-    $('#search-input').autocomplete({
-        minLength: 2, // Minimum length of input before autocomplete activates
-        source: function(request, response) {
-            fetchSuggestions(request.term);
-        }
-    });
-});
-</script>
+<!-- jQuery UI library -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+<!-- jQuery UI CSS -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script src="../static/js/autocomplete.js"></script>
+
+
+
