@@ -2,7 +2,7 @@
 
 include_once("./modele/MyPdo.php");
 include_once("./modele/SearchBD.php");
-
+include './vue/header.html.php';
 
 class searchController
 {
@@ -53,6 +53,3 @@ if(isset($_GET['ville'])) {
     // Display an error message if neither city nor cinema parameter is provided
     echo "No city or cinema specified for search.";
 }
-
-
-?>
