@@ -8,12 +8,15 @@ require dirname(__FILE__) . '/modele/DbConnect.php';
 require dirname(__FILE__) . '/cls/router.php';
 
 if (isset($_GET["action"])) {
-	$action = $_GET["action"];
-	$fichier = redirect($action);
+    $action = $_GET["action"];
+    $fichier = redirect($action);
+} elseif (isset($_GET["ville"])) {
+    // If 'ville' parameter is set, set the action to 'search'
+    $action = 'search';
+    $fichier = redirect($action);
 } else {
-	$fichier = 'accueil.controller.php';
+    $fichier = 'accueil.controller.php';
 }
 
 require RACINE . "/controleur/" . $fichier;
 
-?>

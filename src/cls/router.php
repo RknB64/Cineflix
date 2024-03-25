@@ -15,6 +15,9 @@ switch ($action) {
 	case 'stream':
 		$fichier = 'StreamController.php';
 		break;
+	case'search':
+		$fichier = 'searchController.php';
+		break;
 	default:
 		$fichier = "page404_ctl.php";
 		break;
