@@ -6,9 +6,13 @@ function autoloadFunction(String $className): void
   $directories = ["cls", "modele", "controleur"];
 
   foreach ($directories as $dir) {
+
     $path = RACINE . DIRECTORY_SEPARATOR . $dir;
+
+    // cherche la classe dans le dossier et sous-dossier
     $file = searchDir($path, $className);
-    echo $className . "<br>";
+
+    // charge la classe si trouvé
     if ($file) {
       require_once $file;
     }
@@ -37,6 +41,5 @@ function searchDir(string $dir, string $className): ?string
 
     return null;
 }
-
 
 spl_autoload_register("autoloadFunction");
