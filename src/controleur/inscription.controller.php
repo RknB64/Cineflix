@@ -2,6 +2,7 @@
 
 require RACINE . '/modele/MyPdo.php';
 require RACINE . '/modele/AdherentBD.php';
+require RACINE . '/modele/cls/UserManager.php';
 
 // inputs qui seront affichés
 $fields = [
@@ -26,7 +27,7 @@ include './vue/footer.html.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "post";
-    handlePost();
+    UserManager::handleRegisterPost($_POST);
 }
 
 
@@ -35,13 +36,7 @@ function handlePost()
     $adBD = new AdherentBD();
     $ad = new Adherent();
 
-    $ad->nom = isset($_POST['nom']) ? $_POST['nom'] : "";
-    $ad->prenom = isset($_POST['prenom']) ? $_POST['prenom'] : "";
-    $ad->mail = isset($_POST['mail']) ? $_POST['mail'] : "";
-    $ad->id_ville = isset($_POST['ville']) ? $_POST['ville'] : "";
-    $ad->points = 0;
-    $ad->date_creation = date('Y-m-d H:i:s');
-    $ad->compte = "ad";
+    handleInput($ad);
 
     $mdp = isset($_POST['password']) ? $_POST['password'] : "";
     $mdp_check = isset($_POST['password_check']) ? $_POST['password_check'] : "";
@@ -51,9 +46,21 @@ function handlePost()
 
     if ($valid_mdp) {
         $ad->password = $hash_mdp;
+        $isAdded = $adBD->add($ad);
     } else {
         echo "no";
     }
+}
 
-    $adBD->add($ad);
+function handleInput(Adherent $ad): void
+{
+    $nom    = isset($_POST['nom'])      ? $_POST['nom'] : "";
+    $prenom = isset($_POST['prenom'])   ? $_POST['prenom'] : "";
+    $mail   = isset($_POST['mail'])     ? $_POST['mail'] : "";
+    $ville  = isset($_POST['ville'])    ? $_POST['ville'] : "";
+
+    $ad->nom        = Utilities::sanitaze($nom);
+    $ad->prenom     = Utilities::sanitaze($prenom);
+    $ad->mail       = Utilities::sanitaze($mail);
+    $ad->id_ville   = Utilities::sanitaze($ville);
 }
