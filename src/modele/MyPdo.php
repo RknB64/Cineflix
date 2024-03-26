@@ -164,7 +164,7 @@ abstract class MyPdo extends DbConnect
   // prend en paramètre un objet et fait un where sur les propriétés set up
   // par exemple $Adherent->nom = "Bob"; selectWhere($Adherent) : retourne une array avec les adhérents qui ont pour nom bob
   // les autres propriétés doivent être laissée vide
-  public function selectWhere(object $object): array
+  public function selectWhere(object $object): object
   {
     $db = self::connexion();
     $resultat = null;
@@ -189,7 +189,7 @@ abstract class MyPdo extends DbConnect
 
       while ($ligne = $query->fetch(PDO::FETCH_ASSOC)) {
 
-        $resultat[] = $this->createObject($ligne);
+        $resultat = $this->createObject($ligne);
       }
     } catch (PDOException $e) {
       die("Erreur !: " . $e->getMessage());
