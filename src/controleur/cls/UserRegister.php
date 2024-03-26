@@ -20,7 +20,9 @@ class UserRegister extends UserManager
     $valid_mdp = password_verify($mdp_check, $hash_mdp);
 
     // TODO check que email pas in bd
-    if ($valid_mdp) {
+    $valid_mail = !self::isEmailInBD($ad->mail);
+
+    if ($valid_mail && $valid_mdp) {
       $ad->password = $hash_mdp;
       $isAdded = $adBD->add($ad);
     } else {
