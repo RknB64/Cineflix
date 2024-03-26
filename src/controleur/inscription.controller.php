@@ -22,8 +22,8 @@ include './vue/footer.html.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    echo "post";
-    UserManager::handleRegisterPost($_POST);
+
+    UserRegister::handleRegisterPost($_POST);
 }
 
 
