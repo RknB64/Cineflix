@@ -32,26 +32,12 @@ class AdherentBD extends MyPdo
 
     public function isValidUser(string $email, string $candidateMdp): array
     {
-        $validMdp = false;
-        $validMail = self::isEmailInBD($email);
+        $ad->compte = "ad";
+        $ad->date_creation = date('Y-m-d H:i:s');
+        $ad->points = 0;
 
-        if ($validMail) {
-            $userHash = self::getHash($email);
-            $validMdp = password_verify($candidateMdp, $userHash);
-        }
-        return [$validMail, $validMdp];
-    }
-
-    private function isEmailInBD(string $email): bool
-    {
-        $ad = new Adherent();
-
-        $ad->mail = $email;
-        $ad = $this->selectWhere($ad);
-
-        $validMail = $ad === null ? false : true;
-
-        return $validMail;
+        // appelle la fonction add de MyPdo
+        return parent::add($ad);
     }
 
     protected function className(): string
