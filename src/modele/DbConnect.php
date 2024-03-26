@@ -1,6 +1,6 @@
 <?php
-abstract class DbConnect {
 
+abstract class DbConnect {
 
 	protected static function connexion() {
 		

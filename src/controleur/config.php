@@ -6,10 +6,11 @@ define('DB_PASSWORD', 'root@sio');
 define('DB_DATABASE', 'db_cineflix');
 
 // use mariadb for docker, and local host for vm
-//  define('DB_HOST', 'mariadb');
-define('DB_HOST', 'localhost');
+define('DB_HOST', 'mariadb');
+/* define('DB_HOST', 'localhost'); */
 
 define("RACINE", dirname(__DIR__));
+define("AUTOLOAD", RACINE . "/cls/autoload.php");
 
 
 define('DB_FILM_TABLE', 'film');
