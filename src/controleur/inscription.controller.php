@@ -1,7 +1,11 @@
 <?php
 
+require RACINE . '/modele/MyPdo.php';
+require RACINE . '/modele/AdherentBD.php';
+
+// inputs qui seront affichés
 $fields = [
-    //  label                           type            name
+    //  label                       type            name
     ["Nom",                         "text",         "nom"],
     ["Prénom",                      "text",         "prenom"],
     ["Email",                       "email",        "mail"],
@@ -28,13 +32,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 function handlePost()
 {
+    $adBD = new AdherentBD();
+    $ad = new Adherent();
 
-    $email = isset($_POST['nom']) ? $_POST['nom'] : "";
-    $prenom = isset($_POST['prenom']) ? $_POST['prenom'] : "";
-    $mail = isset($_POST['mail']) ? $_POST['mail'] : "";
-    $ville = isset($_POST['ville']) ? $_POST['ville'] : "";
+    $ad->nom = isset($_POST['nom']) ? $_POST['nom'] : "";
+    $ad->prenom = isset($_POST['prenom']) ? $_POST['prenom'] : "";
+    $ad->mail = isset($_POST['mail']) ? $_POST['mail'] : "";
+    $ad->id_ville = isset($_POST['ville']) ? $_POST['ville'] : "";
+    $ad->points = 0;
+    $ad->date_creation = date('Y-m-d H:i:s');
+    $ad->compte = "ad";
+
     $mdp = isset($_POST['password']) ? $_POST['password'] : "";
     $mdp_check = isset($_POST['password_check']) ? $_POST['password_check'] : "";
 
-    echo strcmp($mdp, $mdp_check);
+    $hash_mdp = password_hash($mdp, PASSWORD_DEFAULT);
+    $valid_mdp = password_verify($mdp_check, $hash_mdp);
+
+    if ($valid_mdp) {
+        $ad->password = $hash_mdp;
+    } else {
+        echo "no";
+    }
+
+    $adBD->add($ad);
 }
