@@ -1,7 +1,5 @@
 <?php
 
-require_once("./modele/DbConnect.php");
-
 class AchatBD extends DbConnect{
     private static $table = "achat";
     public static function getStreams() : array {

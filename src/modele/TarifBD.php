@@ -1,8 +1,5 @@
 <?php
 
-include_once("./controleur/config.php");
-require_once "./modele/DbConnect.php";
-
 class TarifBD extends DbConnect {
 
 
