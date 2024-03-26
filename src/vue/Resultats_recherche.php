@@ -1,64 +1,106 @@
-<div class="container">
-    <h1>Search Results <?= $ville ?></h1>
-    <?php if (!empty($results)): ?>
-        <div class="filmCards px-3 d-flex flex-wrap row-cols-md-5 align-content-start">
-            <?php foreach ($results as $item): ?>
-                <div class="filmCard border border-light-50 border-1 rounded px-2 py-2 my-1 shadow">
-                    <div class="btn mx-0 my-0 py-0 px-0">
-                        <img src="static/img/<?= $item->id_affiche ?>.jpg" class="card-img rounded" alt="..." data-bs-toggle="offcanvas" data-bs-target="#offcanvas<?= $item->id ?>WithBothOptions" aria-controls="offcanvasWithBothOptions">
-                    </div>
-                    <br><br>
-                    <a href="#" class="btn btn-dark w-100">Réserve ta place !</a>
-                </div>
+<style>
+    /* Custom CSS for films container */
 
-                <!-- OffCanvas -->
-                <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvas<?= $item->id ?>WithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title fw-bold" id="offcanvasWithBothOptionsLabel"><?= $item->titre ?></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <img src="static/img/<?= $item->id_affiche ?>.jpg" class="card-img rounded" alt="...">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item mx-auto">
-                                <div class="btn" data-bs-toggle="modal" data-bs-target="#video<?= $item->id ?>Modal">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-play-circle-fill" viewBox="0 0 16 16">
-                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
-                                    </svg>
-                                </div>
-                                <div class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                                    </svg>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <p class="card-text px-2 py-2"><?= $item->description ?></p>
-                            </li>
-                            <li class="list-group-item">
-                                <p class="card-text d-flex justify-content-between"><small class="text-white-70 fst-italic">Durée : <?= $item->duree ?></small>
-                                    <a href="#" class="btn btn-dark">Réserve ta place !</a>
-                                </p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+    /* Adjustments for responsiveness */
+    @media (max-width: 768px) {
+        .films-container {
+            padding: 10px;
+        }
+    }
 
-                <!-- VideoModal -->
-                <div class="modal fade" id="video<?= $item->id ?>Modal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <div class="ratio ratio-16x9 embed-responsive-16by9">
-                                    <iframe class="embed-responsive-item" src="static/vids/Nioh 2 - Opening Cinematic.mp4" title="YouTube video" allowfullscreen></iframe>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    /* Animation keyframes */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+<h1>Search Results <?= $ville ?></h1>
+
+<?php if (!empty($results)) : ?>
+    <div class="filmCards px-3 d-flex flex-wrap row-cols-md-5 align-content-start">
+        <?php foreach ($results as $item) : ?>
+            <div class="filmCard border border-light-50 border-1 rounded px-2 py-2 my-1 shadow">
+                <img src="static/img/cinema/<?= $item->id_affiche ?>.jpg" class="card-img rounded" alt="...">
+                <div class="film-details">
+                    <h5 class="fw-bold"><?= $item->nom ?></h5>
+                    <p class="card-text"><?= $item->address ?></p>
+
+                    <!-- Button to show films for this cinema -->
+                    <button class="btn btn-dark show-films" data-cinema-id="<?= $item->id ?>">Voir les films</button>
                 </div>
-            <?php endforeach; ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
+<?php else : ?>
+    <p>No results found.</p>
+<?php endif; ?>
+
+<?php foreach ($results as $item) : ?>
+    <!-- Container to display films for each cinema (hidden by default) -->
+    <div class="films-container mt-3 d-none" id="films-container-<?= $item->id ?>">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <!-- Film items will be dynamically added here -->
         </div>
-    <?php else: ?>
-        <p>No results found.</p>
-    <?php endif; ?>
-</div>
+
+  
+    </div>
+    <?php endforeach; ?>
+    <script>
+    $(document).ready(function() {
+        $('.show-films').click(function() {
+            var cinemaId = $(this).data('cinema-id'); // Get the cinema ID
+            var filmsContainer = $('#films-container-' + cinemaId);
+
+            // Check if the films container is visible
+            if (filmsContainer.hasClass('d-none')) {
+                // AJAX request to fetch films for the selected cinema
+                $.ajax({
+                    url: 'http://localhost:81/?action=search&cinema=' + cinemaId,
+                    type: 'GET',
+                    dataType: 'json', // Specify JSON dataType for parsing JSON response
+                    success: function(response) {
+                        // Generate HTML content to display film details
+                        var filmsHTML = '';
+                        if (response.error) {
+                            filmsHTML = '<p>' + response.error + '</p>';
+                        } else {
+                            response.forEach(function(film) {
+                                filmsHTML += '<div class="filmCards px-3 d-flex flex-wrap row-cols-md-5 align-content-start">';
+                                filmsHTML += '    <div class="filmCard border border-light-50 border-1 rounded px-2 py-2 my-1 shadow">';
+                                filmsHTML += '        <div class="btn mx-0 my-0 py-0 px-0">';
+                                filmsHTML += '            <img src="static/img/' + film.id_affiche + '.jpg" class="card-img rounded-start" alt="' + film.titre + '">';
+                                filmsHTML += '        </div>';
+                                filmsHTML += '        <div class="col-md-8">';
+                                filmsHTML += '            <div class="card-body">';
+                                filmsHTML += '                <h5 class="card-title">' + film.titre + '</h5>';
+                                filmsHTML += '                <p class="card-text">' + film.description + '</p>';
+                                filmsHTML += '                <p class="card-text"><small class="text-muted">Durée: ' + film.duree + '</small></p>';
+                                filmsHTML += '                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#filmModal' + film.Id + '">Voir la bande-annonce</button>';
+                                filmsHTML += '            </div>';
+                                filmsHTML += '        </div>';
+                                filmsHTML += '    </div>';
+                                filmsHTML += '</div>';
+                                // You can add more film details as needed
+                            });
+                        }
+                        // Display the generated HTML content in the films container
+                        filmsContainer.html(filmsHTML).removeClass('d-none');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            } else {
+                // Hide the films container if it's already visible
+                filmsContainer.addClass('d-none');
+            }
+        });
+    });
+</script>

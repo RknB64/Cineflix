@@ -10,6 +10,10 @@ require dirname(__FILE__) . '/cls/router.php';
 if (isset($_GET["action"])) {
     $action = $_GET["action"];
     $fichier = redirect($action);
+    // if($action === 'show_films') {
+    //     $action = 'showfilm';
+    //     $fichier = redirect($action);
+    // }
 } elseif (isset($_GET["ville"])) {
     // If 'ville' parameter is set, set the action to 'search'
     $action = 'search';

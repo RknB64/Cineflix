@@ -2,7 +2,7 @@
 
 include_once("./modele/MyPdo.php");
 include_once("./modele/SearchBD.php");
-include './vue/header.html.php';
+
 
 class searchController
 {
@@ -13,29 +13,44 @@ class searchController
         $results = $concreteMyPdo->Search_selon_Ville($ville);
 
         if (!empty($results)) {
-            // var_dump($results);
+            //  var_dump($results);
+            include './vue/header.html.php';
             include './vue/Resultats_recherche.php';
         } else {
-            echo "No results found.";
+            echo "<h1><span style='color: red;'>Aucun résultat trouvé.</span></h1>";
+
         }
     }
+    public function getFilmsByCinemaId($cinemaId) {
+        $concreteMyPdo = new SearchBD();
+        $films = $concreteMyPdo->getFilmsByCinemaId($cinemaId);
+        
+        // You can return the films or render a view with the films data
+        if (!empty($films)) {
+            echo json_encode($films);
+        } else {
+            echo json_encode(['error' => 'No films found for the specified cinema ID']);
+        }
+    }
+    
+    
 }
-
-// Create an instance of the controller
 $controller = new searchController();
-
-// Check if the "ville" parameter is set in the URL
 if(isset($_GET['ville'])) {
     // Retrieve the city from the URL parameters
     $ville = $_GET['ville'];
-    // var_dump($ville);
     // Call the search method with the retrieved city
     $controller->search($ville);
+    include './vue/footer.html.php';
+} elseif(isset($_GET['cinema'])) {
+    // Retrieve the cinema ID from the URL parameters
+    $cinemaId = $_GET['cinema'];
+    // Call the getFilmsByCinemaId method with the retrieved cinema ID
+    $controller->getFilmsByCinemaId($cinemaId);
 } else {
-    // Display an error message if the city parameter is not provided
-    echo "No city specified for search.";
+    // Display an error message if neither city nor cinema parameter is provided
+    echo "No city or cinema specified for search.";
 }
 
 
-include './vue/footer.html.php';
 ?>

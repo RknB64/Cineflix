@@ -5,6 +5,10 @@ function redirect($action) {
 /* echo $action; */
 switch ($action) {
 
+	case 'accueil':
+		$fichier = "accueil.controller.php";
+		break;
+
 	case 'signIn':
 		$fichier = "inscription.controller.php";
 		break;
@@ -17,6 +21,9 @@ switch ($action) {
 		break;
 	case'search':
 		$fichier = 'searchController.php';
+		break;
+	case 'showfilm':
+		$fichier = 'accueil.controller.php';
 		break;
 	default:
 		$fichier = "page404_ctl.php";
