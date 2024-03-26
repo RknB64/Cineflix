@@ -1,12 +1,10 @@
 <?php
 
+require dirname(__FILE__) . '/controleur/config.php';
+require RACINE . '/cls/router.php';
+require_once AUTOLOAD;
 
 $action = null;
-
-require dirname(__FILE__) . '/controleur/config.php';
-require dirname(__FILE__) . '/modele/DbConnect.php';
-require dirname(__FILE__) . '/cls/router.php';
-require dirname(__FILE__) . '/controleur/cls/Utilities.php';
 
 if (isset($_GET["action"])) {
 	$action = $_GET["action"];

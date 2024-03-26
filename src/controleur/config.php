@@ -10,6 +10,7 @@ define('DB_HOST', 'mariadb');
 /* define('DB_HOST', 'localhost'); */
 
 define("RACINE", dirname(__DIR__));
+define("AUTOLOAD", RACINE . "/cls/autoload.php");
 
 
 define('DB_FILM_TABLE', 'film');
