@@ -1,6 +1,6 @@
 <?php
-
-final class Stream
+require("MyPdo.php");
+ class Stream
 
 {   public int  $id;
     public int  $id_film;

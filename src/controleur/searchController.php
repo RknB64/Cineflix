@@ -2,7 +2,7 @@
 
 include_once("./modele/MyPdo.php");
 include_once("./modele/SearchBD.php");
-include './vue/header.html.php';
+
 
 class searchController
 {
