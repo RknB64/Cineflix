@@ -1,8 +1,5 @@
 <?php
 
-require RACINE . '/modele/MyPdo.php';
-require RACINE . '/modele/AdherentBD.php';
-
 class UserManager
 {
 
