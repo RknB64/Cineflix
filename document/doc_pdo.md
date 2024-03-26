@@ -85,6 +85,28 @@ $salleModif->id_salle = 2;
 $sbd->update($salleModif);
 ```
 
+## Override
+
+Il est possible d'override les méthodes de la classe `MyPdo` dans les classes filles. Et tout de même utiliser l'implémentation de la classe `MyPdo`.
+C'est utile pour ajouter une étape de vérification des valeurs.
+
+Par exemple, override la fonction add pour adherent afin d'ajouter des valeurs par défaut avant d'appeler la fonction de la classe parrent :
+
+```php
+<?php
+
+    // @Override
+    // ajoute les valeurs par défaut avant de faire la requête
+    public function add(object $ad): bool
+    {
+        $ad->compte = "ad";
+        $ad->date_creation = date('Y-m-d H:i:s');
+        $ad->points = 0;
+
+        return parent::add($ad);
+    }
+``` 
+
 ## Limites
 
 - Fonctionne pas avec les clefs primaires composées (mais surement adaptable)
