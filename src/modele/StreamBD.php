@@ -1,6 +1,4 @@
-
 <?php
-require_once("DbConnect.php");
 
 class StreamBD extends DbConnect {
     private static $table = "stream";
