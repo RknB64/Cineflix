@@ -1,7 +1,7 @@
 <?php
 
 // inputs qui seront affichés
-$fields = UserRegister::getFields();
+$formFields = UserRegister::getFormFields();
 
 include './vue/header.html.php';
 include './vue/inscription.vue.php';
