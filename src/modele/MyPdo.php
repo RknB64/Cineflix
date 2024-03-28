@@ -12,7 +12,7 @@ abstract class MyPdo extends DbConnect
   abstract protected function className(): string;   // return child associated object class (ex: for AdherentBD it's "Adherent")
 
 
-  public function selectAll(): array
+  public function selectAll(): ?array
   {
 
     $db = self::connexion();
@@ -37,7 +37,7 @@ abstract class MyPdo extends DbConnect
 
 
 
-  public function selectById(int $id): object
+  public function selectById(int $id): ?object
   {
 
     $db = self::connexion();
@@ -164,7 +164,7 @@ abstract class MyPdo extends DbConnect
   // prend en paramètre un objet et fait un where sur les propriétés set up
   // par exemple $Adherent->nom = "Bob"; selectWhere($Adherent) : retourne une array avec les adhérents qui ont pour nom bob
   // les autres propriétés doivent être laissée vide
-  public function selectWhere(object $object): object
+  public function selectWhere(object $object): ?object
   {
     $db = self::connexion();
     $resultat = null;
