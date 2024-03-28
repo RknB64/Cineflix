@@ -4,7 +4,7 @@
 class UserRegister extends UserManager
 {
 
-  private static array $fields = [
+  private static array $formFields = [
     //  label                       type            name
     ["Nom",                         "text",         "nom"],
     ["Prénom",                      "text",         "prenom"],
@@ -14,15 +14,15 @@ class UserRegister extends UserManager
     ["Retaper le mot de passe",     "password",     "password_check"]
   ];
 
-  // défini des constantes pour simplifier l'acces, par exemple: $fields[0][LABEL]
+  // défini des constantes pour simplifier l'acces aux fields, par exemple: $fields[0][LABEL]
   const LABEL   = 0;
   const TYPE    = 0;
   const NAME    = 0;
 
-  public static function getFields(): array
+  public static function getFormFields(): array
   {
 
-    return self::$fields;
+    return self::$formFields;
   }
 
   public static function handleRegisterPost(array $post): bool

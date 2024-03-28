@@ -8,7 +8,7 @@
     <div class="container bg-dark text-white p-4 mt-3 rounded border border-secondary">
         <form method="post" action="#">
 
-            <?php foreach ($fields as $field) :
+            <?php foreach ($formFields as $field) :
                 $id = str_replace(" ", "_", $field[UserRegister::LABEL]); ?>
 
                 <div class="w-75 mx-auto mb-3">
