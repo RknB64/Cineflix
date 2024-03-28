@@ -14,6 +14,11 @@ class UserRegister extends UserManager
     ["Retaper le mot de passe",     "password",     "password_check"]
   ];
 
+  // défini des constantes pour simplifier l'acces, par exemple: $fields[0][LABEL]
+  const LABEL   = 0;
+  const TYPE    = 0;
+  const NAME    = 0;
+
   public static function getFields(): array
   {
 

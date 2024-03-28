@@ -9,11 +9,11 @@
         <form method="post" action="#">
 
             <?php foreach ($fields as $field) :
-                $id = str_replace(" ", "_", $field[LABEL]); ?>
+                $id = str_replace(" ", "_", $field[UserRegister::LABEL]); ?>
 
                 <div class="w-75 mx-auto mb-3">
-                    <label for='<?= $id ?>'> <?= $field[LABEL] ?> </label>
-                    <input class="form-control" type="<?= $field[TYPE] ?>" name="<?= $field[NAME] ?>" id="<?= $id ?>">
+                    <label for='<?= $id ?>'> <?= $field[UserRegister::LABEL] ?> </label>
+                    <input class="form-control" type="<?= $field[UserRegister::TYPE] ?>" name="<?= $field[UserRegister::NAME] ?>" id="<?= $id ?>">
                 </div>
 
             <?php endforeach; ?>
