@@ -4,6 +4,22 @@
 class UserRegister extends UserManager
 {
 
+  private static array $fields = [
+    //  label                       type            name
+    ["Nom",                         "text",         "nom"],
+    ["Prénom",                      "text",         "prenom"],
+    ["Email",                       "email",        "mail"],
+    ["Ville",                       "text",         "ville"],
+    ["Mot de passe",                "password",     "password"],
+    ["Retaper le mot de passe",     "password",     "password_check"]
+  ];
+
+  public static function getFields(): array
+  {
+
+    return self::$fields;
+  }
+
   public static function handleRegisterPost(array $post): bool
   {
     $isAdded = false;
@@ -11,7 +27,7 @@ class UserRegister extends UserManager
     $adBD = new AdherentBD();
     $ad = new Adherent();
 
-    $ad = self::handleRegisterInput($post);
+    $ad = self::handleRegisterInputs($post);
 
     $mdp = isset($post['password']) ? $post['password'] : "";
     $mdp_check = isset($post['password_check']) ? $post['password_check'] : "";
@@ -32,7 +48,7 @@ class UserRegister extends UserManager
     return $isAdded;
   }
 
-  private static function handleRegisterInput(array $post): Adherent
+  private static function handleRegisterInputs(array $post): Adherent
   {
     $ad = new Adherent();
 
