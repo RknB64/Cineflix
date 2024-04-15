@@ -61,7 +61,7 @@ CREATE TABLE `adherent` (
   `password` varchar(255) NOT NULL,
   `points` int(10) NOT NULL,
   `date_creation` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `compte` varchar(20) NOT NULL,
+  `estAdmin` int(1) NOT NULL,
   `id_ville` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
