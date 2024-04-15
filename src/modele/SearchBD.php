@@ -24,7 +24,7 @@ class SearchBD extends MyPdo {
     public function Search_selon_Ville($ville): ?array {
         $db = self::connexion();
         try {
-            $query = $db->prepare("SELECT *
+            $query = $db->prepare("SELECT * 
             FROM film
             INNER JOIN seance ON seance.id_film = film.id
             INNER JOIN salle ON seance.id_salle = salle.id
