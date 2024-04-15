@@ -4,7 +4,7 @@ class VilleBD extends MyPdo
 {
   public const TABLE        = "ville";
   public const ID           = "id";
-  public const CLASS_OBJ    = "region";
+  public const CLASS_OBJ    = "Ville";
 
   private static array $columns = array(
     "nom",
