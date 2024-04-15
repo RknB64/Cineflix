@@ -1,7 +1,8 @@
 <?php
+// constantes pour manipuler les fields
 const LABEL = UserRegister::LABEL;
-const TYPE = UserRegister::TYPE;
-const NAME = UserRegister::NAME;
+const TYPE  = UserRegister::TYPE;
+const NAME  = UserRegister::NAME;
 ?>
 <div class="mx-3">
 
@@ -39,10 +40,9 @@ const NAME = UserRegister::NAME;
   // AJAX call for autocomplete 
   $(document).ready(function() {
     $("#ville").keyup(function() {
-      console.log(   this);
       $.ajax({
         type: "POST",
-        url: "../cls/ville.php",
+        url: "../cls/ajax/villeForm.php",
         data: 'keyword=' + $(this).val(),
         beforeSend: function() {
           $("#ville").css("background", "#FFF url(LoaderIcon.gif) no-repeat 165px");
