@@ -2,7 +2,7 @@
 
 $fbd = new FilmBD();
 $listeFilms = new Film();
-$listeFilms = $fbd->selectAll();
+$listeFilms = $fbd->selectAll(); 
 $titre = 'Accueil';
 include './vue/header.html.php';
 include './vue/accueil.vue.php';
