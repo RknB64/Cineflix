@@ -8,11 +8,9 @@ $action = null;
 
 if (isset($_GET["action"])) {
 	$action = $_GET["action"];
-	$fichier = redirect($action);
+	$fichier = Router::redirect($action);
 } else {
 	$fichier = 'accueil.controller.php';
 }
 
 require RACINE . "/controleur/" . $fichier;
-
-?>
