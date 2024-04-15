@@ -48,7 +48,7 @@ abstract class MyPdo extends DbConnect
       $query->execute([$id]);
 
       while ($ligne = $query->fetch(PDO::FETCH_ASSOC)) {
-        $resultat = $this->createObject($ligne);
+        $resultat = $ligne[self::$columns[0]];
       }
 
     } catch (PDOException $e) {

@@ -9,7 +9,7 @@ class UserRegister extends UserManager
     ["Nom",                         "text",         "nom"],
     ["Prénom",                      "text",         "prenom"],
     ["Email",                       "email",        "mail"],
-    ["Ville",                       "number",       "ville"],
+    ["Ville",                       "text",         "ville"],
     ["Mot de passe",                "password",     "password"],
     ["Retaper le mot de passe",     "password",     "password_check"]
   ];
@@ -65,7 +65,6 @@ class UserRegister extends UserManager
     $ad->prenom     = Utilities::sanitaze($prenom);
     $ad->mail       = Utilities::sanitaze($mail);
     $ad->id_ville   = $ville;
-    echo $ville;
 
     return $ad;
   }
