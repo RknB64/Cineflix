@@ -3,8 +3,8 @@
 class Router
 {
 
-	public static function redirect($action)
-	{
+  public static function redirect($action)
+  {
 
     switch ($action) {
       case 'accueil':
