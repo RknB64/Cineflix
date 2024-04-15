@@ -39,7 +39,8 @@ class Router
 
 
 
-	if (!file_exists(RACINE . '/controleur/' . $fichier)) die("Le fichier : " . $fichier . " n'existe pas !");
+    if (!file_exists(RACINE . '/controleur/' . $fichier)) die("Le fichier : " . $fichier . " n'existe pas !");
 
-	return $fichier;
+    return $fichier;
+  }
 }
