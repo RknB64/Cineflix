@@ -25,11 +25,7 @@
                         <select class="form-select col-md-3" id="cinema-select" name="cinema-select" aria-label="Default select example">
                         </select>
                     </div>
-                    <!-- <div class="d-flex d-inline-block">
-                        <select class="form-select" id="seance-select" aria-label="Default select example">
-                        </select>
-                    </div> -->
-                    <div class="btn-group d-inline-block my-1" id="test" name="seance-select" role="group" aria-label="Basic radio toggle button group">
+                    <div class="btn-group d-inline-block my-1" id="seance-select" name="seance-select" role="group" aria-label="Basic radio toggle button group">
                     </div>
                     <div class="d-flex d-inline-block">
                         <label class="form-label col-md-4" id="place-select-label">Nombre de places</label>

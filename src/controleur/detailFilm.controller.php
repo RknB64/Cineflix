@@ -57,42 +57,35 @@ if (isset($_GET["id"])) {
     include './vue/header.html.php';
     include './vue/detailFilm.vue.php';
     include './vue/footer.html.php';
-    // echo '<pre>';
-    // print_r($detailFilm->cinemas[1]->seances);
-    // print_r($detailFilm);
-    // die();
 }
 ?>
 
 <script>
     const villeSelect = document.getElementById('ville-select');
     const cinemaSelect = document.getElementById('cinema-select');
-    // const seanceSelect = document.getElementById('seance-select');
+    const seanceSelect = document.getElementById('seance-select');
     const placeSelectLabel = document.getElementById('place-select-label');
     const placeSelect = document.getElementById('place-select');
     const boutonAchat = document.getElementById('achat-place');
-    const test = document.getElementById('test');
     cinemaSelect.hidden = true;
-    // seanceSelect.hidden = true;
+    seanceSelect.hidden = true;
     placeSelectLabel.hidden = true;
     placeSelect.hidden = true;
     placeSelect.disabled = true;
     boutonAchat.disabled = true;
-    test.hidden = true;
 
     const villesAvecCinemas = <?php echo json_encode($villesAvecCinemas); ?>;
 
     villeSelect.addEventListener('change', function() {
         cinemaSelect.hidden = false;
         placeSelectLabel.hidden = true;
+        seanceSelect.hidden = true;
         placeSelect.hidden = true;
         placeSelect.disabled = true;
         boutonAchat.disabled = true;
-        test.hidden = true;
         const selectedVilleId = this.value;
         const selectedVille = villesAvecCinemas.find(ville => ville.id == selectedVilleId);
         cinemaSelect.innerHTML = '<option value="" selected disabled hidden>Sélectionnez un cinéma</option>';
-        // seanceSelect.innerHTML = '<option value="">Sélectionnez une séance</option>';
         if (selectedVille) {
             selectedVille.cinemas.forEach(cinema => {
                 const option = document.createElement('option');
@@ -109,33 +102,16 @@ if (isset($_GET["id"])) {
 
     const cinemasAvecSeances = <?php echo json_encode($detailFilm->cinemas); ?>;
 
-    // cinemaSelect.addEventListener('change', function() {
-    //     seanceSelect.hidden = false;
-    //     const selectedCinemaId = this.value;
-    //     const selectedCinema = cinemasAvecSeances.find(cinema => cinema.id == selectedCinemaId);
-    //     seanceSelect.innerHTML = '<option value="">Sélectionnez une séance</option>';
-    //     if (selectedCinema) {
-    //         selectedCinema.seances.forEach(seance => {
-    //             const option = document.createElement('option');
-    //             option.value = seance.id;
-    //             option.textContent = seance.horaire_date;
-    //             seanceSelect.appendChild(option);
-    //         });
-    //         seanceSelect.disabled = false;
-    //     } else {
-    //         seanceSelect.disabled = true;
-    //     }
-    // });
 
     cinemaSelect.addEventListener('change', function() {
         placeSelectLabel.hidden = true;
+        seanceSelect.hidden = false
         placeSelect.hidden = true;
         placeSelect.disabled = true;
         boutonAchat.disabled = true;
-        test.hidden = false;
         const selectedCinemaId = this.value;
         const selectedCinema = cinemasAvecSeances.find(cinema => cinema.id == selectedCinemaId);
-        test.innerHTML = ''
+        seanceSelect.innerHTML = ''
         if (selectedCinema) {
             selectedCinema.seances.forEach(seance => {
                 const date = new Date(Date.parse(seance.horaire_date))
@@ -149,6 +125,11 @@ if (isset($_GET["id"])) {
                 if (minutes < 10) minutes = '0' + minutes
                 const time = hours + ':' + minutes
 
+                // groupe bouton toggle des dates de la semaine ou 2 semaines
+                // (comme pathé qui propose 10 jours à partir d'aujourd'hui)
+                // On compare la date de seance à un bouton pour qu'il soit supérieur et un inférieur
+                // On ajoute la séance
+
                 const inputHtml = '<input type="radio" class="btn-check" name="btnradio" id="btnradio' + seance.id + '" autocomplete="off" value="' + seance.id + '">'
                 const labelHtml = '<label class="btn btn-outline-secondary" for="btnradio' + seance.id + '">'
                 const cardHtml = '<div class="card py-0 px-0 border-0 bg-transparent" style="width: 4rem; height: 5rem;">'
@@ -157,18 +138,15 @@ if (isset($_GET["id"])) {
                 const cardSubtitleHtml = '<p class="card-subtitle text-body-secondary" name="horaire-seance">' + time + '</p>'
                 const balisesClosers = '</div></div></label>'
 
-                test.innerHTML += inputHtml + labelHtml + cardHtml + cardBodyHtml + cardTitleHtml + cardSubtitleHtml + balisesClosers;
+                seanceSelect.innerHTML += inputHtml + labelHtml + cardHtml + cardBodyHtml + cardTitleHtml + cardSubtitleHtml + balisesClosers;
             });
+            seanceSelect.disabled = false;
+        } else {
+            seanceSelect.disabled = true;
         };
     });
 
-    // seanceSelect.addEventListener('change', function() {
-    //     placeSelectLabel.hidden = false;
-    //     placeSelect.hidden = false;
-    //     placeSelect.disabled = false;
-    // });
-
-    test.addEventListener('change', function() {
+    seanceSelect.addEventListener('change', function() {
         placeSelectLabel.hidden = true;
         boutonAchat.disabled = true;
         placeSelectLabel.hidden = false;
@@ -181,6 +159,7 @@ if (isset($_GET["id"])) {
     });
 
 
+    //Récupération des données de formulaire
     document.getElementById("formulaire-cinema").addEventListener("submit", function(event) {
         event.preventDefault();
 
