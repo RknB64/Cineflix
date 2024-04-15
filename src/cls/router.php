@@ -6,6 +6,10 @@ function redirect($action)
 	/* echo $action; */
 	switch ($action) {
 
+	case 'accueil':
+		$fichier = "accueil.controller.php";
+		break;
+
 	case 'signIn':
 		$fichier = "inscription.controller.php";
 	   break;

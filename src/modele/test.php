@@ -46,4 +46,18 @@ $ach->id_billet = 1;
 // etc
 
 
+// stream---------------
+
+$st = new StreamBD();
+$str = new Stream();
+$str->id_film = 1 ; 
+
+
+// Achat
+$ac = new AchatBD();
+$ach= new Achat();
+$ach->id_billet = 1;
+// etc
+
+
 
