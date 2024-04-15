@@ -103,7 +103,7 @@ INSERT INTO `cinema` (`id`, `nom`, `id_ville`) VALUES
 --
 
 CREATE TABLE `film` (
-  `Id` int(20) NOT NULL,
+  `id` int(20) NOT NULL,
   `titre` varchar(20) NOT NULL,
   `description` varchar(255) NOT NULL,
   `duree` varchar(5) NOT NULL,
