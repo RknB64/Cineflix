@@ -1,3 +1,8 @@
+<?php
+  const LABEL = UserRegister::LABEL;
+  const TYPE = UserRegister::TYPE;
+  const NAME = UserRegister::NAME;
+?>
 <div class="mx-3">
 
     <div class="container mt-3">
@@ -9,11 +14,11 @@
         <form method="post" action="#">
 
             <?php foreach ($formFields as $field) :
-                $id = str_replace(" ", "_", $field[UserRegister::LABEL]); ?>
+                $id = str_replace(" ", "_", $field[NAME]); ?>
 
                 <div class="w-75 mx-auto mb-3">
-                    <label for='<?= $id ?>'> <?= $field[UserRegister::LABEL] ?> </label>
-                    <input class="form-control" type="<?= $field[UserRegister::TYPE] ?>" name="<?= $field[UserRegister::NAME] ?>" id="<?= $id ?>">
+                    <label for='<?= $id ?>'> <?= $field[LABEL] ?> </label>
+                    <input class="form-control" type="<?= $field[TYPE] ?>" name="<?= $field[NAME] ?>" id="<?= $id ?>">
                 </div>
 
             <?php endforeach; ?>
