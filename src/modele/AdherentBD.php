@@ -15,24 +15,14 @@ class AdherentBD extends MyPdo
         "password",
         "points",
         "date_creation",
-        "compte",
+        "estAdmin",
     );
 
     // @Override
     // ajoute les valeurs par défaut avant de faire la requête
     public function add(object $ad): bool
     {
-        $ad->compte = "ad";
-        $ad->date_creation = date('Y-m-d H:i:s');
-        $ad->points = 0;
-
-        // appelle la fonction add de MyPdo
-        return parent::add($ad);
-    }
-
-    public function isValidUser(string $email, string $candidateMdp): array
-    {
-        $ad->compte = "ad";
+        $ad->estAdmin = 0;
         $ad->date_creation = date('Y-m-d H:i:s');
         $ad->points = 0;
 
