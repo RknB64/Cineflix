@@ -1,27 +1,30 @@
 <?php
 
-function redirect($action)
+class Router
 {
 
-	/* echo $action; */
-	switch ($action) {
+	function redirect($action)
+	{
 
-		case 'signIn':
-			$fichier = "inscription.controller.php";
-			break;
+		switch ($action) {
 
-		case 'film-details':
-			$fichier = "detailFilm.controller.php";
-			break;
-		case 'stream':
-			$fichier = 'StreamController.php';
-			break;
-		default:
-			$fichier = "page404_ctl.php";
-			break;
+			case 'signIn':
+				$fichier = "inscription.controller.php";
+				break;
+
+			case 'film-details':
+				$fichier = "detailFilm.controller.php";
+				break;
+			case 'stream':
+				$fichier = 'StreamController.php';
+				break;
+			default:
+				$fichier = "page404_ctl.php";
+				break;
+		}
+
+		if (!file_exists(RACINE . '/controleur/' . $fichier)) die("Le fichier : " . $fichier . " n'existe pas !");
+
+		return $fichier;
 	}
-
-	if (!file_exists(RACINE . '/controleur/' . $fichier)) die("Le fichier : " . $fichier . " n'existe pas !");
-
-	return $fichier;
 }
