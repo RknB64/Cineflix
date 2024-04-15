@@ -10,7 +10,15 @@ Marche quand on fait un `new` ou un appel `static` à une classe.
 Le fichier de configuration définie une constante `AUTOLOAD` qui donne le chemin vers le fichier.
 Il y a juste à ajouter `require_once AUTOLOAD;` en haut du fichier `index.php` et tout devrais marcher.
 
-Si jamais il y a des erreurs de classe non trouvée, essayer de rajouter `require_once AUTOLOAD;`, en haut du fichier d'où provient le problème.
+### Si marche pas
+
+Si jamais il y a des erreurs de classe non trouvée, essayer de rajouter en haut fichier :
+
+```php
+require_once "../controleur/config.php";
+require_once AUTOLOAD;
+```
+> Si un fichier est appelé en ajax, ca risque de ne pas marcher.
 
 ## Code
 
