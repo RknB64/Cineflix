@@ -16,8 +16,10 @@ class searchController
             //  var_dump($results);
             include './vue/header.html.php';
             include './vue/Resultats_recherche.php';
+            include './vue/footer.html.php';
         } else {
-            echo "<h1><span style='color: red;'>Aucun résultat trouvé.</span></h1>";
+            // echo "<h1><span style='color: red;'>Aucun résultat trouvé.</span></h1>";
+           
 
         }
     }
@@ -41,7 +43,7 @@ if(isset($_GET['ville'])) {
     $ville = $_GET['ville'];
     // Call the search method with the retrieved city
     $controller->search($ville);
-    include './vue/footer.html.php';
+    // include './vue/footer.html.php';
 } elseif(isset($_GET['cinema'])) {
     // Retrieve the cinema ID from the URL parameters
     $cinemaId = $_GET['cinema'];

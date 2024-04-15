@@ -43,7 +43,5 @@ function changeSearch(item) {
     var searchBox = document.getElementById("search-box").querySelector("input[type='text']");
     searchBox.value = item.textContent;
     document.getElementById("search-box").submit();
-    // Trigger search action here based on the double-clicked item
-    // For example, you can submit the form or call a function to perform the search
-    // Example: document.getElementById("search-box").submit();
+  
 }

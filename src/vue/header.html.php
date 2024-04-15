@@ -8,16 +8,22 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="static/css/style.css" type="text/css" media="screen" />
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="/static/js/autocomplete.js"></script>
-    <script src="static/js/film.js"></script>
+    
+   
 
 
     <?php if (isset($stylesheet)) : ?>
         <link rel="stylesheet" href="static/css/<?= $stylesheet ?>.css" type="text/css" media="screen" />
     <?php endif; ?>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="/static/js/autocomplete.js"></script>
+    <script src="static/js/film.js"></script>
+
     <style>
-      .search-results {
+
+        /* styles pour search resulte */
+
+.search-results {
     position: absolute;
     top: 100%; /* Position below the search box */
     left: 0;
@@ -27,16 +33,13 @@
     border-top: none;
     z-index: 1000; /* Ensure it's above other content */
     /* Style for selected item */
-
-  
 }
-    .search-results li.selected {
-        background-color: #007bff;
+
+.search-results li.selected {
+        background-color: #ffa200;
         color: #fff;
         cursor: pointer;
-
 }
-
     </style>
 </head>
 
@@ -62,7 +65,7 @@
                         <a class="nav-link text-white" href="#">STREAMING</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search" id="search-box" method="GET">
+                <form class="d-flex" role="search" id="search-box" method="GET" >
                     <input class="form-control me-2" type="text" name="ville" placeholder="Rechercher un cinéma" aria-label="Search" onkeyup="showResults(this.value)">
                     <div id="search-results" class="search-results"></div>
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="">

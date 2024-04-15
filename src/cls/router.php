@@ -17,6 +17,10 @@ function redirect($action)
 		case 'film-details':
 			$fichier = "detailFilm.controller.php";
 			break;
+
+		// case 'recherche-ville':
+		// 	$fichier = "searchController.php";
+		// 	break;
 		case 'accueil':
 			$fichier = "accueil.controller.php";
 			break;
