@@ -46,7 +46,7 @@
                 <img src="static/img/<?= $film->id_affiche ?>.jpg" class="card-img rounded" alt="..." data-bs-toggle="offcanvas" data-bs-target="#offcanvas<?= $index ?>WithBothOptions" aria-controls="offcanvasWithBothOptions">
             </div>
             <br><br>
-            <a href="?action=film-details&&id=<?= $film->Id ?>" class="btn btn-dark w-100">Réserve ta place !</a>
+            <a href="?action=film-details&&id=<?= $film->id ?>" class="btn btn-dark w-100">Réserve ta place !</a>
         </div>
 
         <!-- OffCanvas -->
@@ -75,7 +75,7 @@
                     </li>
                     <li class="list-group-item">
                         <p class="card-text d-flex justify-content-between"><small class="text-white-70 fst-italic">Durée : <?= $film->duree ?></small>
-                            <a href="?action=film-details&&id=<?= $film->Id ?>" class="btn btn-dark">Réserve ta place !</a>
+                            <a href="?action=film-details&&id=<?= $film->id ?>" class="btn btn-dark">Réserve ta place !</a>
                         </p>
                     </li>
                 </ul>

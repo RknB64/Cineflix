@@ -2,7 +2,7 @@
 class FilmBD extends MyPdo
 {
   public const TABLE        = "film";
-  public const ID           = "Id";
+  public const ID           = "id";
   public const CLASS_OBJ    = "Film";
 
   private static array $columns = array(
