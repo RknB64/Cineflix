@@ -1,0 +1,10 @@
+From github.com:RknB64/Cineflix
+ * branch            master     -> FETCH_HEAD
+CONFLICT (modify/delete): src/controleur/detailFilm.controller.php deleted in HEAD and modified in 0b807e8 (Détail film V1).  Version 0b807e8 (Détail film V1) of src/controleur/detailFilm.controller.php left in tree.
+CONFLICT (modify/delete): src/vue/detailFilm.vue.php deleted in HEAD and modified in 0b807e8 (Détail film V1).  Version 0b807e8 (Détail film V1) of src/vue/detailFilm.vue.php left in tree.
+error: could not apply 0b807e8... Détail film V1
+hint: Resolve all conflicts manually, mark them as resolved with
+hint: "git add/rm <conflicted_files>", then run "git rebase --continue".
+hint: You can instead skip this commit: run "git rebase --skip".
+hint: To abort and get back to the state before "git rebase", run "git rebase --abort".
+Could not apply 0b807e8... Détail film V1
