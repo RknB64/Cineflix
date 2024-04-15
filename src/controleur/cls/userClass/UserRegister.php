@@ -9,15 +9,15 @@ class UserRegister extends UserManager
     ["Nom",                         "text",         "nom"],
     ["Prénom",                      "text",         "prenom"],
     ["Email",                       "email",        "mail"],
-    ["Ville",                       "text",         "ville"],
+    ["Ville",                       "number",       "ville"],
     ["Mot de passe",                "password",     "password"],
     ["Retaper le mot de passe",     "password",     "password_check"]
   ];
 
   // défini des constantes pour simplifier l'acces aux fields, par exemple: $fields[0][LABEL]
   const LABEL   = 0;
-  const TYPE    = 0;
-  const NAME    = 0;
+  const TYPE    = 1;
+  const NAME    = 2;
 
   public static function getFormFields(): array
   {
@@ -40,7 +40,6 @@ class UserRegister extends UserManager
     $hash_mdp = password_hash($mdp, PASSWORD_DEFAULT);
     $valid_mdp = password_verify($mdp_check, $hash_mdp);
 
-    // TODO check que email pas in bd
     $valid_mail = !self::isEmailInBD($ad->mail);
 
     if ($valid_mail && $valid_mdp) {
@@ -57,15 +56,16 @@ class UserRegister extends UserManager
   {
     $ad = new Adherent();
 
-    $nom    = isset($post['nom'])      ? $post['nom'] : "";
-    $prenom = isset($post['prenom'])   ? $post['prenom'] : "";
-    $mail   = isset($post['mail'])     ? $post['mail'] : "";
-    $ville  = isset($post['ville'])    ? $post['ville'] : "";
+    $nom    = isset($post['nom'])      ? $post['nom']       : "";
+    $prenom = isset($post['prenom'])   ? $post['prenom']    : "";
+    $mail   = isset($post['mail'])     ? $post['mail']      : "";
+    $ville  = isset($post['ville'])    ? $post['ville']     : 0;
 
     $ad->nom        = Utilities::sanitaze($nom);
     $ad->prenom     = Utilities::sanitaze($prenom);
     $ad->mail       = Utilities::sanitaze($mail);
-    $ad->id_ville   = Utilities::sanitaze($ville);
+    $ad->id_ville   = $ville;
+    echo $ville;
 
     return $ad;
   }
