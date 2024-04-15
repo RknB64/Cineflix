@@ -38,28 +38,28 @@
 
     if (count($listeFilms) === 0) echo "Aucun film trouvé.";
 
-    for ($i = 0; $i < count($listeFilms); $i++) {
+    foreach ($listeFilms as $index => $film) {
 
     ?>
         <div class="filmCard border border-light-50 border-1 rounded px-2 py-2 my-1 shadow">
             <div class="btn mx-0 my-0 py-0 px-0">
-                <img src="static/img/<?= $listeFilms[$i]['id_affiche'] ?>.jpg" class="card-img rounded" alt="..." data-bs-toggle="offcanvas" data-bs-target="#offcanvas<?= $i ?>WithBothOptions" aria-controls="offcanvasWithBothOptions">
+                <img src="static/img/<?= $film->id_affiche ?>.jpg" class="card-img rounded" alt="..." data-bs-toggle="offcanvas" data-bs-target="#offcanvas<?= $index ?>WithBothOptions" aria-controls="offcanvasWithBothOptions">
             </div>
             <br><br>
-            <a href="#" class="btn btn-dark w-100">Réserve ta place !</a>
+            <a href="?action=film-details&&id=<?= $film->Id ?>" class="btn btn-dark w-100">Réserve ta place !</a>
         </div>
 
         <!-- OffCanvas -->
-        <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvas<?= $i ?>WithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+        <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvas<?= $index ?>WithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title fw-bold" id="offcanvasWithBothOptionsLabel"><?= $listeFilms[$i]['titre'] ?></h5>
+                <h5 class="offcanvas-title fw-bold" id="offcanvasWithBothOptionsLabel"><?= $film->titre ?></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-                <img src="static/img/<?= $listeFilms[$i]['id_affiche'] ?>.jpg" class="card-img rounded" alt="...">
+                <img src="static/img/<?= $film->id_affiche ?>.jpg" class="card-img rounded" alt="...">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item mx-auto">
-                        <div class="btn" data-bs-toggle="modal" data-bs-target="#video<?= $i ?>Modal">
+                        <div class="btn" data-bs-toggle="modal" data-bs-target="#video<?= $index ?>Modal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-play-circle-fill" viewBox="0 0 16 16">
                                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z" />
                             </svg>
@@ -71,11 +71,11 @@
                         </div>
                     </li>
                     <li class="list-group-item">
-                        <p class="card-text px-2 py-2"><?= $listeFilms[$i]['description'] ?></p>
+                        <p class="card-text px-2 py-2"><?= $film->description ?></p>
                     </li>
                     <li class="list-group-item">
-                        <p class="card-text d-flex justify-content-between"><small class="text-white-70 fst-italic">Durée : <?= $listeFilms[$i]['duree'] ?></small>
-                            <a href="#" class="btn btn-dark">Réserve ta place !</a>
+                        <p class="card-text d-flex justify-content-between"><small class="text-white-70 fst-italic">Durée : <?= $film->duree ?></small>
+                            <a href="?action=film-details&&id=<?= $film->Id ?>" class="btn btn-dark">Réserve ta place !</a>
                         </p>
                     </li>
                 </ul>
@@ -83,11 +83,11 @@
         </div>
 
         <!-- VideoModal -->
-        <div class="modal fade" id="video<?= $i ?>Modal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+        <div class="modal fade" id="video<?= $index ?>Modal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <!-- <div class="modal-header">
-                        <h5 class="modal-title" id="videoModalLabel"><?= $listeFilms[$i]['titre'] ?></h5>
+                        <h5 class="modal-title" id="videoModalLabel"><?= $film->titre ?></h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div> -->
                     <div class="modal-body">
