@@ -14,9 +14,6 @@ if (isset($_GET["action"])) {
     // If 'ville' parameter is set, set the action to 'search'
     $action = 'search';
     $fichier = Router::redirect($action);
-} elseif (isset($_GET["ville"])) {
-    // If 'ville' parameter is set, set the action to 'search'
-    $action = 'search';
 } else {
     $fichier = 'accueil.controller.php';
 }
