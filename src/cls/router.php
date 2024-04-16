@@ -4,6 +4,8 @@ class Router
 {
 
 	public static function redirect($action)
+
+
 	{
 
 		switch ($action) {
