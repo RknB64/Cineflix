@@ -2,7 +2,7 @@
 
 class Film
 {
-  public int    $Id;
+  public int    $id;
   public string $titre;
   public string $description;
   public string $duree;
