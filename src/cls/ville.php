@@ -12,11 +12,17 @@ if (!empty($_POST["keyword"])) {
 ?>
     <ul id="country-list" class="list-group">
       <?php foreach ($result as $ville) : ?>
-        <li onClick="selectCountry('<?php echo $ville; ?>');" class="list-group-item">
+      <li onClick="selectCountry('<?php echo $ville; ?>');" class="list-group-item" >
           <?php echo $ville; ?>
         </li>
       <?php endforeach; ?>
     </ul>
+    <script>
+      document.querySelector("list-group-item").onmouseover = function() 
+      {
+          this.style.backgroundColor = "blue";
+      }
+    </script>
 <?php
   } // end if not empty
 }
