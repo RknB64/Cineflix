@@ -4,11 +4,7 @@ class Router
 {
 
 	public static function redirect($action)
-<<<<<<< HEAD
 
-
-=======
->>>>>>> c079407 (master local)
 	{
 
 		switch ($action) {
