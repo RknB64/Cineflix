@@ -3,7 +3,7 @@
 class Router
 {
 
-	function redirect($action)
+	public static function redirect($action)
 	{
 
 		switch ($action) {
