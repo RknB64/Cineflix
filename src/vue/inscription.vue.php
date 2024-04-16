@@ -60,4 +60,5 @@ const NAME = UserRegister::NAME;
     $("#ville").val(val);
     $("#suggesstion-box").hide();
   }
+
 </script>
