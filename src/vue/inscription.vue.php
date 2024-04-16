@@ -38,12 +38,17 @@ const NAME  = UserRegister::NAME;
 
 <script>
   // AJAX call for autocomplete 
+  let requestType = '<?php echo VilleAjax::AUTOCOMPLETE_REQUEST; ?>';
+
   $(document).ready(function() {
     $("#ville").keyup(function() {
       $.ajax({
         type: "POST",
-        url: "../cls/ajax/villeForm.php",
-        data: 'keyword=' + $(this).val(),
+        url: "../controleur/ajaxRequestController.php",
+        data: {
+          keyword: $(this).val(),
+          request: requestType
+        },
         beforeSend: function() {
           $("#ville").css("background", "#FFF url(LoaderIcon.gif) no-repeat 165px");
         },
