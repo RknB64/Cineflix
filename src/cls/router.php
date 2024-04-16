@@ -1,6 +1,9 @@
 <?php
 
-function redirect($action)
+
+class Router{
+
+	static function redirect($action)
 {
 
 	/* echo $action; */
@@ -18,9 +21,6 @@ function redirect($action)
 			$fichier = "detailFilm.controller.php";
 			break;
 
-		// case 'recherche-ville':
-		// 	$fichier = "searchController.php";
-		// 	break;
 		case 'accueil':
 			$fichier = "accueil.controller.php";
 			break;
@@ -48,4 +48,6 @@ function redirect($action)
 	if (!file_exists(RACINE . '/controleur/' . $fichier)) die("Le fichier : " . $fichier . " n'existe pas !");
 
 	return $fichier;
+}
+
 }
