@@ -3,7 +3,8 @@
 class AjaxHandler
 {
 
-  public const AUTOCOMPLETE_VILLE = "autocomplete-name";
+  // constante pour orienter les requêtes
+  public const AUTOCOMPLETE_VILLE = "autocomplete-ville";
 
   public static function autocompleteVille(string $keyword)
   {
@@ -13,9 +14,9 @@ class AjaxHandler
       $villeDao = new VilleBD();
       $result = $villeDao->selectLike($keyword, $colName, $colName, 6);
 
-        if (!empty($result)) {
-          include(RACINE . '/vue/component/ajaxCompletionList.php');
-        }
+      if (!empty($result)) {
+        include(RACINE . '/vue/component/ajaxCompletionList.php');
+      }
     }
   }
 }

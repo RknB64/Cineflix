@@ -5,19 +5,21 @@ class UserRegister extends UserManager
 {
 
   private static array $formFields = [
-    //  label                       type            name
-    ["Nom",                         "text",         "nom"],
-    ["Prénom",                      "text",         "prenom"],
-    ["Email",                       "email",        "mail"],
-    ["Ville",                       "text",         "ville"],
-    ["Mot de passe",                "password",     "password"],
-    ["Retaper le mot de passe",     "password",     "password_check"]
+    //  label                       type            name                properties
+    ["Nom",                         "text",         "nom",              "required"],
+    ["Prénom",                      "text",         "prenom",           "required"],
+    ["Email",                       "email",        "mail",             "required"],
+    ["Ville",                       "text",         "ville_name",       "required autocomplete='off'"],
+    ["VilleId",                     "hidden",       "ville_id",         "required"],
+    ["Mot de passe",                "password",     "password",         "required"],
+    ["Retaper le mot de passe",     "password",     "password_check",   "required"]
   ];
 
   // défini des constantes pour simplifier l'acces aux fields, par exemple: $fields[0][LABEL]
-  const LABEL   = 0;
-  const TYPE    = 1;
-  const NAME    = 2;
+  const LABEL       = 0;
+  const TYPE        = 1;
+  const NAME        = 2;
+  const PROPERTIES  = 3;
 
   public static function getFormFields(): array
   {
@@ -59,12 +61,15 @@ class UserRegister extends UserManager
     $nom    = isset($post['nom'])      ? $post['nom']       : "";
     $prenom = isset($post['prenom'])   ? $post['prenom']    : "";
     $mail   = isset($post['mail'])     ? $post['mail']      : "";
-    $ville  = isset($post['ville'])    ? $post['ville']     : 0;
+    $ville  = isset($post['ville_id']) ? $post['ville_id']  : 0;
+    echo $ville;
+    var_dump($post);
+    die();
 
     $ad->nom        = Utilities::sanitaze($nom);
     $ad->prenom     = Utilities::sanitaze($prenom);
     $ad->mail       = Utilities::sanitaze($mail);
-    $ad->id_ville   = $ville;
+    $ad->id_ville   = intval($ville);
 
     return $ad;
   }

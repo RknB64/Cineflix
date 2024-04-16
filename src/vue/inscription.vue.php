@@ -3,6 +3,7 @@
 const LABEL = UserRegister::LABEL;
 const TYPE  = UserRegister::TYPE;
 const NAME  = UserRegister::NAME;
+const PROPERTIES  = UserRegister::PROPERTIES;
 ?>
 <div class="mx-3">
 
@@ -17,13 +18,17 @@ const NAME  = UserRegister::NAME;
       <?php foreach ($formFields as $field) : ?>
 
         <div class="w-75 mx-auto mb-3">
-          <label for='<?= $id ?>'> <?= $field[LABEL] ?> </label>
-          <input class="form-control" type="<?= $field[TYPE] ?>" name="<?= $field[NAME] ?>" id="<?= $field[NAME] ?>" required autocomplete="off">
-          <?php if ($field[NAME] === 'ville') : ?>
-        <div  class="position-relative">
-          <div class="position-absolute" id="suggesstion-box"></div>
-        </div>
+          <?php if ($field[TYPE] != 'hidden') : ?>
+            <label for='<?= $id ?>'> <?= $field[LABEL] ?> </label>
           <?php endif; ?>
+          <input class="form-control" type="<?= $field[TYPE] ?>" name="<?= $field[NAME] ?>" id="<?= $field[NAME] ?>" <?= $field[PROPERTIES] ?>>
+
+          <?php if ($field[NAME] === 'ville_name') : ?>
+            <div class="position-relative">
+              <div class="position-absolute" id="suggesstion-box"></div>
+            </div>
+          <?php endif; ?>
+
         </div>
 
 
@@ -38,10 +43,10 @@ const NAME  = UserRegister::NAME;
 
 <script>
   // AJAX call for autocomplete 
-  let requestType = '<?php echo VilleAjax::AUTOCOMPLETE_REQUEST; ?>';
+  let requestType = '<?php echo AjaxHandler::AUTOCOMPLETE_VILLE; ?>';
 
   $(document).ready(function() {
-    $("#ville").keyup(function() {
+    $("#ville_name").keyup(function() {
       $.ajax({
         type: "POST",
         url: "../controleur/ajaxRequestController.php",
@@ -50,20 +55,23 @@ const NAME  = UserRegister::NAME;
           request: requestType
         },
         beforeSend: function() {
-          $("#ville").css("background", "#FFF url(LoaderIcon.gif) no-repeat 165px");
+          $("#ville_name").css("background", "#FFF url(LoaderIcon.gif) no-repeat 165px");
         },
         success: function(data) {
           $("#suggesstion-box").show();
           $("#suggesstion-box").html(data);
-          $("#ville").css("background", "#FFF");
+          $("#ville_name").css("background", "#FFF");
         }
       });
     });
   });
-  //To select a country name
-  function selectCountry(val) {
-    $("#ville").val(val);
-    $("#suggesstion-box").hide();
-  }
 
+  // function utilisée par la vue retournée par l'ajax (TODO c'est pas terrible comme systeme, passer le nom de la fn en data ??)
+  function selectValue(val, id) {
+    $("#ville_name").val(val);
+    $("#suggesstion-box").hide();
+
+    $("#ville_id").val(7);
+    console.log($("#ville_id"));
+  }
 </script>
