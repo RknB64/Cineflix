@@ -181,7 +181,7 @@ abstract class MyPdo extends DbConnect
 
       while ($ligne = $query->fetch(PDO::FETCH_ASSOC)) {
 
-        $resultat = $this->createObject($ligne);
+        $resultat[] = $this->createObject($ligne);
       }
     } catch (PDOException $e) {
       die("Erreur !: " . $e->getMessage());
