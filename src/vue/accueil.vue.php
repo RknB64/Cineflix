@@ -36,9 +36,9 @@
 
     <?php
 
-    if (count($listeFilms) === 0) echo "Aucun film trouvé.";
+    if (count($filmsDispo) === 0) echo "Aucun film trouvé.";
 
-    foreach ($listeFilms as $index => $film) {
+    foreach ($filmsDispo as $index => $film) {
 
     ?>
         <div class="filmCard border border-light-50 border-1 rounded px-2 py-2 my-1 shadow">
