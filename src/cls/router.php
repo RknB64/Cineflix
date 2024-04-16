@@ -21,10 +21,6 @@ class Router{
 			$fichier = "detailFilm.controller.php";
 			break;
 
-		case 'accueil':
-			$fichier = "accueil.controller.php";
-			break;
-
 		case 'page1':
 			$fichier = "page1_ctl.php";
 			break;
