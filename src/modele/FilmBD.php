@@ -34,4 +34,24 @@ class FilmBD extends MyPdo
   {
     return self::ID;
   }
+
+  public function selectFilmsDispo()
+  {
+    $db = self::connexion();
+    $resultat = null;
+
+    try {
+      $query = $db->prepare("SELECT * FROM " . $this->table() . " WHERE date_expiration >= NOW();");
+      $query->execute();
+
+      while ($ligne = $query->fetch(PDO::FETCH_ASSOC)) {
+
+        $resultat[] = $this->createObject($ligne);
+      }
+    } catch (PDOException $e) {
+      die("Erreur !: " . $e->getMessage());
+    }
+
+    return $resultat;
+  }
 }
