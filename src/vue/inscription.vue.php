@@ -25,7 +25,7 @@ const PROPERTIES  = UserRegister::PROPERTIES;
 
           <?php if ($field[NAME] === 'ville_name') : ?>
             <div class="position-relative">
-              <div class="position-absolute" id="suggesstion-box"></div>
+              <div class="position-absolute" id="suggesstion-box-ville"></div>
             </div>
           <?php endif; ?>
 
@@ -41,37 +41,8 @@ const PROPERTIES  = UserRegister::PROPERTIES;
   </div>
 </div>
 
+<!-- Ajout de l'ajax pour autocompléter les villes -->
+<script src="/static/js/ajaxAutocompleteVille.js"></script>
 <script>
-  // AJAX call for autocomplete 
-  let requestType = '<?php echo AjaxHandler::AUTOCOMPLETE_VILLE; ?>';
-
-  $(document).ready(function() {
-    $("#ville_name").keyup(function() {
-      $.ajax({
-        type: "POST",
-        url: "../controleur/ajaxRequestController.php",
-        data: {
-          keyword: $(this).val(),
-          request: requestType
-        },
-        beforeSend: function() {
-          $("#ville_name").css("background", "#FFF url(LoaderIcon.gif) no-repeat 165px");
-        },
-        success: function(data) {
-          $("#suggesstion-box").show();
-          $("#suggesstion-box").html(data);
-          $("#ville_name").css("background", "#FFF");
-        }
-      });
-    });
-  });
-
-  // function utilisée par la vue retournée par l'ajax (TODO c'est pas terrible comme systeme, passer le nom de la fn en data ??)
-  function selectValue(val, id) {
-    $("#ville_name").val(val);
-    $("#suggesstion-box").hide();
-
-    $("#ville_id").val(7);
-    console.log($("#ville_id"));
-  }
+  autocompleteVille();
 </script>

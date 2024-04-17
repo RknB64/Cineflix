@@ -61,10 +61,7 @@ class UserRegister extends UserManager
     $nom    = isset($post['nom'])      ? $post['nom']       : "";
     $prenom = isset($post['prenom'])   ? $post['prenom']    : "";
     $mail   = isset($post['mail'])     ? $post['mail']      : "";
-    $ville  = isset($post['ville_id']) ? $post['ville_id']  : 0;
-    echo $ville;
-    var_dump($post);
-    die();
+    $ville  = isset($post['ville_id']) ? $post['ville_id']  : "0";
 
     $ad->nom        = Utilities::sanitaze($nom);
     $ad->prenom     = Utilities::sanitaze($prenom);
