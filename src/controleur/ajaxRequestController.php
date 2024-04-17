@@ -9,10 +9,10 @@ $request = $_POST['request'];
 switch ($request) {
 
   case AjaxHandler::AUTOCOMPLETE_VILLE:
-          AjaxHandler::autocompleteVille($_POST['keyword']);
-        break;
+    AjaxHandler::autocompleteVille($_POST['keyword']);
+    break;
 
-    default:
-        // TODO
-        break;
+  default:
+    // TODO
+    break;
 }
