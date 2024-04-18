@@ -5,6 +5,13 @@ const TYPE  = UserRegister::TYPE;
 const NAME  = UserRegister::NAME;
 const PROPERTIES  = UserRegister::PROPERTIES;
 ?>
+
+<!-- Ajout de l'ajax pour autocompléter les villes -->
+<script src="/static/js/ajaxAutocompleteVille.js"></script>
+<script>
+  autocompleteVille();
+</script>
+
 <div class="mx-3">
 
   <div class="container mt-3">
@@ -41,8 +48,3 @@ const PROPERTIES  = UserRegister::PROPERTIES;
   </div>
 </div>
 
-<!-- Ajout de l'ajax pour autocompléter les villes -->
-<script src="/static/js/ajaxAutocompleteVille.js"></script>
-<script>
-  autocompleteVille();
-</script>
