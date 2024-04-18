@@ -57,3 +57,8 @@ function selectValue(val, id) {
   $("#ville_id").val(id);
 }
 
+$(document).click(function(event) {
+  if (!$(event.target).closest('#suggesstion-box-ville').length) {
+    $('#suggesstion-box-ville').hide();
+  }
+});
