@@ -6,12 +6,24 @@
 ?>
 
 <ul id="autocomplete-list" class="list-group">
-  <?php foreach ($result as $objet) : ?>
-  <li onClick="selectValue('<?= $objet->$colName ?>', <?= $objet->id ?>)" class="list-group-item" id=<?= $objet->id ?>>
-      <?= $objet->$colName; ?>
+
+  <?php if ($result === null) : ?>
+    <li class="list-group-item" id="">
+      Aucun résultat
     </li>
-  <?php endforeach; ?>
+  <?php else : ?>
+
+    <?php foreach ($result as $objet) : ?>
+      <li onClick="selectValue('<?= $objet->$colName ?>', <?= $objet->id ?>)" class="list-group-item" id=<?= $objet->id ?>>
+        <?= $objet->$colName; ?>
+      </li>
+    <?php endforeach; ?>
+
+  <?php endif; ?>
+
 </ul>
+
+
 
 <script>
   document.querySelectorAll('.list-group-item').forEach(function(element) {
