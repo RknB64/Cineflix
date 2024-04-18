@@ -40,8 +40,8 @@ class UserManager
     $ad->mail = $email;
     $ad = $adBD->selectWhere($ad);
 
-    if ($ad && isset($ad->password)) {
-      $hash = $ad->password;
+    if ($ad && isset($ad[0]->password)) {
+      $hash = $ad[0]->password;
     }
 
     return $hash;
