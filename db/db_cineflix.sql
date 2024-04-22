@@ -61,7 +61,7 @@ CREATE TABLE `adherent` (
   `password` varchar(255) NOT NULL,
   `points` int(10) NOT NULL,
   `date_creation` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `compte` varchar(20) NOT NULL,
+  `estAdmin` int(1) NOT NULL,
   `id_ville` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -103,7 +103,7 @@ INSERT INTO `cinema` (`id`, `nom`, `id_ville`) VALUES
 --
 
 CREATE TABLE `film` (
-  `Id` int(20) NOT NULL,
+  `id` int(20) NOT NULL,
   `titre` varchar(20) NOT NULL,
   `description` varchar(255) NOT NULL,
   `duree` varchar(5) NOT NULL,
