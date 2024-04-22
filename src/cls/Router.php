@@ -16,9 +16,15 @@ class Router
 			case 'film-details':
 				$fichier = "detailFilm.controller.php";
 				break;
+
 			case 'stream':
 				$fichier = 'StreamController.php';
 				break;
+
+			case 'ajax':
+				$fichier = 'ajaxRequestController.php';
+				break;
+
 			default:
 				$fichier = "page404_ctl.php";
 				break;

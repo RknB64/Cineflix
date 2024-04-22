@@ -12,7 +12,7 @@ abstract class MyPdo extends DbConnect
   abstract protected function className(): string;   // return child associated object class (ex: for AdherentBD it's "Adherent")
 
 
-  public function selectAll(): array
+  public function selectAll(): ?array
   {
 
     $db = self::connexion();
@@ -37,7 +37,7 @@ abstract class MyPdo extends DbConnect
 
 
 
-  public function selectById(int $id): object
+  public function selectById(int $id): ?object
   {
 
     $db = self::connexion();
@@ -50,13 +50,10 @@ abstract class MyPdo extends DbConnect
       while ($ligne = $query->fetch(PDO::FETCH_ASSOC)) {
         $resultat = $this->createObject($ligne);
       }
-
     } catch (PDOException $e) {
       die("Erreur !: " . $e->getMessage());
-
     } finally {
       $db = null;
-
     }
 
     return $resultat;
@@ -73,14 +70,12 @@ abstract class MyPdo extends DbConnect
 
     try {
       $query = $db->prepare("DELETE FROM " . $this->table() .
-                           " WHERE " . $this->id() . " = ?");
+        " WHERE " . $this->id() . " = ?");
 
       $res = $query->execute([$id]);
-
     } catch (PDOException $e) {
       die("Erreur !: " . $e->getMessage());
       $res = false;
-
     } finally {
       $db = null;
     }
@@ -105,7 +100,7 @@ abstract class MyPdo extends DbConnect
 
     try {
       $query = $db->prepare("INSERT INTO " . $this->table() .
-                           " (" . $columnsFormated . ") 
+        " (" . $columnsFormated . ") 
                              VALUES (" . $placeholders . ") ");
 
       // crée une array avec les valeurs à ajouter 
@@ -113,12 +108,10 @@ abstract class MyPdo extends DbConnect
       $newValues = array_map(fn ($property) => $object->$property, $columns);
 
       $isAdded = $query->execute($newValues);
-
     } catch (PDOException $e) {
 
       die("Erreur !: " . $e->getMessage()); // TODO enlever les die()
       $isAdded = false;
-
     } finally {
       $db = null;
     }
@@ -142,17 +135,15 @@ abstract class MyPdo extends DbConnect
 
     try {
       $query = $db->prepare("UPDATE " . $this->table() .
-                           " SET " . $columnsFormated .
-                           " WHERE id=" . $this->id());
+        " SET " . $columnsFormated .
+        " WHERE id=" . $this->id());
 
       $newValues = array_map(fn ($property) => $object->$property, $columns);
 
       $isUpdated = $query->execute($newValues);
-
     } catch (PDOException $e) {
       die("Erreur !: " . $e->getMessage());
       $isUpdated = false;
-
     } finally {
       $db = null;
     }
@@ -163,14 +154,15 @@ abstract class MyPdo extends DbConnect
 
   // prend en paramètre un objet et fait un where sur les propriétés set up
   // par exemple $Adherent->nom = "Bob"; selectWhere($Adherent) : retourne une array avec les adhérents qui ont pour nom bob
-  // les autres propriétés doivent être laissée vide
-  public function selectWhere(object $object): array
+  // les autres propriétés doivent être laissées vides
+  public function selectWhere(object $object): ?array
   {
     $db = self::connexion();
     $resultat = null;
-    
+
     $where = "";
 
+    // cree le where à partir des colonnes utilisée dans l'objet
     foreach ($this->columns() as $property) {
 
       if (isset($object->$property)) {
@@ -181,7 +173,7 @@ abstract class MyPdo extends DbConnect
 
         $where .= $stm;
       }
-    } 
+    }
 
     try {
       $query = $db->prepare("SELECT * FROM " . $this->table() . " WHERE " . $where);
@@ -200,6 +192,51 @@ abstract class MyPdo extends DbConnect
     return $resultat;
   }
 
+
+  /**
+   *
+   * Réalise une requête 'select * where $colFrom like $input%'
+   *
+   * @param string $input : texte qui est recherché
+   * @param string $colFrom : colonne dans laquelle chercher
+   * @param (optionnelle) string $colOrderBy : colonne par laquelle trier les résultats 
+   * @param (optionnelle) int $limit : nombre max de résultat 
+   * @param (optionnelle) bool $bothSide : s'il faut insérer des '%' des deux côtés (sinon que après)
+   * @return array d'objet
+   **/
+  public function selectLike(string $input, string $colFrom = "", string $colOrderBy = "", int $limit = 0, bool $bothSide = false): ?array
+  {
+    $db = self::connexion();
+    $resultat = null;
+
+    if ($colOrderBy != "") {
+      $colOrderBy = " ORDER BY " . $colOrderBy;
+    }
+
+    if ($limit > 0) {
+      $limit = " LIMIT 0," . $limit;
+    }
+
+    $input = $input . '%';
+    if ($bothSide === true) {
+      $input = '%' . $input;
+    }
+
+    try {
+      $query = $db->prepare("SELECT * FROM " . $this->table() . " WHERE " . $colFrom . " LIKE ? ". $colOrderBy . $limit);
+      $query->execute([$input]);
+
+      while ($line = $query->fetch(PDO::FETCH_ASSOC)) {
+        $resultat[] = $this->createObject($line);
+      }
+    } catch (PDOException $e) {
+      die("Erreur !: " . $e->getMessage());
+    } finally {
+      $db = null;
+    }
+
+    return $resultat;
+  }
 
 
   // retourne à partir d'une ligne de query, l'objet associé.

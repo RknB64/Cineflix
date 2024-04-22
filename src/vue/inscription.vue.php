@@ -1,38 +1,50 @@
 <?php
-
-$fields = [
-  //  label                       type          row
-  ["Prénom",                    "text",         1],
-  ["Nom",                       "text",         1],
-  ["Email",                     "email",        1],
-  ["Adresse Postale",           "text",         2],
-  ["Date de naissance",         "text",         2],
-  /* ["Téléphone",                 "text",         3], */
-  ["Mot de passe",              "password",     4],
-  ["Retaper le mot de passe",   "password",     4]
-];
-
+// constantes pour manipuler les fields
+const LABEL = UserRegister::LABEL;
+const TYPE  = UserRegister::TYPE;
+const NAME  = UserRegister::NAME;
+const PROPERTIES  = UserRegister::PROPERTIES;
 ?>
 
-<div class="form-wrapper ">
-  <form action="" method="post">
-    
-    <div class="form-part">
-        <label for='test'>Test</label>
-        <input class="form-control" type="text" id="test">
+<!-- Ajout de l'ajax pour autocompléter les villes -->
+<script src="static/js/ajaxAutocompleteVille.js"></script>
+<script>
+  autocompleteVille();
+</script>
 
-        <label for='test2'>Test2</label>
-        <input class="form-control" type="text" id="test2">
-    </div>
+<div class="mx-3">
 
-    <?php foreach ($fields as $field) : ?>
-      <?php $id = str_replace(" ", "_", $field[0]); ?>
- 
-      <div class="form-group">
-        <label for='<?= $id ?>'> <?= $field[0] ?> </label>
-        <input class="form-control" type="<?$field[1]?>" id="<?= $id ?>">
+  <div class="container mt-3">
+    <h1 class="text-white">Je m'inscris</h1>
+    <p class="text-white">Complétez le formulaire pour vous inscrire</p>
+  </div>
+
+  <div class="container bg-dark text-white p-4 mt-3 rounded border border-secondary">
+    <form method="post" action="#">
+
+      <?php foreach ($formFields as $field) : ?>
+
+        <div class="w-75 mx-auto mb-3">
+          <?php if ($field[TYPE] != 'hidden') : ?>
+            <label for='<?= $id ?>'> <?= $field[LABEL] ?> </label>
+          <?php endif; ?>
+          <input class="form-control" type="<?= $field[TYPE] ?>" name="<?= $field[NAME] ?>" id="<?= $field[NAME] ?>" <?= $field[PROPERTIES] ?>>
+
+          <?php if ($field[NAME] === 'ville_name') : ?>
+            <div class="position-relative">
+              <div class="position-absolute" id="suggesstion-box-ville"></div>
+            </div>
+          <?php endif; ?>
+
+        </div>
+
+
+      <?php endforeach; ?>
+
+      <div class="w-75 mx-auto mb-3">
+        <button type="submit" class="btn btn-outline-light ">Submit</button>
       </div>
-    <?php endforeach; ?>
-
-  </form>
+    </form>
+  </div>
 </div>
+

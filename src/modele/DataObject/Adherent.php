@@ -11,5 +11,5 @@ class Adherent
   public string $password;
   public int    $points;
   public string $date_creation; // format "yyyy-mm-dd"
-  public string $compte; // a retirer de la bd je pense
+  public string $estAdmin;
 }

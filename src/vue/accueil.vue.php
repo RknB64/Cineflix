@@ -36,7 +36,7 @@
 
     <?php
 
-    if (count($filmsDispo) === 0) echo "Aucun film trouvé.";
+    if ($filmsDispo === null) echo "Aucun film trouvé.";
 
     foreach ($filmsDispo as $index => $film) {
 
