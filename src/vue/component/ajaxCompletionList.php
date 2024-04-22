@@ -9,13 +9,13 @@
 <ul id="autocomplete-list" class="list-group">
 
   <?php if ($result === null) : ?>
-    <li class="list-group-item" id="">
+    <li class="list-group-item list-group-item-dark" id="">
       Aucun résultat
     </li>
   <?php else : ?>
 
     <?php foreach ($result as $objet) : ?>
-      <li onClick="selectValue('<?= $inputId ?>', '<?= $objet->$colName ?>', <?= $objet->id ?>)" class="list-group-item" id=<?= $objet->id ?>>
+      <li onClick="selectValue('<?= $inputId ?>', '<?= $objet->$colName ?>', <?= $objet->id ?>)" class="list-group-item list-group-item-dark" id=<?= $objet->id ?>>
         <?= $objet->$colName; ?>
       </li>
     <?php endforeach; ?>
@@ -27,16 +27,19 @@
 
 
 <script>
+
   document.querySelectorAll('.list-group-item').forEach(function(element) {
     element.addEventListener('mouseover', hover);
     element.addEventListener('mouseout', out);
   });
 
   function hover(event) {
-    event.target.style.backgroundColor = '#dbdbdb';
+    /* event.target.style.backgroundColor = '#dbdbdb'; */
+    event.target.classList.add('active');
   }
 
   function out(event) {
-    event.target.style.backgroundColor = '#FFF';
+    event.target.classList.remove('active');
+    event.target.style.backgroundColor = '';
   }
 </script>
