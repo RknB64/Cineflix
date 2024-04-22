@@ -2,6 +2,7 @@
 
 // inputs qui seront affichés
 $formFields = UserRegister::getFormFields();
+$titre = 'Inscription';
 
 include './vue/header.html.php';
 include './vue/inscription.vue.php';

@@ -31,8 +31,8 @@ const PROPERTIES  = UserRegister::PROPERTIES;
           <input class="form-control" type="<?= $field[TYPE] ?>" name="<?= $field[NAME] ?>" id="<?= $field[NAME] ?>" <?= $field[PROPERTIES] ?>>
 
           <?php if ($field[NAME] === 'ville_name') : ?>
-            <div class="">
-              <div class="" id="suggesstion-box-ville"></div>
+            <div class="position-relative">
+              <div class="position-absolute" id="suggesstion-box-ville"></div>
             </div>
           <?php endif; ?>
 
