@@ -6,7 +6,7 @@
 //    @param $inputId -> id de l'input où l'élément selectionné sera ajouté
 ?>
 
-<ul id="autocomplete-list" class="list-group">
+<ul id="autocomplete-list" class="list-group" >
 
   <?php if ($result === null) : ?>
     <li class="list-group-item list-group-item-dark" id="">
@@ -15,9 +15,10 @@
   <?php else : ?>
 
     <?php foreach ($result as $objet) : ?>
-      <li onClick="selectValue('<?= $inputId ?>', '<?= $objet->$colName ?>', <?= $objet->id ?>)" class="list-group-item list-group-item-dark" id=<?= $objet->id ?>>
+  <a href="#" onClick="selectValue('<?= $inputId ?>', '<?= $objet->$colName ?>', <?= $objet->id ?>)" 
+    class="focus-ring list-group-item list-group-item-dark" id='<?= $objet->id ?>' style='--bs-focus-ring-color: rgba(0,0,0, 0)'>
         <?= $objet->$colName; ?>
-      </li>
+      </a>
     <?php endforeach; ?>
 
   <?php endif; ?>
@@ -29,11 +30,13 @@
 <script>
 
   document.querySelectorAll('.list-group-item').forEach(function(element) {
-    element.addEventListener('mouseover', hover);
+    element.addEventListener('mouseover', on);
     element.addEventListener('mouseout', out);
+    element.addEventListener('focus', on);
+    element.addEventListener('focusout', out);
   });
 
-  function hover(event) {
+  function on(event) {
     /* event.target.style.backgroundColor = '#dbdbdb'; */
     event.target.classList.add('active');
   }
