@@ -21,11 +21,12 @@
 
     <!-- jQuery UI CSS -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="static/js/SearchFilm_SelonCinema"></script>
+   
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="/static/js/SearchFilm_SelonCinema.js"></script>
     <script src="/static/js/autocomplete.js"></script>
-    <script src="static/js/film.js"></script>
+    <script src="/static/js/film.js"></script>
 
     <style>
         /* styles pour search resulte */
