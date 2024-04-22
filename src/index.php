@@ -13,10 +13,9 @@ if (isset($_GET["action"])) {
 } elseif (isset($_GET["ville"])) {
     // If 'ville' parameter is set, set the action to 'search'
     $action = 'search';
-    $fichier =Router::redirect($action);
+    $fichier = Router::redirect($action);
 } else {
     $fichier = 'accueil.controller.php';
 }
 
 require RACINE . "/controleur/" . $fichier;
-

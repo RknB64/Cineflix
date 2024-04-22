@@ -1,21 +1,23 @@
 <?php
 
-
-class Router{
-
-	static function redirect($action)
+class Router
 {
 
-	/* echo $action; */
-	switch ($action) {
+  public static function redirect($action)
+  {
 
-		case 'accueil':
-			$fichier = "accueil.controller.php";
-			break;
+    switch ($action) {
+      case 'accueil':
+        $fichier = "accueil.controller.php";
+        break;
 
-		case 'signIn':
-			$fichier = "inscription.controller.php";
-			break;
+      case 'signIn':
+        $fichier = "inscription.controller.php";
+        break;
+
+      case 'film-details':
+        $fichier = "detailFilm.controller.php";
+        break;
 
 		case 'film-details':
 			$fichier = "detailFilm.controller.php";
@@ -41,11 +43,10 @@ class Router{
 
 
 
-	if (!file_exists(RACINE . '/controleur/' . $fichier)) die("Le fichier : " . $fichier . " n'existe pas !");
+    if (!file_exists(RACINE . '/controleur/' . $fichier)) die("Le fichier : " . $fichier . " n'existe pas !");
 
-	return $fichier;
-}
-
+    return $fichier;
+  }
 }
 
 

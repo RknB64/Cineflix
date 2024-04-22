@@ -53,6 +53,3 @@ if(isset($_GET['ville'])) {
     // Display an error message if neither city nor cinema parameter is provided
     echo "No city or cinema specified for search.";
 }
-
-
-?>

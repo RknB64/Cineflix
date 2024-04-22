@@ -79,7 +79,6 @@
                 </form>
 
 
-
             </div>
         </div>
     </nav>
@@ -130,14 +129,20 @@
 
     <div id="corps">
 
-        <!-- jQuery library -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <!-- jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-        <!-- jQuery UI library -->
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<!-- jQuery UI library -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
-        <!-- jQuery UI CSS -->
-        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <script>
-           
-        </script>
+<!-- jQuery UI CSS -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script>
+
+
+
+</script>
+
+
+
+<!-- live serach  -->
