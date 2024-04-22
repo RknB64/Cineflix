@@ -26,6 +26,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="/static/js/autocomplete.js"></script>
     <script src="static/js/film.js"></script>
+    <script src="/static/js/ajaxAutocompleteVille.js"></script>
 
     <style>
         /* styles pour search resulte */
@@ -52,6 +53,12 @@
     </style>
 </head>
 
+<script>
+  // set up l'autocomplete de la ville via ajax
+  autocompleteVille("nav-search-ville");
+</script>
+
+
 <body class="body bg-black">
 
     <nav class="navbar navbar-expand-lg bg-dark position-sticky top-0 start-0 z-3" data-bs-theme="dark" style="--bs-bg-opacity: .7;">
@@ -75,8 +82,13 @@
                     </li>
                 </ul>
                 <form class="d-flex" role="search" id="search-box" method="GET">
-                    <input class="form-control me-2" type="text" name="ville" placeholder="Rechercher un cinéma" aria-label="Search" onkeyup="showResults(this.value)">
-                    <div id="search-results" class="search-results"></div>
+                    <div>
+                      <input id="nav-search-ville" class="form-control me-2" type="text" name="ville" placeholder="Rechercher un cinéma" aria-label="Search" autocomplete='off'>
+
+                      <input type='hidden' id='suggestion_ville_id'>
+
+                    </div>
+
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" class="bi bi-person-circle" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
@@ -137,3 +149,4 @@
     </div>
 
     <div id="corps">
+

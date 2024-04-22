@@ -4,12 +4,13 @@ const LABEL = UserRegister::LABEL;
 const TYPE  = UserRegister::TYPE;
 const NAME  = UserRegister::NAME;
 const PROPERTIES  = UserRegister::PROPERTIES;
+const CLASSES  = UserRegister::CLASSES;
 ?>
 
 <!-- Ajout de l'ajax pour autocompléter les villes -->
 <script src="static/js/ajaxAutocompleteVille.js"></script>
 <script>
-  autocompleteVille();
+  autocompleteVille('inscription_ville_name');
 </script>
 
 <div class="mx-3">
@@ -28,13 +29,8 @@ const PROPERTIES  = UserRegister::PROPERTIES;
           <?php if ($field[TYPE] != 'hidden') : ?>
             <label for='<?= $id ?>'> <?= $field[LABEL] ?> </label>
           <?php endif; ?>
-          <input class="form-control" type="<?= $field[TYPE] ?>" name="<?= $field[NAME] ?>" id="<?= $field[NAME] ?>" <?= $field[PROPERTIES] ?>>
+            <input class="<?="form-control " . $field[CLASSES] ?>" type="<?= $field[TYPE] ?>" name="<?= $field[NAME] ?>" id="<?= 'inscription_'.$field[NAME] ?>" <?= $field[PROPERTIES] ?>>
 
-          <?php if ($field[NAME] === 'ville_name') : ?>
-            <div class="position-relative">
-              <div class="position-absolute" id="suggesstion-box-ville"></div>
-            </div>
-          <?php endif; ?>
 
         </div>
 

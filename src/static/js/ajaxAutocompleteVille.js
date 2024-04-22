@@ -21,27 +21,38 @@
             </script>
 */
 
-// AJAX call for autocomplete 
-const REQUEST_TYPE = 'autocomplete-ville';
+function autocompleteVille(inputId) {
 
-function autocompleteVille() {
+
+  let villeIdInputId = inputId + '-ville-id';
+  let villeIdInput = "<input type='hidden' id='" + villeIdInputId +"'>";
+
+  let suggestionBoxId = inputId + '-suggestion-box'
+  let suggestionBox = "<div class='position-relative'>";
+  suggestionBox += "<div class='position-absolute suggestion-box-ville' id='" + suggestionBoxId + "'></div></div>"
 
   $(document).ready(function() {
-    $("#ville_name").keyup(function() {
+    console.log( inputId + " " + suggestionBoxId );
+
+    $('#'+inputId).after(suggestionBox);
+    $('#'+inputId).after(villeIdInput);
+
+    $('#'+inputId).keyup(function() {
       $.ajax({
         type: "POST",
         url: "?action=ajax",
         data: {
           keyword: $(this).val(),
-          request: REQUEST_TYPE
+          inputId: inputId,
+          request: 'autocomplete-ville'
         },
         beforeSend: function() {
-          $("#ville_name").css("background", "#FFF url(LoaderIcon.gif) no-repeat 165px");
         },
         success: function(data) {
-          $("#suggesstion-box-ville").show();
-          $("#suggesstion-box-ville").html(data);
-          $("#ville_name").css("background", "#FFF");
+
+          console.log( suggestionBoxId );
+          $('#'+ suggestionBoxId).show();
+          $('#'+ suggestionBoxId).html(data);
         }
       });
     });
@@ -50,15 +61,16 @@ function autocompleteVille() {
 
 
 // function utilisée par la vue retournée par l'ajax (TODO c'est pas terrible comme systeme, passer le nom de la fn en data ??)
-function selectValue(val, id) {
-  $("#ville_name").val(val);
-  $("#suggesstion-box-ville").hide();
+function selectValue(inputId, villeName, villeId) {
+  $('#' + inputId).val(villeName);
+  $(".suggestion-box-ville").hide();
 
-  $("#ville_id").val(id);
+  $(inputId + '-ville-id').val(villeId);
 }
 
+// hide la suggestion si on clique ailleur
 $(document).click(function(event) {
-  if (!$(event.target).closest('#suggesstion-box-ville').length) {
-    $('#suggesstion-box-ville').hide();
+  if (!$(event.target).closest('.suggestion-box-ville').length) {
+    $('.suggestion-box-ville').hide();
   }
 });

@@ -5,14 +5,14 @@ class UserRegister extends UserManager
 {
 
   private static array $formFields = [
-    //  label                       type            name                properties
-    ["Nom",                         "text",         "nom",              "required"],
-    ["Prénom",                      "text",         "prenom",           "required"],
-    ["Email",                       "email",        "mail",             "required"],
-    ["Ville",                       "text",         "ville_name",       "required autocomplete='off'"],
-    ["VilleId",                     "hidden",       "ville_id",         "required"],
-    ["Mot de passe",                "password",     "password",         "required"],
-    ["Retaper le mot de passe",     "password",     "password_check",   "required"]
+    //  label                       type            name                properties                          classes
+    ["Nom",                         "text",         "nom",              "required",                         ""],
+    ["Prénom",                      "text",         "prenom",           "required",                         ""],
+    ["Email",                       "email",        "mail",             "required",                         ""],
+    ["Ville",                       "text",         "ville_name",       "required autocomplete='off'",      "suggestion_ville_name"],
+    ["VilleId",                     "hidden",       "ville_id",         "required",                         "suggestion_ville_id"],
+    ["Mot de passe",                "password",     "password",         "required",                         ""],
+    ["Retaper le mot de passe",     "password",     "password_check",   "required",                         ""]
   ];
 
   // défini des constantes pour simplifier l'acces aux fields, par exemple: $fields[0][LABEL]
@@ -20,6 +20,7 @@ class UserRegister extends UserManager
   const TYPE        = 1;
   const NAME        = 2;
   const PROPERTIES  = 3;
+  const CLASSES     = 4;
 
   public static function getFormFields(): array
   {
