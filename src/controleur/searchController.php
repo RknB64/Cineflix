@@ -1,14 +1,14 @@
 <?php
 
-include_once("./modele/MyPdo.php");
-include_once("./modele/SearchBD.php");
+// include_once("./modele/MyPdo.php");
+// include_once("./modele/SearchBD.php");
 
 
 class searchController
 {
     public function search($ville)
     {
-        $concreteMyPdo = new SearchBD();
+        $concreteMyPdo = new CinemaBD();
 
         $results = $concreteMyPdo->Search_selon_Ville($ville);
 
@@ -25,7 +25,7 @@ class searchController
     }
     public function getFilmsByCinemaId($cinemaId)
     {
-        $concreteMyPdo = new SearchBD();
+        $concreteMyPdo = new FilmBD();
         $films = $concreteMyPdo->getFilmsByCinemaId($cinemaId);
 
         // You can return the films or render a view with the films data
