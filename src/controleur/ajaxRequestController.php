@@ -1,9 +1,5 @@
 <?php
 
-// autoload doit être chargé quand on utilise ajax
-require_once "../controleur/config.php";
-require_once AUTOLOAD;
-
 $request = $_POST['request'];
 
 switch ($request) {

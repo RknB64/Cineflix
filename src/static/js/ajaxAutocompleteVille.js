@@ -30,7 +30,7 @@ function autocompleteVille() {
     $("#ville_name").keyup(function() {
       $.ajax({
         type: "POST",
-        url: "controleur/ajaxRequestController.php",
+        url: "?action=ajax",
         data: {
           keyword: $(this).val(),
           request: REQUEST_TYPE

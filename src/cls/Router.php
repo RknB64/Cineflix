@@ -20,6 +20,10 @@ class Router
 				$fichier = 'StreamController.php';
 				break;
 
+			case 'ajax':
+				$fichier = 'ajaxRequestController.php';
+				break;
+
 			default:
 				$fichier = "page404_ctl.php";
 				break;
