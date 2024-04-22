@@ -1,7 +1,5 @@
 <?php
 
-require(RACINE . "/modele/FilmDetail.php");
-
 if (isset($_GET["id"])) {
 
     $detailFilm = new FilmDetail($_GET["id"]);
@@ -12,6 +10,7 @@ if (isset($_GET["id"])) {
         'cinemas' => $detailFilm->cinemas,
         'villes' => $detailFilm->villes
     ];
+
 
     // Créer un tableau vide pour stocker les villes avec les cinémas
     $villesAvecCinemas = [];
