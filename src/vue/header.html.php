@@ -24,7 +24,6 @@
     <script src="static/js/SearchFilm_SelonCinema"></script>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="/static/js/autocomplete.js"></script>
     <script src="static/js/film.js"></script>
     <script src="/static/js/ajaxAutocompleteVille.js"></script>
 
@@ -83,12 +82,14 @@
                 </ul>
                 <form class="d-flex" role="search" id="search-box" method="GET">
                     <div>
+                      <input type="hidden" name="action" value="search">
                       <input id="nav-search-ville" class="form-control me-2" type="text" name="ville" placeholder="Rechercher un cinéma" aria-label="Search" autocomplete='off'>
 
-                      <input type='hidden' id='suggestion_ville_id'>
+                      <input type="submit" style="position: absolute; left: -9999px"/>
 
                     </div>
 
+                </form>
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" class="bi bi-person-circle" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
@@ -96,8 +97,6 @@
                         </svg>
 
                     </button>
-
-                </form>
 
 
             </div>
