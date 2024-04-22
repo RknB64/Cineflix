@@ -1,10 +1,15 @@
 <?php
 
-/* require_once './modele/FilmBD.php'; */
+// inputs qui seront affichés
+$formFields = UserRegister::getFormFields();
+$titre = 'Inscription';
 
-$stylesheet = "inscription";
- 
 include './vue/header.html.php';
 include './vue/inscription.vue.php';
 include './vue/footer.html.php';
-?>
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+  UserRegister::handleRegisterPost($_POST);
+
+}

@@ -1,7 +1,6 @@
 <?php
 
 require dirname(__FILE__) . '/controleur/config.php';
-require RACINE . '/cls/router.php';
 require_once AUTOLOAD;
 
 $action = null;
