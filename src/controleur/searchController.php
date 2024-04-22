@@ -9,8 +9,10 @@ class searchController
     public function search($ville)
     {
         $concreteMyPdo = new CinemaBD();
+        $cine = new Cinema();
+        $cine->id_ville = $_GET['ville_id'];
 
-        $results = $concreteMyPdo->Search_selon_Ville($ville);
+        $results = $concreteMyPdo->selectWhere($cine);
 
         if (!empty($results)) {
             //  var_dump($results);
