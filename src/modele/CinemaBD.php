@@ -1,12 +1,5 @@
 <?php
 
-class Cinema
-{
-    public int    $id;
-    public string $nom;
-    public int    $id_ville;
-}
-
 class CinemaBD extends MyPdo
 {
 
@@ -17,6 +10,8 @@ class CinemaBD extends MyPdo
     private static array $columns = array(
         "nom",
         "id_ville",
+        "id_affiche",
+        "adresse",
     );
 
     protected function className(): string
