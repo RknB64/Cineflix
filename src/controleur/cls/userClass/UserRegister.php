@@ -10,7 +10,7 @@ class UserRegister extends UserManager
     ["Prénom",                      "text",         "prenom",           "required",                         ""],
     ["Email",                       "email",        "mail",             "required",                         ""],
     ["Ville",                       "text",         "ville_name",       "required autocomplete='off'",      "suggestion_ville_name"],
-    ["VilleId",                     "hidden",       "ville_id",         "required",                         "suggestion_ville_id"],
+    /* ["VilleId",                     "hidden",       "ville_id",         "required",                         "suggestion_ville_id"], */
     ["Mot de passe",                "password",     "password",         "required",                         ""],
     ["Retaper le mot de passe",     "password",     "password_check",   "required",                         ""]
   ];
