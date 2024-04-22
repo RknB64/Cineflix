@@ -7,7 +7,7 @@ const PROPERTIES  = UserRegister::PROPERTIES;
 ?>
 
 <!-- Ajout de l'ajax pour autocompléter les villes -->
-<script src="/static/js/ajaxAutocompleteVille.js"></script>
+<script src="static/js/ajaxAutocompleteVille.js"></script>
 <script>
   autocompleteVille();
 </script>
