@@ -1,47 +1,55 @@
 /*
   Ajax pour autocompléter le nom des villes depuis la bd.
 
-  Pour utiliser, il faut définir dans la vue :
-  Un input avec l'id 'ville_name', dans lequel l'user saisie la ville au clavier
-  Un div avec l'id 'suggestion-box-ville' pour indiquer 
-  Éventuellement un input avec l'id 'ville_id' en type hidden dans lequel l'id de la ville sera automatiquement saisie
+  Pour utiliser :
+  - Ajouter un input dans la vue avec un id unique
+  - Appeler la fonction "autocompleteVille" avec en parametre l'id de l'input dans lequel on veut compléter les villes
 
   Exemple :
 
-            <input type='text' id='ville_name'>
-            <input type='hidden' id='ville_id'>
-
-            <div class='position-relative'>
-              <div class='position-absolute' id='suggesstion-box-ville'></div>
-            </div>
-
             <script src="/static/js/ajaxAutocompleteVille.js"></script>
+
             <script>
-              autocompleteVille();
+              autocompleteVille('form_ville_name');
             </script>
+
+            <input type='text' id='form_ville_name'>
+
+  La fonction ajoute les divs nécessaires pour faire les suggestions de noms de ville
+  Et ajoute un input hidden avec en valeur l'id de la ville sélectionné. Cet input peut être utilisé avec le nom 'ville_id' (ex: $_POST['ville_id'])
+
 */
 
-// AJAX call for autocomplete 
-const REQUEST_TYPE = 'autocomplete-ville';
+function autocompleteVille(inputId) {
 
-function autocompleteVille() {
+
+  let villeIdInputId = inputId + '-ville-id';
+  let villeIdInput = "<input class='form-control' type='hidden' name='ville_id' id='" + villeIdInputId +"'>";
+
+  let suggestionBoxId = inputId + '-suggestion-box'
+  let suggestionBox = "<div class='position-relative'>";
+  suggestionBox += "<div class='position-absolute suggestion-box-ville' id='" + suggestionBoxId + "'></div></div>"
 
   $(document).ready(function() {
-    $("#ville_name").keyup(function() {
+
+    $('#'+inputId).after(suggestionBox);
+    $('#'+inputId).after(villeIdInput);
+
+    $('#'+inputId).keyup(function() {
       $.ajax({
         type: "POST",
         url: "?action=ajax",
         data: {
           keyword: $(this).val(),
-          request: REQUEST_TYPE
+          inputId: inputId,
+          request: 'autocomplete-ville'
         },
         beforeSend: function() {
-          $("#ville_name").css("background", "#FFF url(LoaderIcon.gif) no-repeat 165px");
         },
         success: function(data) {
-          $("#suggesstion-box-ville").show();
-          $("#suggesstion-box-ville").html(data);
-          $("#ville_name").css("background", "#FFF");
+
+          $('#'+ suggestionBoxId).show();
+          $('#'+ suggestionBoxId).html(data);
         }
       });
     });
@@ -50,15 +58,17 @@ function autocompleteVille() {
 
 
 // function utilisée par la vue retournée par l'ajax (TODO c'est pas terrible comme systeme, passer le nom de la fn en data ??)
-function selectValue(val, id) {
-  $("#ville_name").val(val);
-  $("#suggesstion-box-ville").hide();
+function selectValue(inputId, villeName, villeId) {
+  $('#' + inputId).val(villeName);
+  $(".suggestion-box-ville").hide();
 
-  $("#ville_id").val(id);
+  $('#'+inputId + '-ville-id').val(villeId);
+  $('#' + inputId).focus();
 }
 
+// hide la suggestion si on clique ailleur
 $(document).click(function(event) {
-  if (!$(event.target).closest('#suggesstion-box-ville').length) {
-    $('#suggesstion-box-ville').hide();
+  if (!$(event.target).closest('.suggestion-box-ville').length) {
+    $('.suggestion-box-ville').hide();
   }
 });

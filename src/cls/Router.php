@@ -9,6 +9,14 @@ class Router
 
 		switch ($action) {
 
+			case 'catalogue':
+				$fichier = 'catalogueCinema.controller.php';
+				break;
+
+			case 'streaming':
+				$fichier = 'streaming.controller.php';
+				break;
+
 			case 'signIn':
 				$fichier = "inscription.controller.php";
 				break;
@@ -25,9 +33,9 @@ class Router
 				$fichier = 'ajaxRequestController.php';
 				break;
                 
-            case 'search':
-                $fichier = 'searchController.php';
-                break;
+      case 'search':
+          $fichier = 'searchController.php';
+          break;
 
 			default:
 				$fichier = "page404_ctl.php";

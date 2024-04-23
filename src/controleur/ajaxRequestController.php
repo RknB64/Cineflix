@@ -8,6 +8,7 @@ switch ($request) {
     $villeDao = new VilleBD();
     $colName = 'nom';
     $userInput = $_POST['keyword'];
+    $inputId = $_POST['inputId'];
 
     $result = AjaxHandler::autocomplete($_POST['keyword'], $villeDao, $colName);
     include(RACINE . '/vue/component/ajaxCompletionList.php');
