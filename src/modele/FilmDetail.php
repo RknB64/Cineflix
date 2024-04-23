@@ -34,6 +34,11 @@ class FilmDetail
         $seances->id_film = $id;
         $seances = $seancebd->selectWhere($seances);
 
+        $this->seances = array();
+        $this->salles = array();
+        $this->cinemas = array();
+        $this->villes = array();
+
         if ($seances !== NULL) {
 
             $this->seances = $seances;
@@ -41,7 +46,6 @@ class FilmDetail
 
             $idSalles = array_column($this->seances, 'id_salle');
 
-            $this->salles = array();
             $idCinema = array();
             $sallebd = new SalleBD();
             $salles = new Salle();
@@ -52,7 +56,6 @@ class FilmDetail
             }
 
             $idCinemaClean = array_unique($idCinema);
-            $this->cinemas = array();
             $cinemabd = new CinemaBD();
             $cinemas = new Cinema();
             foreach ($idCinemaClean as $key => $idCine) {
@@ -66,18 +69,12 @@ class FilmDetail
                 array_push($villeIds, $cinema->id_ville);
             }
             $villeIdsClean = array_unique($villeIds);
-            $this->villes = array();
             $villebd = new VilleBD();
             $villes = new Ville();
             foreach ($villeIdsClean as $key => $villeId) {
                 $villes = $villebd->selectById($villeId);
                 array_push($this->villes, $villes);
             }
-        } else {
-            $this->seances = array();
-            $this->salles = array();
-            $this->cinemas = array();
-            $this->villes = array();
         }
     }
 }
