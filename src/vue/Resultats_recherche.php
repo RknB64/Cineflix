@@ -30,7 +30,7 @@
                 <img src="static/img/cinema/<?= $item->id_affiche ?>.jpg" class="card-img rounded" alt="...">
                 <div class="film-details">
                     <h5 class="fw-bold"><?= $item->nom ?></h5>
-                    <p class="card-text"><?= $item->address ?></p>
+                    <p class="card-text"><?= $item->adresse ?></p>
 
                     <!-- Button to show films for this cinema -->
                     <button class="btn btn-dark show-films" data-cinema-id="<?= $item->id ?>">Voir les films</button>
