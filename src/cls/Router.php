@@ -13,6 +13,10 @@ class Router
 				$fichier = "inscription.controller.php";
 				break;
 
+			case 'connexion': 
+				$fichier = 'login.controller.php' ; 
+				break ; 
+
 			case 'film-details':
 				$fichier = "detailFilm.controller.php";
 				break;
