@@ -8,6 +8,13 @@ class Router
 	{
 
 		switch ($action) {
+			case 'catalogue':
+				$fichier = 'catalogueCinema.controller.php';
+				break;
+
+			case 'streaming':
+				$fichier = 'streaming.controller.php';
+				break;
 
 			case 'signIn':
 				$fichier = "inscription.controller.php";
