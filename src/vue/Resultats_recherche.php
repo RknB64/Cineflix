@@ -19,6 +19,7 @@
             opacity: 1;
             transform: translateY(0);
         }
+
     }
 </style>
 <h1>Search Results <?= $ville ?></h1>
@@ -45,11 +46,12 @@
 <?php foreach ($results as $item) : ?>
     <!-- Container to display films for each cinema (hidden by default) -->
     <div class="films-container mt-3 d-none" id="films-container-<?= $item->id ?>">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <!-- Film items will be dynamically added here -->
+        <div class="row row-cols-1 row-cols-md-7 g-3">
+           
         </div>
 
-  
+
+
+
     </div>
-    <?php endforeach; ?>
-   
+<?php endforeach; ?>
