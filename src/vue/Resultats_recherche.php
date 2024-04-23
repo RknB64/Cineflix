@@ -24,7 +24,7 @@
 <h1 class="text-white">Résultat recherche pour <?= $villeName ?></h1>
 
 <?php if (!empty($results)) : ?>
-    <div class="filmCards px-3 d-flex flex-wrap row-cols-md-5 align-content-start text-white">
+    <div class="filmCards px-3 d-flex flex-wrap gap-3 row-cols-md-5 align-content-start text-white">
         <?php foreach ($results as $item) : ?>
             <div class="filmCard border border-light-50 border-1 rounded px-2 py-2 my-1 shadow">
                 <img src="static/img/cinema/<?= $item->id_affiche ?>.jpg" class="card-img rounded" alt="...">
@@ -44,14 +44,15 @@
 
 <?php foreach ($results as $item) : ?>
     <!-- Container to display films for each cinema (hidden by default) -->
-    <div class="films-container mt-3 d-none" id="films-container-<?= $item->id ?>">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="films-container mt-3 d-flex" id="films-container-<?= $item->id ?>">
+        <div class="bg-light g-4">
             <!-- Film items will be dynamically added here -->
         </div>
 
   
     </div>
     <?php endforeach; ?>
+
     <script>
     $(document).ready(function() {
         $('.show-films').click(function() {
@@ -73,24 +74,24 @@
                         } else {
                             // console.log(response);
                             // return false;
-                            response.forEach(function(film) {
-                                filmsHTML += '<div class="filmCards px-3 d-flex flex-wrap row-cols-md-5 align-content-start text-white">';
-                                filmsHTML += '    <div class="filmCard border border-light-50 border-1 rounded px-2 py-2 my-1 shadow">';
-                                filmsHTML += '        <div class="btn mx-0 my-0 py-0 px-0">';
-                                filmsHTML += '            <img src="static/img/' + film.id_affiche + '.jpg" class="card-img rounded-start" alt="' + film.titre + '">';
-                                filmsHTML += '        </div>';
-                                filmsHTML += '        <div class="col-md-8">';
-                                filmsHTML += '            <div class="card-body">';
-                                filmsHTML += '                <h5 class="card-title">' + film.titre + '</h5>';
-                                filmsHTML += '                <p class="card-text">' + film.description + '</p>';
-                                filmsHTML += '                <p class="card-text"><small class="text-white">Durée: ' + film.duree + '</small></p>';
-                                filmsHTML += '                <a href="?action=film-details&&id='+film.id+'" class="btn btn-primary" role="button">Voir la bande-annonce</a>';
 
-                                filmsHTML += '            </div>';
-                                filmsHTML += '        </div>';
-                                filmsHTML += '    </div>';
-                                filmsHTML += '</div>';
-                                
+                            response.forEach(function(film) {
+                                filmsHTML += `<div class=" filmCards px-3 d-flex flex-wrap align-content-start text-white">
+                                                <div class="filmCard border border-light-50 border-1 rounded px-2 py-2 my-1 shadow">
+                                                    <div class="btn mx-0 my-0 py-0 px-0">
+                                                        <img src="static/img/${film.id_affiche}.jpg" class="card-img rounded-start" alt="${film.titre}">
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">${film.titre}</h5>
+                                                            <p class="card-text">${film.description}</p>
+                                                            <p class="card-text"><small class="text-white">Durée: ${film.duree}</small></p>
+                                                            <a href="?action=film-details&&id=${film.id}" class="btn btn-primary" role="button">Réserver places</a>
+
+                                                           </div>
+                                                       </div>
+                                                   </div>
+                                               </div>`
                             });
                             
                         }
