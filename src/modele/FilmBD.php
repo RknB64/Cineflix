@@ -62,7 +62,7 @@ class FilmBD extends MyPdo
     $db = self::connexion();
     try {
       // Prepare the SQL query to fetch films based on cinema ID
-      $query = $db->prepare("SELECT film.*
+      $query = $db->prepare("SELECT DISTINCT film.*
                                FROM cinema
                                INNER JOIN salle ON cinema.id = salle.id_cinema
                                INNER JOIN seance ON salle.id = seance.id_salle
