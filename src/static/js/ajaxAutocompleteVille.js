@@ -63,7 +63,7 @@ function selectValue(inputId, villeName, villeId) {
   $(".suggestion-box-ville").hide();
 
   $('#'+inputId + '-ville-id').val(villeId);
-  console.log(  $('#'+inputId + '-ville-id'));
+  $('#' + inputId).focus();
 }
 
 // hide la suggestion si on clique ailleur

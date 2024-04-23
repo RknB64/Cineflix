@@ -21,7 +21,7 @@
         }
     }
 </style>
-<h1>Search Results <?= $ville ?></h1>
+<h1>Résultat recherche pour <?= $villeName ?></h1>
 
 <?php if (!empty($results)) : ?>
     <div class="filmCards px-3 d-flex flex-wrap row-cols-md-5 align-content-start">

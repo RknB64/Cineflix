@@ -6,24 +6,14 @@
 
 class searchController
 {
-    public function search($ville)
+    public function search($villeId)
     {
         $concreteMyPdo = new CinemaBD();
         $cine = new Cinema();
-        $cine->id_ville = $_GET['ville_id'];
+        $cine->id_ville = $villeId;;
 
-        $results = $concreteMyPdo->selectWhere($cine);
+        return $concreteMyPdo->selectWhere($cine);
 
-        if (!empty($results)) {
-            //  var_dump($results);
-            include './vue/header.html.php';
-            include './vue/Resultats_recherche.php';
-            include './vue/footer.html.php';
-        } else {
-            // echo "<h1><span style='color: red;'>Aucun résultat trouvé.</span></h1>";
-
-
-        }
     }
     public function getFilmsByCinemaId($cinemaId)
     {
@@ -38,13 +28,28 @@ class searchController
         }
     }
 }
+
 $controller = new searchController();
-if (isset($_GET['ville'])) {
+
+if (isset($_GET['ville_id'])) {
+
+    include './vue/header.html.php';
+
     // Retrieve the city from the URL parameters
-    $ville = $_GET['ville'];
+    $villeId = intval($_GET['ville_id']);
+    $villeName = $_GET['ville'];
+
     // Call the search method with the retrieved city
-    $controller->search($ville);
-    // include './vue/footer.html.php';
+    $results = $controller->search($villeId);
+
+    if (!empty($results)) {
+        include './vue/Resultats_recherche.php';
+    } else {
+         echo "<h1><span style='color: white;'>Aucun cinéma trouvé pour la ville de " .$villeName. "</span></h1>";
+    }
+
+    include './vue/footer.html.php';
+
 } elseif (isset($_GET['cinema'])) {
     // Retrieve the cinema ID from the URL parameters
     $cinemaId = $_GET['cinema'];
