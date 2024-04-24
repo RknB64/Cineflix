@@ -24,8 +24,10 @@ class connexion {
                 $_SESSION['user_mail'] = $mail;
                 $_SESSION['user_name'] = $ad->nom; 
                 
-                // Return  username
-                return $ad->nom;
+              
+                // redirect dans la page d'accueil , ici il va passer les valeurs de session pour la page d'accueil
+                header("Location: $?action=accueil");
+                exit();
                 
             } else {
                 // verfication Authentication  si failed, return false
@@ -42,3 +44,7 @@ class connexion {
 
 // appeller method authenticate
 connexion::authenticate();
+
+// une qaustion pour $currentPage
+// $currentURL = $_SERVER['REQUEST_URI'];
+// connexion::authenticate($currentURL);
