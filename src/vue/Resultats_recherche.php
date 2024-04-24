@@ -63,7 +63,7 @@
             if (filmsContainer.hasClass('d-none')) {
                 // AJAX request to fetch films for the selected cinema
                 $.ajax({
-                    url: 'http://localhost:81/?action=search&cinema=' + cinemaId,
+                    url: '?action=search&cinema=' + cinemaId,
                     type: 'GET',
                     dataType: 'json', // Specify JSON dataType for parsing JSON response
                     success: function(response) {
