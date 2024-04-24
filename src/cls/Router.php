@@ -4,9 +4,11 @@ class Router
 {
 
 	public static function redirect($action)
+
 	{
 
 		switch ($action) {
+
 			case 'catalogue':
 				$fichier = 'catalogueCinema.controller.php';
 				break;
@@ -30,6 +32,10 @@ class Router
 			case 'ajax':
 				$fichier = 'ajaxRequestController.php';
 				break;
+                
+      case 'search':
+          $fichier = 'searchController.php';
+          break;
 
 			default:
 				$fichier = "page404_ctl.php";

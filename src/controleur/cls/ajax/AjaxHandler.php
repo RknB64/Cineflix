@@ -5,7 +5,7 @@ class AjaxHandler
 
   // constante pour orienter les requêtes
   public const AUTOCOMPLETE_VILLE = "autocomplete-ville";
-
+  
   public static function autocomplete(string $userInput, object $objectBD, string $colName) : ?array
   {
     $result = null;

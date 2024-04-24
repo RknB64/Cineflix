@@ -30,4 +30,5 @@ class VilleBD extends MyPdo
   {
     return self::ID;
   }
+
 }

@@ -77,4 +77,35 @@ class FilmBD extends MyPdo
 
     return $resultat;
   }
+
+
+
+  public function getFilmsByCinemaId($cinemaId)
+  {
+    $db = self::connexion();
+    try {
+      // Prepare the SQL query to fetch films based on cinema ID
+      $query = $db->prepare("SELECT DISTINCT film.*
+                               FROM cinema
+                               INNER JOIN salle ON cinema.id = salle.id_cinema
+                               INNER JOIN seance ON salle.id = seance.id_salle
+                               INNER JOIN film ON seance.id_film = film.id
+                               WHERE cinema.id = :cinemaId");
+
+      // Bind the cinema ID parameter
+      $query->bindParam(':cinemaId', $cinemaId, PDO::PARAM_INT);
+
+      // Execute the query
+      $query->execute();
+
+      // Fetch the results
+      $films = $query->fetchAll(PDO::FETCH_OBJ);
+
+      // Return the films data
+      return $films;
+    } catch (PDOException $e) {
+      // Handle any potential errors
+      die("Error: " . $e->getMessage());
+    }
+  }
 }
