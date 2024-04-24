@@ -1,6 +1,6 @@
 <?php
 
-if (!isset($_SESSION['login'])) {
+if (!isset($_SESSION['logged_in'])) {
 ?>
     <div class="card text-center mt-4 w-75 mx-auto" data-bs-theme="dark">
         <div class="card-header">

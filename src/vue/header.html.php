@@ -1,3 +1,12 @@
+<?php 
+
+
+require ('./controleur/connexion.controller.php');
+
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -52,9 +61,7 @@
         }
     </style>
 </head>
-
 <body class="body bg-black">
-
     <nav class="navbar navbar-expand-lg bg-dark position-sticky top-0 start-0 z-3" data-bs-theme="dark" style="--bs-bg-opacity: .7;">
         <div class="container-fluid">
             <a class="navbar-brand" href="?">
@@ -83,18 +90,24 @@
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
                             <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
                         </svg>
-
                     </button>
-
+                    <?php if (isset($_SESSION['user_name'])) : ?>
+                        <a href="?action=logout" class="btn btn-outline-light">Logout</a>
+                    <?php endif; ?>
                 </form>
-
-
             </div>
         </div>
+        <!-- session qui a le bom de utilsateur -->
+        <!-- si la session exist  -->
+        <?php if (isset($_SESSION['user_name'])) : ?>
+            <p style="color: white;">Bienvenue, <?php echo $_SESSION['user_name']; ?>!</p>
+            <!-- si la session n'exist pas  -->
+        <?php else : ?>
+            <p style="color: white;">Bienvenue, Guest!</p>
+        <?php endif; ?>
     </nav>
     <!-- Modal -->
     <?php
     echo file_get_contents(RACINE . '/vue/component/loginModal.html', true);
     ?>
-
     <div id="corps">

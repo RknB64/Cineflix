@@ -8,6 +8,13 @@ class Router
 	{
 
 		switch ($action) {
+
+
+
+		    case 'accueil':
+				$fichier = 'accueil.controller.php';
+				break;
+
 			case 'catalogue':
 				$fichier = 'catalogueCinema.controller.php';
 				break;
@@ -18,6 +25,14 @@ class Router
 
 			case 'signIn':
 				$fichier = "inscription.controller.php";
+				break;
+
+			case 'connexion':
+				$fichier = "connexion.controller.php";
+				break;
+				
+			case 'logout':
+				$fichier = "logout.controller.php";
 				break;
 
 			case 'film-details':
@@ -35,7 +50,8 @@ class Router
 			case 'search':
 				$fichier = 'searchController.php';
 				break;
-
+			
+			
 			default:
 				$fichier = "page404_ctl.php";
 				break;
