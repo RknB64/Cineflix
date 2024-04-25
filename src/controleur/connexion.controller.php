@@ -26,7 +26,7 @@ class connexion {
                 
               
                 // redirect dans la page d'accueil , ici il va passer les valeurs de session pour la page d'accueil
-                header("Location: $?action=accueil");
+                header("Location: ?action=accueil");
                 exit();
                 
             } else {
