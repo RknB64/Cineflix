@@ -1,5 +1,8 @@
 <?php
 
+// require(RACINE . "/modele/FilmDetail.php");
+// require(RACINE . "/cls/billetForm.php");
+
 if (isset($_GET["id"])) {
 
     $detailFilm = new FilmDetail($_GET["id"]);
@@ -10,7 +13,6 @@ if (isset($_GET["id"])) {
         'cinemas' => $detailFilm->cinemas,
         'villes' => $detailFilm->villes
     ];
-
 
     // Créer un tableau vide pour stocker les villes avec les cinémas
     $villesAvecCinemas = [];
@@ -129,7 +131,7 @@ if (isset($_GET["id"])) {
                 // On compare la date de seance à un bouton pour qu'il soit supérieur et un inférieur
                 // On ajoute la séance
 
-                const inputHtml = '<input type="radio" class="btn-check" name="btnradio" id="btnradio' + seance.id + '" autocomplete="off" value="' + seance.id + '">'
+                const inputHtml = '<input type="radio" class="btn-check" name="seance-select" id="btnradio' + seance.id + '" autocomplete="off" value="' + seance.id + '">'
                 const labelHtml = '<label class="btn btn-outline-secondary" for="btnradio' + seance.id + '">'
                 const cardHtml = '<div class="card py-0 px-0 border-0 bg-transparent" style="width: 4rem; height: 5rem;">'
                 const cardBodyHtml = '<div class="card-body py-0 px-0">'
@@ -155,29 +157,5 @@ if (isset($_GET["id"])) {
 
     placeSelect.addEventListener('change', function() {
         boutonAchat.disabled = false;
-    });
-
-
-    //Récupération des données de formulaire
-    document.getElementById("formulaire-cinema").addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        const ville = document.getElementById("ville-select").value;
-        const cinema = document.getElementById("cinema-select").value;
-        const seances = document.getElementsByName("btnradio");
-        let seanceChoisie;
-        for (let i = 0; i < seances.length; i++) {
-            if (seances[i].checked) {
-                seanceChoisie = seances[i].value;
-                break;
-            }
-        }
-        const place = document.getElementById("place-select").value;
-
-        if (ville === '' || cinema === '' || seanceChoisie === '' || place === '') {
-            alert('Veuillez remplir tous les champs')
-        } else {
-            alert("ville : " + ville + "\ncinema : " + cinema + "\nseance Id : " + seanceChoisie + "\nnombre de places : " + place);
-        }
     });
 </script>

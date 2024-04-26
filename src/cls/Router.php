@@ -32,10 +32,14 @@ class Router
 			case 'ajax':
 				$fichier = 'ajaxRequestController.php';
 				break;
-                
-      case 'search':
-          $fichier = 'searchController.php';
-          break;
+
+			case 'achat':
+				$fichier = 'achat.controller.php';
+				break;
+
+			case 'search':
+				$fichier = 'searchController.php';
+				break;
 
 			default:
 				$fichier = "page404_ctl.php";
