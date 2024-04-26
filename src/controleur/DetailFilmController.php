@@ -18,7 +18,7 @@ class DetailFilmController extends Controller
     }
 
     $this->detailFilm = new FilmDetail($_GET["id"]);
-    list($this->villesAvecCinemas) = $this->getData();
+    $this->villesAvecCinemas = $this->getVillesData();
 
     $this->data = array(
       'titre'               => $this->titre,
@@ -29,7 +29,7 @@ class DetailFilmController extends Controller
     $this->render($this->view, $this->data);
   }
 
-  private function getData(): array
+  private function getVillesData(): array
   {
 
     $data = [
@@ -77,6 +77,6 @@ class DetailFilmController extends Controller
       $cinema->seances = array_values($seancesUniques);
     }
 
-    return [$villesAvecCinemas];
+    return $villesAvecCinemas;
   }
 }

@@ -3,7 +3,7 @@
 class Router
 {
 
-	public static function redirect($action)
+	public static function redirect($action, $requestMethod)
 
 	{
 
@@ -16,6 +16,7 @@ class Router
 				break;
 
 			case 'signIn':
+        new InscriptionController($requestMethod);
 				break;
 
 			case 'film-details':
