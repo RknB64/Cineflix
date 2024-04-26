@@ -35,7 +35,7 @@ class FilmBD extends MyPdo
     return self::ID;
   }
 
-  public function selectFilmsDispo()
+  public function selectFilmsDispo(): ?array
   {
     $db = self::connexion();
     $resultat = null;
@@ -51,12 +51,14 @@ class FilmBD extends MyPdo
       }
     } catch (PDOException $e) {
       die("Erreur !: " . $e->getMessage());
+    } finally {
+      $db = null;
     }
 
     return $resultat;
   }
 
-  public function selectFilmsDispoAccueil()
+  public function selectFilmsDispoAccueil(): ?array
   {
     $db = self::connexion();
     $resultat = null;
@@ -73,6 +75,8 @@ class FilmBD extends MyPdo
       }
     } catch (PDOException $e) {
       die("Erreur !: " . $e->getMessage());
+    } finally {
+      $db = null;
     }
 
     return $resultat;
@@ -80,7 +84,7 @@ class FilmBD extends MyPdo
 
 
 
-  public function getFilmsByCinemaId($cinemaId)
+  public function getFilmsByCinemaId(int $cinemaId): ?array
   {
     $db = self::connexion();
     try {
@@ -106,6 +110,8 @@ class FilmBD extends MyPdo
     } catch (PDOException $e) {
       // Handle any potential errors
       die("Error: " . $e->getMessage());
+    } finally {
+      $db = null;
     }
   }
 }
