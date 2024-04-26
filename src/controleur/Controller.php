@@ -12,12 +12,14 @@ abstract class Controller
   }
 
   // prend en arg le nom d'un vue, et les variables nécessaires pour l'affichage dans une array
-  static protected function render($view, $data = [])
+  static protected function render(string $view, array $data = [], bool $withHeaderFooter = true): void
   {
     extract($data);
 
-    include RACINE . "/vue/header.php";
+    $withHeaderFooter ? include RACINE . "/vue/header.php" : "";
+
     include RACINE . "/vue/$view.php";
-    include RACINE . "/vue/footer.php";
+
+    $withHeaderFooter ? include RACINE . "/vue/footer.php" : "";
   }
 }

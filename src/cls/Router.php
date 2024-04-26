@@ -27,6 +27,7 @@ class Router
 				break;
 
 			case 'ajax':
+        new AjaxRequestController();
 				break;
                 
       case 'search':

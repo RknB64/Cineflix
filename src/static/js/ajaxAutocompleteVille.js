@@ -29,10 +29,10 @@ function autocompleteVille(inputId) {
   let suggestionBoxId = inputId + '-suggestion-box'
   let suggestionBox = "<div class='position-relative'>";
   suggestionBox += "<div class='position-absolute suggestion-box-ville' id='" + suggestionBoxId + "'></div></div>"
-  console.log( 'hello' );
+  console.log( inputId);
 
   $(document).ready(function() {
-    console.log( 'boo' );
+    console.log(inputId);
 
     $('#'+inputId).after(suggestionBox);
     $('#'+inputId).after(villeIdInput);
