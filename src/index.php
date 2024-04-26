@@ -10,7 +10,5 @@ if (isset($_GET["action"])) {
     $fichier = Router::redirect($action);
    
 } else {
-    $fichier = 'accueil.controller.php';
+  new AccueilController();
 }
-
-require RACINE . "/controleur/" . $fichier;

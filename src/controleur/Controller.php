@@ -3,9 +3,9 @@
 abstract class Controller
 {
 
-  protected string $titre;
-  protected string $view;
-  protected array $data;
+  protected string  $titre;
+  protected string  $view;
+  protected array   $data;
 
   protected function __construct()
   {
