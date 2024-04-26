@@ -1,6 +1,6 @@
 <?php
 
 $titre = 'Page introuvable';
-include './vue/header.html.php';
+include './vue/header.php';
 include './vue/page404.vue.php';
-include './vue/footer.html.php';
+include './vue/footer.php';

@@ -1,6 +1,6 @@
 <?php
 
 $titre = 'Streaming';
-include './vue/header.html.php';
+include './vue/header.php';
 include './vue/streaming.vue.php';
-include './vue/footer.html.php';
+include './vue/footer.php';

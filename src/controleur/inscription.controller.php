@@ -4,9 +4,9 @@
 $formFields = UserRegister::getFormFields();
 $titre = 'Inscription';
 
-include './vue/header.html.php';
+include './vue/header.php';
 include './vue/inscription.vue.php';
-include './vue/footer.html.php';
+include './vue/footer.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 

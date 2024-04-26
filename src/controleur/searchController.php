@@ -33,7 +33,7 @@ $controller = new searchController();
 
 if (isset($_GET['ville_id'])) {
 
-    include './vue/header.html.php';
+    include './vue/header.php';
 
     // Retrieve the city from the URL parameters
     $villeId = intval($_GET['ville_id']);
@@ -48,7 +48,7 @@ if (isset($_GET['ville_id'])) {
          echo "<h1><span style='color: white;'>Aucun cinéma trouvé pour la ville de " .$villeName. "</span></h1>";
     }
 
-    include './vue/footer.html.php';
+    include './vue/footer.php';
 
 } elseif (isset($_GET['cinema'])) {
     // Retrieve the cinema ID from the URL parameters
