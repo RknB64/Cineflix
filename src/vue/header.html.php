@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 
-require ('./controleur/connexion.controller.php');
+require('./controleur/connexion.controller.php');
 
 
 ?>
@@ -30,7 +30,7 @@ require ('./controleur/connexion.controller.php');
 
     <!-- jQuery UI CSS -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-   
+
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="/static/js/SearchFilm_SelonCinema.js"></script>
@@ -61,6 +61,7 @@ require ('./controleur/connexion.controller.php');
         }
     </style>
 </head>
+
 <body class="body bg-black">
     <nav class="navbar navbar-expand-lg bg-dark position-sticky top-0 start-0 z-3" data-bs-theme="dark" style="--bs-bg-opacity: .7;">
         <div class="container-fluid">
@@ -91,7 +92,7 @@ require ('./controleur/connexion.controller.php');
                             <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
                         </svg>
                     </button>
-                    <?php if (isset($_SESSION['user_name'])) : ?>
+                    <?php if (isset($_SESSION['current_adherent'])) : ?>
                         <a href="?action=logout" class="btn btn-outline-light">Logout</a>
                     <?php endif; ?>
                 </form>
@@ -99,12 +100,14 @@ require ('./controleur/connexion.controller.php');
         </div>
         <!-- session qui a le bom de utilsateur -->
         <!-- si la session exist  -->
-        <?php if (isset($_SESSION['user_name'])) : ?>
-            <p style="color: white;">Bienvenue, <?php echo $_SESSION['user_name']; ?>!</p>
-            <!-- si la session n'exist pas  -->
+        <?php if (isset($_SESSION['current_adherent'])  && $_SESSION['current_adherent']->estAdmin == 1) : ?>
+            <p style="color: white;">Bienvenue,Admin <?php echo $_SESSION['current_adherent']->nom; ?> </p>
+        <?php elseif (isset($_SESSION['current_adherent'])) : ?>
+            <p style="color: white;">Bienvenue, <?php echo $_SESSION['current_adherent']->nom; ?></p>
         <?php else : ?>
             <p style="color: white;">Bienvenue, Guest!</p>
         <?php endif; ?>
+
     </nav>
     <!-- Modal -->
     <?php
