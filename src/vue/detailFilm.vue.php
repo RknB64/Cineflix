@@ -13,7 +13,7 @@
                 <?php
                 if (count($detailFilm->seances) !== 0) {
                 ?>
-                    <form id="formulaire-cinema" action="" method="post">
+                    <form id="formulaire-cinema" action="?action=achat" method="post">
                         <div class="d-flex d-inline-block col-md-6">
                             <select class="form-select col-md-3" id="ville-select" name="ville-select" aria-label="Default select example">
                                 <option value="" selected disabled hidden>Selectionner une ville</option>
@@ -28,7 +28,7 @@
                             <select class="form-select col-md-3" id="cinema-select" name="cinema-select" aria-label="Default select example">
                             </select>
                         </div>
-                        <div class="btn-group d-inline-block my-1" id="seance-select" name="seance-select" role="group" aria-label="Basic radio toggle button group">
+                        <div class="btn-group d-inline-block my-1" id="seance-select" name="seance" role="group" aria-label="Basic radio toggle button group">
                         </div>
                         <div class="d-flex d-inline-block">
                             <label class="form-label col-md-4" id="place-select-label">Nombre de places</label>
@@ -44,7 +44,7 @@
                             </select>
                         </div>
                         <div class="d-flex justify-content-end mt-1">
-                            <input class="btn btn-secondary" id="achat-place" type="submit" value="ACHETER">
+                            <input class="btn btn-secondary" id="achat-place" type="submit" value="ACHETER" formtarget="_blank">
                         </div>
                     </form>
                 <?php
