@@ -44,7 +44,7 @@
 
 <?php foreach ($results as $item) : ?>
     <!-- Container to display films for each cinema (hidden by default) -->
-    <div class="films-container mt-3 d-flex" id="films-container-<?= $item->id ?>">
+    <div class="films-container px-3 d-flex flex-wrap row-cols-md-5 align-content-start gap-3" id="films-container-<?= $item->id ?>">
         <div class="bg-light g-4">
             <!-- Film items will be dynamically added here -->
         </div>
@@ -76,7 +76,7 @@
                             // return false;
 
                             response.forEach(function(film) {
-                                filmsHTML += `<div class="filmCards px-3 d-flex flex-wrap row-cols-md-5 align-content-start text-white">
+                                filmsHTML += `
                                                 <div class="filmCard border border-light-50 border-1 rounded px-2 py-2 my-1 shadow">
                                                     <div class="btn mx-0 my-0 py-0 px-0">
                                                         <img src="static/img/${film.id_affiche}.jpg" class="card-img rounded-start" alt="${film.titre}">
@@ -90,7 +90,6 @@
 
                                                            </div>
                                                        </div>
-                                                   </div>
                                                </div>`
                             });
                             
