@@ -3,6 +3,7 @@
 require dirname(__FILE__) . '/controleur/config.php';
 require_once AUTOLOAD;
 
+
 $action = null;
 
 if (isset($_GET["action"])) {

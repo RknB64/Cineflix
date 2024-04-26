@@ -1,12 +1,3 @@
-<?php
-
-
-require('./controleur/connexion.controller.php');
-
-
-?>
-
-
 <!DOCTYPE html>
 <html>
 
