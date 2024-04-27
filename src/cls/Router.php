@@ -13,6 +13,7 @@ class Router
 				break;
 
 			case 'streaming':
+        new StreamingController();
 				break;
 
 			case 'signIn':
