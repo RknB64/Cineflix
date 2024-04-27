@@ -3,7 +3,7 @@
 class Router
 {
 
-	public static function redirect($action, $requestMethod)
+	public static function redirect($action, $requestMethod = '')
 
 	{
 
@@ -34,6 +34,7 @@ class Router
           break;
 
 			default:
+        new Page404Controller();
 				break;
 		}
 
