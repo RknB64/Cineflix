@@ -39,71 +39,12 @@
     </div>
     <div class="accordion-item">
         <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                Informations personnelles
-            </button>
-        </h2>
-        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-            <div class="accordion-body">
-                <ol class="list-group">
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div class="form-floating mb-3">
-                            <input type="text" readonly class="form-control-plaintext" id="name-label" value=<?= $adherent->nom ?>>
-                            <label for="floatingPlaintextInput">Nom</label>
-                        </div>
-                        <form class="row g-3 my-auto">
-                            <div class="col-auto">
-                                <input type="text" class="form-control" name="compte-mod-nom" id="compte-mod-nom" placeholder="Nouveau nom">
-                            </div>
-                            <div class="col-auto">
-                                <button type="submit" class="btn btn-success mb-3">Modifier</button>
-                            </div>
-                        </form>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div class="form-floating mb-3">
-                            <input type="text" readonly class="form-control-plaintext" id="prenom-label" value=<?= $adherent->prenom ?>>
-                            <label for="floatingPlaintextInput">Prénom</label>
-                        </div>
-                        <form class="row g-3 my-auto">
-                            <div class="col-auto">
-                                <input type="text" class="form-control" name="compte-mod-prenom" id="compte-mod-prenom" placeholder="Nouveau prénom">
-                            </div>
-                            <div class="col-auto">
-                                <button type="submit" class="btn btn-success mb-3">Modifier</button>
-                            </div>
-                        </form>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div class="form-floating mb-3">
-                            <input type="text" readonly class="form-control-plaintext" id="name-label" value=<?= $ville->nom ?>>
-                            <label for="floatingPlaintextInput">Ville</label>
-                        </div>
-                        <form class="row g-3 my-auto">
-                            <div class="col-auto">
-                                <input type="text" class="form-control" name="compte-mod-ville" id="compte-mod-ville" placeholder="Nouvelle ville">
-                            </div>
-                            <div class="col-auto">
-                                <button type="submit" class="btn btn-success mb-3">Modifier</button>
-                            </div>
-                        </form>
-                    </li>
-                </ol>
-            </div>
-        </div>
-    </div>
-    <div class="accordion-item">
-        <h2 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
                 Gérer mon compte
             </button>
         </h2>
         <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
             <div class="accordion-body">
-                <!-- <p>date de création</p>
-                <p>mail</p>
-                <p>mot de passe</p>
-                <p>supprimer mon compte</p> -->
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="form-floating mb-3">
@@ -115,15 +56,43 @@
                 <ol class="list-group">
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="form-floating mb-3">
+                            <input type="text" readonly class="form-control-plaintext" id="name-label" value=<?= $adherent->nom ?>>
+                            <label for="floatingPlaintextInput">Nom</label>
+                        </div>
+                        <form class="row g-3 my-auto" action="?action=compte" method="post">
+                            <div class="col-auto">
+                                <input type="text" class="form-control" name="compte-mod-nom" id="compte-mod-nom" placeholder="Nouveau nom" required>
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-success mb-3">Modifier</button>
+                            </div>
+                        </form>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="form-floating mb-3">
+                            <input type="text" readonly class="form-control-plaintext" id="prenom-label" value=<?= $adherent->prenom ?>>
+                            <label for="floatingPlaintextInput">Prénom</label>
+                        </div>
+                        <form class="row g-3 my-auto" action="?action=compte" method="post">
+                            <div class="col-auto">
+                                <input type="text" class="form-control" name="compte-mod-prenom" id="compte-mod-prenom" placeholder="Nouveau prénom" required>
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-success mb-3">Modifier</button>
+                            </div>
+                        </form>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="form-floating mb-3">
                             <input type="email" readonly class="form-control-plaintext" id="email-label" value=<?= $adherent->mail ?>>
                             <label for="floatingPlaintextInput">E-mail</label>
                         </div>
-                        <form class="row g-3 my-auto">
+                        <form class="row g-3 my-auto" action="?action=compte" method="post">
                             <div class="col-auto">
-                                <input type="email" class="form-control" name="compte-mod-mail" id="compte-mod-mail" placeholder="Nouvel e-mail">
+                                <input type="email" class="form-control" name="compte-mod-mail" id="compte-mod-mail" placeholder="Nouvel e-mail" required>
                             </div>
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-danger mb-3">Modifier</button>
+                                <button type="submit" class="btn btn-success mb-3">Modifier</button>
                             </div>
                         </form>
                     </li>
@@ -132,15 +101,15 @@
                             <input type="text" readonly class="form-control-plaintext" id="name-label" value="Mot de passe">
                             <label for="floatingPlaintextInput" hidden>mdp</label>
                         </div>
-                        <form class="row g-3 my-auto">
+                        <form class="row g-3 my-auto" action="?action=compte" method="post">
                             <div class="col-auto">
-                                <input type="password" class="form-control" name="compte-mod-mdp" id="compte-mod-mdp" placeholder="Nouveau mot de passe">
+                                <input type="password" class="form-control" name="compte-mod-mdp" id="compte-mod-mdp" placeholder="Nouveau mot de passe" required>
                             </div>
                             <div class="col-auto">
-                                <input type="password" class="form-control" name="compte-conf-mdp" id="compte-conf-mdp" placeholder="Confirmer le mot de passe">
+                                <input type="password" class="form-control" name="compte-conf-mdp" id="compte-conf-mdp" placeholder="Confirmer le mot de passe" required>
                             </div>
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-danger mb-3">Modifier</button>
+                                <button type="submit" class="btn btn-success mb-3">Modifier</button>
                             </div>
                         </form>
                     </li>
@@ -151,7 +120,7 @@
                         </div> -->
                         <form class="row g-3 my-auto d-flex justify-content-end">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required>
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Cochez cette case pour supprimer le compte (NB : cette action est irréversible.)
                                 </label>
