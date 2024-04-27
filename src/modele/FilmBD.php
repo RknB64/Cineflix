@@ -87,6 +87,8 @@ class FilmBD extends MyPdo
   public function getFilmsByCinemaId(int $cinemaId): ?array
   {
     $db = self::connexion();
+    $films = null;
+
     try {
       // Prepare the SQL query to fetch films based on cinema ID
       $query = $db->prepare("SELECT DISTINCT film.*
@@ -105,13 +107,14 @@ class FilmBD extends MyPdo
       // Fetch the results
       $films = $query->fetchAll(PDO::FETCH_OBJ);
 
-      // Return the films data
-      return $films;
     } catch (PDOException $e) {
       // Handle any potential errors
       die("Error: " . $e->getMessage());
     } finally {
       $db = null;
     }
+
+    // Return the films data
+    return $films;
   }
 }
