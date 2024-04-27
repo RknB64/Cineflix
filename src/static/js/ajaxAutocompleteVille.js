@@ -40,7 +40,7 @@ function autocompleteVille(inputId) {
     $('#'+inputId).keyup(function() {
       $.ajax({
         type: "POST",
-        url: "?action=ajax",
+        url: "?action=ajaxRequest",
         data: {
           keyword: $(this).val(),
           inputId: inputId,

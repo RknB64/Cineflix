@@ -4,12 +4,11 @@ class Router
 {
 
     public static function redirect($action, $requestMethod = '')
-
     {
 
         switch ($action) {
 
-            case 'catalogue':
+            case 'catalogueCinema':
                 new CatalogueCinemaController();
                 break;
 
@@ -17,19 +16,19 @@ class Router
                 new StreamingController();
                 break;
 
-            case 'signIn':
+            case 'inscription':
                 new InscriptionController($requestMethod);
                 break;
 
-            case 'film-details':
+            case 'detailFilm':
                 new DetailFilmController();
                 break;
 
-            case 'ajax':
+            case 'ajaxRequest':
                 new AjaxRequestController();
                 break;
 
-            case 'search':
+            case 'recherche':
                 new RechercheController();
                 break;
 

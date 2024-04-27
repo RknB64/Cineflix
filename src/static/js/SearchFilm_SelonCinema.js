@@ -8,7 +8,7 @@ $(document).ready(function() {
         if (filmsContainer.hasClass('d-none')) {
             // AJAX request to fetch films for the selected cinema
             $.ajax({
-                url: '?action=search&cinema=' + cinemaId,
+                url: '?action=recherche&cinema=' + cinemaId,
                 type: 'GET',
                 dataType: 'json', // Specify JSON dataType for parsing JSON response
                 success: function(response) {

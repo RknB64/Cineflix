@@ -64,7 +64,7 @@
             if (filmsContainer.hasClass('d-none')) {
                 // AJAX request to fetch films for the selected cinema
                 $.ajax({
-                    url: '?action=search&cinema=' + cinemaId,
+                    url: '?action=recherche&cinema=' + cinemaId,
                     type: 'GET',
                     dataType: 'json', // Specify JSON dataType for parsing JSON response
                     success: function(response) {
@@ -87,7 +87,7 @@
                                                             <h5 class="card-title">${film.titre}</h5>
                                                             <p class="card-text">${film.description}</p>
                                                             <p class="card-text"><small class="text-white">Durée: ${film.duree}</small></p>
-                                                            <a href="?action=film-details&&id=${film.id}" class="btn btn-primary" role="button">Réserver places</a>
+                                                            <a href="?action=detailFilm&&id=${film.id}" class="btn btn-primary" role="button">Réserver places</a>
 
                                                            </div>
                                                        </div>

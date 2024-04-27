@@ -74,17 +74,21 @@
                         <a class="nav-link text-white" aria-current="page" href="?">ACCUEIL</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="?action=catalogue">CINEMA</a>
+                        <a class="nav-link text-white" href="?action=catalogueCinema">CINEMA</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="?action=streaming">STREAMING</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search" id="search-box" method="GET">
+                <form class="d-flex" role="recherche" id="search-box" method="GET">
                     <div>
-                        <input type="hidden" name="action" value="search">
+
+                        <!-- input qui sert à ajouter le action=recherche -->
+                        <input type="hidden" name="action" value="recherche">
+
                         <input id="nav-search-ville" class="form-control me-2" type="text" name="ville" placeholder="Rechercher un cinéma" aria-label="Search" autocomplete='off'>
 
+                        <!-- input qui sert à pouvoir submit en appuyant sur 'entrer' -->
                         <input type="submit" style="position: absolute; left: -9999px" />
 
                     </div>

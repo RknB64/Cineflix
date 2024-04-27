@@ -21,7 +21,7 @@ const CLASSES  = UserRegister::CLASSES;
     </div>
 
     <div class="container bg-dark text-white p-4 mt-3 rounded border border-secondary">
-        <form method="post" action="?action=signIn">
+        <form method="post" action="?action=inscription">
 
             <?php foreach ($formFields as $field) : ?>
 

@@ -23,7 +23,7 @@
 <div class="d-flex d-inline-block justify-content-between">
     <div class="d-flex d-inline-block" id="allTitles">
         <h1 class="fw-bold ms-4 my-4 ps-2 text-white">Liste des Films</h1>
-        <a href="?action=catalogue" class="mx-4 my-4 px-4 pt-3 text-white" id="link" style="display: none">
+        <a href="?action=catalogueCinema" class="mx-4 my-4 px-4 pt-3 text-white" id="link" style="display: none">
             Voir tous les films&nbsp;
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
@@ -46,7 +46,7 @@
                 <img src="static/img/<?= $film->id_affiche ?>.jpg" class="card-img rounded" alt="..." data-bs-toggle="offcanvas" data-bs-target="#offcanvas<?= $index ?>WithBothOptions" aria-controls="offcanvasWithBothOptions">
             </div>
             <br><br>
-            <a href="?action=film-details&&id=<?= $film->id ?>" class="btn btn-dark w-100">Réserve ta place !</a>
+            <a href="?action=detailFilm&&id=<?= $film->id ?>" class="btn btn-dark w-100">Réserve ta place !</a>
         </div>
 
         <!-- OffCanvas -->
@@ -75,7 +75,7 @@
                     </li>
                     <li class="list-group-item">
                         <p class="card-text d-flex justify-content-between"><small class="text-white-70 fst-italic">Durée : <?= $film->duree ?></small>
-                            <a href="?action=film-details&&id=<?= $film->id ?>" class="btn btn-dark">Réserve ta place !</a>
+                            <a href="?action=detailFilm&&id=<?= $film->id ?>" class="btn btn-dark">Réserve ta place !</a>
                         </p>
                     </li>
                 </ul>
