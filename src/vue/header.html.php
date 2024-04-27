@@ -1,3 +1,20 @@
+<?php
+
+/* Ce bloc de code vérifie si le paramètre 'action' est défini dans l'URL (['action']) et
+    s'il n'est pas égal à 'connexion'. Si ces conditions sont remplies, il stocke la valeur de « action »
+    dans la variable de session 'current_action'. De plus, il stocke éventuellement l'URL complète du
+    page actuelle dans la variable de session 'current_url' à des fins de redirection plus précises. C'est
+    couramment utilisé pour garder une trace de l'action en cours ou de la page consultée pour une utilisation ultérieure, telle que
+    rediriger l'utilisateur vers la même page après qu'une certaine action soit effectuée. */
+
+if (isset($_GET['action']) && $_GET['action'] !== 'connexion') {
+    // $_SESSION['current_action'] = $_GET['action'];
+    $_SESSION['current_url'] = $_SERVER['REQUEST_URI'];
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -91,12 +108,14 @@
         </div>
         <!-- session qui a le bom de utilsateur -->
         <!-- si la session exist  -->
-        <?php if (isset($_SESSION['current_adherent'])  && $_SESSION['current_adherent']->estAdmin == 1) : ?>
-            <p style="color: white;">Bienvenue,Admin <?php echo $_SESSION['current_adherent']->nom; ?> </p>
-        <?php elseif (isset($_SESSION['current_adherent'])) : ?>
-            <p style="color: white;">Bienvenue, <?php echo $_SESSION['current_adherent']->nom; ?></p>
-        <?php else : ?>
-            <p style="color: white;">Bienvenue, Guest!</p>
+        <?php if (isset($_SESSION['current_adherent'])) : ?>
+            <?php if ($_SESSION['current_adherent']->estAdmin == 1) : ?>
+                <p style="color: white;">Bienvenue, Admin <?php echo $_SESSION['current_adherent']->nom; ?></p>
+            <?php else : ?>
+                <p style="color: white;">Bienvenue, <?php echo $_SESSION['current_adherent']->nom; ?></p>
+            <?php endif; ?>
+            <?php else : ?>
+                <p style="color: white;">Bienvenue, Guest!</p>
         <?php endif; ?>
 
     </nav>

@@ -11,8 +11,8 @@
            
         }
         //redirect dans la page d'accueil
-        // header("Location: ?action=accueil");
-        // exit();
+        header("Location: ?action=accueil");
+        exit();
     }
     
 }
