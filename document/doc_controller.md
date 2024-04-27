@@ -13,19 +13,19 @@ Cela permet de facilement associer un controller aux autres éléments qui lui s
 ### Nom des classes controller
 
 - En `PascalCase`.
-- Nom de la page/route suive de `Controller`
+- Nom de la page/route suivi de `Controller`
 - Exemples : `AccueilController`, `CatalogueCinemaController`, `InscriptionController`
 
 ### Nom du fichier controller
 
 - En `PascalCase`
-- Même nom que la classe suive de `.php`
+- Même nom que la classe suivi de `.php`
 - Exemples : `AccueilController.php`, `CatalogueCinemaController.php`, `InscriptionController.php`
 
 ### Nom de la vue associée au controller
 
 - En `cameCase`
-- Même nom que la classe sans le Controller et la majuscule de début, suivie de `.php`
+- Même nom que la classe sans le Controller et la majuscule de début, suivi de `.php`
 - Exemples : `accueil.php`, `catalogueCinema.php`, `inscription.php`
 
 ### Nom de l'action associée au controller
@@ -43,7 +43,7 @@ Déclare les **variables** suivante qui seront initialisée dans la classe concr
 - `string $view` : La vue associée à la page
 - `array $data` : Une array de clés/valeurs avec les variables qui seront transmises à la vue
 
-Déclare la **méthode** suivante :
+Défini la **méthode** suivante :
 - `render` : qui permet d'inclure la vue et lui passer les variables nécessaires à son affichage
 
 ### $data
@@ -85,11 +85,99 @@ static protected function render(string $view, array $data = [], bool $withHeade
 Arguments :
 - `string $view` : le nom de la vue à afficher **sans le .php**. Exemple : `accueil`, `inscription`
 - `array $data` : array de clé/valeur
-- `boo $withHeaderFooter` : si vrai, ajoute le header et le footer avant et après la vue. Vrai par défaut.
+- `bool $withHeaderFooter` : si vrai, ajoute le header et le footer avant et après la vue. Vrai par défaut.
 
 ## Les classes concrètes
 
+Doivent `extends Controller`.
+
+Définir au début de la classe les attributs utilisés en les classant en trois catégories :
+- Les classes de pdo utilisées par le controller (classes qui finissent par BD, AdherentBD, FilmBD...)
+- Les variables/classes qui seront transmises à la vue
+- Les variables/classes uniquement utilisée par le controller
+
+Exemple :
+```php
+<?php
+class AccueilController extends Controller
+{
+    // Classes PDO utilisées
+    private CinemaBD    $cinemaBD;
+    private FilmBD      $filmBD;
+
+    // Variables utilisées par la vue
+    private ?array      $results;
+    private string      $villeName;
+
+    // Variables utilisées par le controller
+    private int         $villeId;
+    private int         $cinemaId;
+
+    ...
+```
+
+Mettre la logique qui doit être exécutée lors de l'appel du controller dans le constructeur :
+
+```php
+<?php
+  ...
+    public function __construct()
+    {
+        $this->titre    = 'Page introuvable';
+        $this->view     = 'page404';
+
+        $this->data = array(
+            'titre' => $this->titre
+        );
+
+        $this->render($this->view, $this->data);
+    }
+  ...
+```
 
 ### Gérer les controllers qui peuvent à la fois utiliser GET ou POST
 
-## Utilisation
+Certains controllers peuvent servir des requêtes POST ou GET.  
+
+Dans ce cas, dans la classe :
+- Définir un attribut `$requestMethod`
+- Ajouter l'argument `string $requestMethod` dans le constructeur
+
+Exemple :
+
+```php
+<?php
+class InscriptionController extends Controller
+{
+    ...
+    
+    // Variables utilisées par le controller
+    private string    $requestMethod;
+    
+    public function __construct(string $requestMethod)
+    {
+        $this->requestMethod = $requestMethod;
+        
+        if ($this->requestMethod === 'POST') {
+          ...
+        } else if ($this->requestMethod === 'GET') {
+          ...
+        }
+        
+        ...
+```
+
+Le fichier `Index.php` extrait la méthode dans une variable qui est passée au Router :
+
+```php
+<?php
+$requestMethod = $_SERVER['REQUEST_METHOD'];
+```
+Ensuite cette variable peut être passé au constructeur du controller depuis le `Router`:
+
+```php
+<?php
+case 'inscription':
+    new InscriptionController($requestMethod);
+    break;
+```
