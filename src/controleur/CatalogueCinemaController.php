@@ -3,8 +3,13 @@
 class CatalogueCinemaController extends Controller
 {
 
+    // Classes PDO utilisées
     private FilmBD    $filmBD;
+
+    // Variables utilisées par la vue
     private array     $allFilmsDispo;
+
+    // Variables utilisées par le controller
 
     public function __construct()
     {

@@ -3,12 +3,15 @@
 class RechercheController extends Controller
 {
 
+    // Classes PDO utilisées
     private CinemaBD    $cinemaBD;
     private FilmBD      $filmBD;
 
+    // Variables utilisées par la vue
     private ?array      $results;
     private string      $villeName;
 
+    // Variables utilisées par le controller
     private int         $villeId;
     private int         $cinemaId;
 

@@ -3,13 +3,18 @@
 class AjaxRequestController extends Controller
 {
 
-    private string $completionView = 'component/ajaxCompletionList';
-
-    private string $request;
+    // Classes PDO utilisées
     private VilleBD $villeBD;
+
+    // Variables utilisées par la vue
+
+    // Variables utilisées par le controller
+    private string  $request;
 
     public function __construct()
     {
+        $this->titre = '';
+        $this->view = 'component/ajaxCompletionList';
 
         $this->request = $_POST['request'];
 
@@ -20,7 +25,7 @@ class AjaxRequestController extends Controller
                 $colName = 'nom';
 
                 $this->data = $this->autocomplete($this->villeBD, $colName);
-                $this->render($this->completionView, $this->data, false);
+                $this->render($this->view, $this->data, false);
                 break;
 
             default:

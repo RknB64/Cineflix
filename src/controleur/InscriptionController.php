@@ -3,7 +3,12 @@
 class InscriptionController extends Controller
 {
 
+    // Classes PDO utilisées
+
+    // Variables utilisées par la vue
     private array     $formFields;
+
+    // Variables utilisées par le controller
     private string    $requestMethod;
 
     public function __construct(string $requestMethod)

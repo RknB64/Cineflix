@@ -3,8 +3,13 @@
 class DetailFilmController extends Controller
 {
 
-    private FilmDetail $detailFilm;
-    private array $villesAvecCinemas;
+    // Classes PDO utilisées
+
+    // Variables utilisées par la vue
+    private FilmDetail  $detailFilm;
+    private array       $villesAvecCinemas;
+
+    // Variables utilisées par le controller
 
     public function __construct()
     {
