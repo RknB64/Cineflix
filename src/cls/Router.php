@@ -3,41 +3,39 @@
 class Router
 {
 
-	public static function redirect($action, $requestMethod = '')
+    public static function redirect($action, $requestMethod = '')
 
-	{
+    {
 
-		switch ($action) {
+        switch ($action) {
 
-			case 'catalogue':
-				break;
+            case 'catalogue':
+                new CatalogueCinemaController();
+                break;
 
-			case 'streaming':
-        new StreamingController();
-				break;
+            case 'streaming':
+                new StreamingController();
+                break;
 
-			case 'signIn':
-        new InscriptionController($requestMethod);
-				break;
+            case 'signIn':
+                new InscriptionController($requestMethod);
+                break;
 
-			case 'film-details':
-        new DetailFilmController();
-				break;
+            case 'film-details':
+                new DetailFilmController();
+                break;
 
-			case 'stream':
-				break;
+            case 'ajax':
+                new AjaxRequestController();
+                break;
 
-			case 'ajax':
-        new AjaxRequestController();
-				break;
-                
-      case 'search':
-          break;
+            case 'search':
+                new RechercheController();
+                break;
 
-			default:
-        new Page404Controller();
-				break;
-		}
-
-	}
+            default:
+                new Page404Controller();
+                break;
+        }
+    }
 }
