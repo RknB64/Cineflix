@@ -5,12 +5,12 @@
 </body>
 <footer class="border border-light-50 border-1 rounded px-2 py-2 shadow">
 
-  <span>About us</span>
-  <span>CGU</span>
-  <span>Politique de confidentialité</span>
-  <span>Disclaimer</span>
-  <span>DMCA</span>
-  <span>Contact</span>
+    <span>About us</span>
+    <span>CGU</span>
+    <span>Politique de confidentialité</span>
+    <span>Disclaimer</span>
+    <span>DMCA</span>
+    <span>Contact</span>
 </footer>
 
 </html>

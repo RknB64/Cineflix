@@ -35,9 +35,9 @@ class RechercheController extends Controller
             $this->data['villeName']    = $this->villeName;
 
             $this->render($this->view, $this->data);
-        
+
         // l'utilisateur clique sur 'voir les films' d'un cinéma. Dans ce cas c'est une requête ajax (depuis la vue 'recherche.php')
-        } elseif (isset($_GET['cinema'])) { 
+        } elseif (isset($_GET['cinema'])) {
 
             $this->cinemaId = $_GET['cinema'];
             $this->filmBD   = new FilmBD();

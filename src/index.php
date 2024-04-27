@@ -11,7 +11,7 @@ $action = null;
 if (isset($_GET["action"])) {
     $action = $_GET["action"];
     $fichier = Router::redirect($action, $requestMethod);
-   
+
 } else {
-  new AccueilController();
+    new AccueilController();
 }

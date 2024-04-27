@@ -10,37 +10,36 @@ const CLASSES  = UserRegister::CLASSES;
 <!-- Ajout de l'ajax pour autocompléter les villes -->
 <script src="static/js/ajaxAutocompleteVille.js"></script>
 <script>
-  autocompleteVille('inscription_ville_name');
+    autocompleteVille('inscription_ville_name');
 </script>
 
 <div class="mx-3">
 
-  <div class="container mt-3">
-    <h1 class="text-white">Je m'inscris</h1>
-    <p class="text-white">Complétez le formulaire pour vous inscrire</p>
-  </div>
+    <div class="container mt-3">
+        <h1 class="text-white">Je m'inscris</h1>
+        <p class="text-white">Complétez le formulaire pour vous inscrire</p>
+    </div>
 
-  <div class="container bg-dark text-white p-4 mt-3 rounded border border-secondary">
-    <form method="post" action="?action=signIn">
+    <div class="container bg-dark text-white p-4 mt-3 rounded border border-secondary">
+        <form method="post" action="?action=signIn">
 
-      <?php foreach ($formFields as $field) : ?>
+            <?php foreach ($formFields as $field) : ?>
 
-        <div class="w-75 mx-auto mb-3">
-          <?php if ($field[TYPE] != 'hidden') : ?>
-            <label for='<?= $id ?>'> <?= $field[LABEL] ?> </label>
-          <?php endif; ?>
-            <input class="<?="form-control " . $field[CLASSES] ?>" type="<?= $field[TYPE] ?>" name="<?= $field[NAME] ?>" id="<?= 'inscription_'.$field[NAME] ?>" <?= $field[PROPERTIES] ?>>
-
-
-        </div>
+                <div class="w-75 mx-auto mb-3">
+                    <?php if ($field[TYPE] != 'hidden') : ?>
+                        <label for='<?= $id ?>'> <?= $field[LABEL] ?> </label>
+                    <?php endif; ?>
+                    <input class="<?= "form-control " . $field[CLASSES] ?>" type="<?= $field[TYPE] ?>" name="<?= $field[NAME] ?>" id="<?= 'inscription_' . $field[NAME] ?>" <?= $field[PROPERTIES] ?>>
 
 
-      <?php endforeach; ?>
+                </div>
 
-      <div class="w-75 mx-auto mb-3">
-        <button type="submit" class="btn btn-outline-light ">Submit</button>
-      </div>
-    </form>
-  </div>
+
+            <?php endforeach; ?>
+
+            <div class="w-75 mx-auto mb-3">
+                <button type="submit" class="btn btn-outline-light ">Submit</button>
+            </div>
+        </form>
+    </div>
 </div>
-

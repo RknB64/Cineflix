@@ -1,9 +1,7 @@
 <?php
 
-
-class Utilities {
-
-
+class Utilities
+{
     public static function sanitaze(String $input): String
     {
 
@@ -13,5 +11,4 @@ class Utilities {
 
         return $input;
     }
-
 }

@@ -1,27 +1,26 @@
 <?php
 
-class CatalogueCinemaController extends Controller 
+class CatalogueCinemaController extends Controller
 {
 
-  private FilmBD    $filmBD;
-  private array     $allFilmsDispo;
+    private FilmBD    $filmBD;
+    private array     $allFilmsDispo;
 
-  public function __construct() 
-  {
+    public function __construct()
+    {
 
-    $this->titre    = 'Catalogue cinéma';
-    $this->view     = 'catalogueCinema';
+        $this->titre    = 'Catalogue cinéma';
+        $this->view     = 'catalogueCinema';
 
-    $this->filmBD = new FilmBD();
-    $this->allFilmsDispo = $this->filmBD->selectFilmsDispo();
+        $this->filmBD = new FilmBD();
+        $this->allFilmsDispo = $this->filmBD->selectFilmsDispo();
 
 
-    $this->data = array(
-      'titre' => $this->titre,
-      'allFilmsDispo' => $this->allFilmsDispo,
-    );
+        $this->data = array(
+            'titre' => $this->titre,
+            'allFilmsDispo' => $this->allFilmsDispo,
+        );
 
-    $this->render($this->view, $this->data);
-  }
-  
+        $this->render($this->view, $this->data);
+    }
 }
