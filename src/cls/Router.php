@@ -5,7 +5,6 @@ class Router
 
     public static function redirect($action, $requestMethod = '')
     {
-
         switch ($action) {
 
             case 'catalogueCinema':
@@ -26,6 +25,10 @@ class Router
 
             case 'ajaxRequest':
                 new AjaxRequestController();
+                break;
+
+            case 'achat':
+                new AchatController();
                 break;
 
             case 'recherche':
