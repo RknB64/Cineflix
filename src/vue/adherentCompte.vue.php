@@ -48,7 +48,7 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="form-floating mb-3">
-                            <input type="text" readonly class="form-control-plaintext" id="date-label" value=<?= $adherent->date_creation ?>>
+                            <input type="text" readonly class="form-control-plaintext" id="date-label" value=<?= date('d/m/Y', strtotime($adherent->date_creation)) ?>>
                             <label for="floatingPlaintextInput">Date de création du compte</label>
                         </div>
                     </li>
