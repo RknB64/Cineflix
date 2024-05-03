@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <?php
 
@@ -10,6 +11,8 @@ require('./controleur/connexion.controller.php');
 
 
 >>>>>>> 72f7397 (add modification login)
+=======
+>>>>>>> 1d138ee (gg)
 <!DOCTYPE html>
 <html>
 
