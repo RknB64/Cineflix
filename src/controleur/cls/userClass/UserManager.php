@@ -16,22 +16,42 @@ class UserManager
     }
     return [$validMail, $validMdp];
   }
-
-  public static function isEmailInBD(string $email): bool
+// changement de fonction pour static fonction 
+  public static function isEmailInBD(string $email): ?object
   {
     $ad = new Adherent();
     $adBD = new AdherentBD();
 
     $ad->mail = $email;
+    
     $ad = $adBD->selectWhere($ad);
 
-    $validMail = $ad === null ? false : true;
+    $ad = $ad === null ? null :  $ad[0];
+    // $validMail = $ad === null ? false : true;
 
-    return $validMail;
+    return $ad ;
+     
   }
 
+
+  // public static function isEmailInBD(string $email): bool
+  // {
+  //   $ad = new Adherent();
+  //   $adBD = new AdherentBD();
+
+  //   $ad->mail = $email;
+    
+  //   $ad = $adBD->selectWhere($ad);
+
+  //   $validMail = $ad === null ? false : true;
+
+  //   return $validMail ;
+     
+  // }
+ 
+
   // return a user hash password from the bd
-  public function getHash(string $email): string
+  public static function getHash(string $email): string
   {
     $hash   = "";
     $ad     = new Adherent();
