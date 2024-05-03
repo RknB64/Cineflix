@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<?php
-
-
-require('./controleur/connexion.controller.php');
-
-=======
 <?php
 
 /* Ce bloc de code vérifie si le paramètre 'action' est défini dans l'URL (['action']) et
@@ -21,7 +11,7 @@ if (isset($_GET['action']) && $_GET['action'] !== 'connexion') {
     // $_SESSION['current_action'] = $_GET['action'];
     $_SESSION['current_url'] = $_SERVER['REQUEST_URI'];
 }
->>>>>>> 8db479e (fix problem de login)
+
 
 ?>
 
