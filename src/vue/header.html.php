@@ -16,12 +16,7 @@ if (isset($_GET['action']) && $_GET['action'] !== 'connexion') {
 ?>
 
 
-<<<<<<< HEAD
->>>>>>> 72f7397 (add modification login)
-=======
->>>>>>> 1d138ee (gg)
-=======
->>>>>>> 8db479e (fix problem de login)
+
 <!DOCTYPE html>
 <html>
 
@@ -76,15 +71,12 @@ if (isset($_GET['action']) && $_GET['action'] !== 'connexion') {
     </style>
 </head>
 
-<<<<<<< HEAD
 <script>
   // set up l'autocomplete de la ville via ajax
   autocompleteVille("nav-search-ville");
 </script>
 
 
-=======
->>>>>>> 72f7397 (add modification login)
 <body class="body bg-black">
 
     <nav class="navbar navbar-expand-lg bg-dark position-sticky top-0 start-0 z-3" data-bs-theme="dark" style="--bs-bg-opacity: .7;">
@@ -124,31 +116,10 @@ if (isset($_GET['action']) && $_GET['action'] !== 'connexion') {
                         </svg>
 
                     </button>
-<<<<<<< HEAD
 
 
             </div>
         </div>
-=======
-                    <?php if (isset($_SESSION['current_adherent'])) : ?>
-                        <a href="?action=logout" class="btn btn-outline-light">Logout</a>
-                    <?php endif; ?>
-                </form>
-            </div>
-        </div>
-        <!-- session qui a le bom de utilsateur -->
-        <!-- si la session exist  -->
-        <?php if (isset($_SESSION['current_adherent'])) : ?>
-            <?php if ($_SESSION['current_adherent']->estAdmin == 1) : ?>
-                <p style="color: white;">Bienvenue, Admin <?php echo $_SESSION['current_adherent']->nom; ?></p>
-            <?php else : ?>
-                <p style="color: white;">Bienvenue, <?php echo $_SESSION['current_adherent']->nom; ?></p>
-            <?php endif; ?>
-            <?php else : ?>
-                <p style="color: white;">Bienvenue, Guest!</p>
-        <?php endif; ?>
-
->>>>>>> 72f7397 (add modification login)
     </nav>
     <!-- Modal -->
     <?php
