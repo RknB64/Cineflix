@@ -11,4 +11,9 @@ class Utilities
 
         return $input;
     }
+
+    public static function alerte(String $message): void
+    {
+        echo '<script>alert("'.$message.'")</script>';
+    }
 }
