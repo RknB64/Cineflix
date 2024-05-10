@@ -49,7 +49,10 @@ class UserRegister extends UserManager
             $ad->password = $hash_mdp;
             $isAdded = $adBD->add($ad);
         } else {
-            echo "no";
+            $message = "";
+            $message .= $valid_mail ? "" : "Cette adresse mail est déjà utilisée par un autre utilisateur.\\n";
+            $message .= $valid_mdp ? "" : "Le mot de passe de confimation ne conrespond pas.";
+            Utilities::alerte($message);
         }
 
         return $isAdded;
