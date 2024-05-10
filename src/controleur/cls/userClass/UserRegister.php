@@ -48,6 +48,8 @@ class UserRegister extends UserManager
         if ($valid_mail && $valid_mdp) {
             $ad->password = $hash_mdp;
             $isAdded = $adBD->add($ad);
+            header('location: /');
+            die();
         } else {
             $message = "";
             $message .= $valid_mail ? "" : "Cette adresse mail est déjà utilisée par un autre utilisateur.\\n";
