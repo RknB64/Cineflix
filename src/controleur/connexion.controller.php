@@ -27,7 +27,7 @@ class connexion
                 $_SESSION['current_adherent'] = $ad;
 
                 //redirct aprér login
-                $redirectUrl = $_SESSION['current_url'] ?? $_SERVER['REQUEST_URI'];
+                $redirectUrl = $_SESSION['current_url'] ;
                 header("Location: $redirectUrl");
                 exit();
               
