@@ -59,7 +59,7 @@
                             <input type="text" readonly class="form-control-plaintext" id="name-label" value=<?= $adherent->nom ?>>
                             <label for="floatingPlaintextInput">Nom</label>
                         </div>
-                        <form class="row g-3 my-auto" action="?action=compte" method="post">
+                        <form class="row g-3 my-auto" id="myForm" method="post">
                             <div class="col-auto">
                                 <input type="text" class="form-control" name="compte-mod-nom" id="compte-mod-nom" placeholder="Nouveau nom" required>
                             </div>
@@ -135,3 +135,6 @@
         </div>
     </div>
 </div>
+
+<?php
+echo file_get_contents(RACINE . '/vue/component/confirmModal.php', true);

@@ -8,7 +8,7 @@ $vbd = new VilleBD();
 $ville = new Ville();
 $ville = $vbd->selectById($adherent->id_ville);
 
-if (isset($_POST['compte-mod-nom'])) {
+if (isset($_POST['confirm']) && isset($_POST['compte-mod-nom'])) {
     $adherent->nom = Utilities::sanitaze($_POST['compte-mod-nom']);
     $adhBd->update($adherent);
 }
@@ -49,3 +49,39 @@ include './vue/footer.html.php';
 // //     [estAdmin] => 0
 // // )
 // die();
+
+
+?>
+
+<!-- <script>
+    $(document).ready(function() {
+        $('#myForm').submit(function(e) {
+            e.preventDefault(); // Empêche le rechargement de la page
+            $('#staticBackdrop').modal('show'); // Affiche le modal de confirmation
+        });
+
+        $('#confirmForm').submit(function(e) {
+            e.preventDefault(); // Empêche la soumission du formulaire
+
+            // Récupère les données du formulaire
+            let formData = $('#myForm').serialize();
+
+            $.ajax({
+                url: '<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>', // Utilisez le nom du fichier PHP actuel comme URL
+                method: 'POST',
+                data: formData, // Données à envoyer
+                success: function(response) {
+                    // Gérer la réponse du serveur si nécessaire
+                    console.log(response);
+                    // Vous pouvez ajouter ici un code pour actualiser la page ou afficher un message de succès
+                },
+                error: function(xhr, status, error) {
+                    // Gérer les erreurs de la requête AJAX si nécessaire
+                    console.error(xhr, status, error);
+                }
+            });
+
+            $('#staticBackdrop').modal('hide'); // Cache le modal de confirmation
+        });
+    });
+</script> -->
