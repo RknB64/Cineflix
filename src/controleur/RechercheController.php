@@ -18,7 +18,7 @@ class RechercheController extends Controller
     public function __construct()
     {
 
-        $this->titre    = 'page title';
+        $this->titre    = "Recherche cinéma";
         $this->view     = 'recherche';
 
         $this->data = array(
