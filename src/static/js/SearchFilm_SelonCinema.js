@@ -21,15 +21,15 @@ $(document).ready(function() {
                         // return false;
                         response.forEach(function(film) {
                             filmsHTML += `
-                                        <div class="filmCards px-3 d-flex flex-wrap row-cols-md-5 align-content-start">
-                                            <div class="filmCard border border-light-50 border-1 rounded px-2 py-2 my-1 shadow">
+                                        
+                                            <div class="filmCard border border-light-50 border-1 rounded px-2 py-2 my-1 shadow text-white">
                                                 <img src="static/img/${film.id_affiche}.jpg" class="card-img rounded-start" alt="${film.titre}">
                                                 
                                                 <div class="col-md-8">
                                                     <div class="card-body">
                                                         <h5 class="card-title">${film.titre}</h5>
                                                         <p class="card-text">${film.description}</p>
-                                                        <p class="card-text"><small class="text-muted">Durée: ${film.duree}</small></p>
+                                                        <p class="card-text"><small class="">Durée: ${film.duree}</small></p>
                                                         <a href="?action=film-details&&id=${film.id}" class="btn btn-primary" role="button">Voir la bande-annonce</a>
                                                     </div>
                                                 </div>

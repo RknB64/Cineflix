@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 class Router
 {
@@ -6,6 +7,10 @@ class Router
     public static function redirect($action, $requestMethod = '')
     {
         switch ($action) {
+
+		    case 'accueil':
+                new AccueilController();
+				break;
 
             case 'catalogueCinema':
                 new CatalogueCinemaController();
@@ -30,6 +35,14 @@ class Router
             case 'achat':
                 new AchatController();
                 break;
+
+			case 'connexion':
+                new ConnexionController();
+				break;
+				
+			case 'logout':
+                new LogoutController();
+				break;
 
             case 'recherche':
                 new RechercheController();

@@ -30,8 +30,23 @@ class UserManager
         return $validMail;
     }
 
+    public static function getUserFromEMail(string $email): ?object
+    {
+        $ad = new Adherent();
+        $adBD = new AdherentBD();
+
+        $ad->mail = $email;
+
+        $ad = $adBD->selectWhere($ad);
+
+        $ad = $ad === null ? null :  $ad[0];
+        // $validMail = $ad === null ? false : true;
+
+        return $ad;
+    }
+
     // return a user hash password from the bd
-    public function getHash(string $email): string
+    public static function getHash(string $email): string
     {
         $hash   = "";
         $ad     = new Adherent();
