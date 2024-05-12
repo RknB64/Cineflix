@@ -238,30 +238,6 @@ abstract class MyPdo extends DbConnect
     return $resultat;
   }
 
-//pour avoir le nom de user selon son email
-  public function getUserNameByEmail(string $email): ?string
-  {
-      $db = self::connexion();
-      $userName = null;
-  
-      try {
-          $query = $db->prepare("SELECT name FROM users WHERE email = :email");
-          $query->execute(['email' => $email]);
-  
-          $result = $query->fetch(PDO::FETCH_ASSOC);
-          if ($result) {
-              $userName = $result['name'];
-          }
-      } catch (PDOException $e) {
-          die("Erreur !: " . $e->getMessage());
-      } finally {
-          $db = null;
-      }
-  
-      return $userName;
-  }
-  
-
   // retourne à partir d'une ligne de query, l'objet associé.
   // repose sur le fait que le nom des variables des objets sont les mêmes que le nom des colonnes sql
   // par exemple Adherent->nom marche car dans sql la colonnes s'appelle aussi 'nom'
