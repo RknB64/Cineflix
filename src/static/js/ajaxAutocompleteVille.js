@@ -29,8 +29,10 @@ function autocompleteVille(inputId) {
   let suggestionBoxId = inputId + '-suggestion-box'
   let suggestionBox = "<div class='position-relative'>";
   suggestionBox += "<div class='position-absolute suggestion-box-ville' id='" + suggestionBoxId + "'></div></div>"
+  console.log( inputId);
 
   $(document).ready(function() {
+    console.log(inputId);
 
     $('#'+inputId).after(suggestionBox);
     $('#'+inputId).after(villeIdInput);
@@ -38,7 +40,7 @@ function autocompleteVille(inputId) {
     $('#'+inputId).keyup(function() {
       $.ajax({
         type: "POST",
-        url: "?action=ajax",
+        url: "?action=ajaxRequest",
         data: {
           keyword: $(this).val(),
           inputId: inputId,

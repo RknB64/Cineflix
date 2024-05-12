@@ -7,6 +7,4 @@ class Cinema
     public int    $id_ville;
     public string $id_affiche;
     public string $adresse;
-
 }
-

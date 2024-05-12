@@ -5,7 +5,7 @@ require RACINE . '/vendor/autoload.php';
 
 use Spipu\Html2Pdf\Html2Pdf;
 
-class pdfForm
+class PdfForm
 {
     static function generateBillet($film, $cinema, $ville, $day, $dayNum, $month, $hour, $minute, $nbPlaces)
     {

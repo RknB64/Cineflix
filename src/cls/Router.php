@@ -1,53 +1,56 @@
 <?php
+session_start();
 
 class Router
 {
 
-	public static function redirect($action)
+    public static function redirect($action, $requestMethod = '')
+    {
+        switch ($action) {
 
-	{
-
-		switch ($action) {
-
-			case 'catalogue':
-				$fichier = 'catalogueCinema.controller.php';
+		    case 'accueil':
+                new AccueilController();
 				break;
 
-			case 'streaming':
-				$fichier = 'streaming.controller.php';
+            case 'catalogueCinema':
+                new CatalogueCinemaController();
+                break;
+
+            case 'streaming':
+                new StreamingController();
+                break;
+
+            case 'inscription':
+                new InscriptionController($requestMethod);
+                break;
+
+            case 'detailFilm':
+                new DetailFilmController();
+                break;
+
+            case 'ajaxRequest':
+                new AjaxRequestController();
+                break;
+
+            case 'achat':
+                new AchatController();
+                break;
+
+			case 'connexion':
+                new ConnexionController();
+				break;
+				
+			case 'logout':
+                new LogoutController();
 				break;
 
-			case 'signIn':
-				$fichier = "inscription.controller.php";
-				break;
+            case 'recherche':
+                new RechercheController();
+                break;
 
-			case 'film-details':
-				$fichier = "detailFilm.controller.php";
-				break;
-
-			case 'stream':
-				$fichier = 'StreamController.php';
-				break;
-
-			case 'ajax':
-				$fichier = 'ajaxRequestController.php';
-				break;
-
-			case 'achat':
-				$fichier = 'achat.controller.php';
-				break;
-
-			case 'search':
-				$fichier = 'searchController.php';
-				break;
-
-			default:
-				$fichier = "page404_ctl.php";
-				break;
-		}
-
-		if (!file_exists(RACINE . '/controleur/' . $fichier)) die("Le fichier : " . $fichier . " n'existe pas !");
-
-		return $fichier;
-	}
+            default:
+                new Page404Controller();
+                break;
+        }
+    }
 }

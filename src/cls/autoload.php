@@ -2,21 +2,21 @@
 
 function autoloadFunction(String $className): void
 {
-  // Liste des dossiers dans src où chercher la classe (pas besoin de chercher dans static, vue...)
-  $directories = ["cls", "modele", "controleur"];
+    // Liste des dossiers dans src où chercher la classe (pas besoin de chercher dans static, vue...)
+    $directories = ["cls", "modele", "controleur"];
 
-  foreach ($directories as $dir) {
+    foreach ($directories as $dir) {
 
-    $path = RACINE . DIRECTORY_SEPARATOR . $dir;
+        $path = RACINE . DIRECTORY_SEPARATOR . $dir;
 
-    // cherche la classe dans le dossier et sous-dossier
-    $file = searchDir($path, $className);
+        // cherche la classe dans le dossier et sous-dossier
+        $file = searchDir($path, $className);
 
-    // charge la classe si trouvé
-    if ($file) {
-      require_once $file;
+        // charge la classe si trouvé
+        if ($file) {
+            require_once $file;
+        }
     }
-  }
 }
 
 // cherche récursivement une classe dans un dossier et ses sous-dossier

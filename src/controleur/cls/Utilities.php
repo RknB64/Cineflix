@@ -1,9 +1,7 @@
 <?php
 
-
-class Utilities {
-
-
+class Utilities
+{
     public static function sanitaze(String $input): String
     {
 
@@ -14,4 +12,8 @@ class Utilities {
         return $input;
     }
 
+    public static function alerte(String $message): void
+    {
+        echo '<script>alert("'.$message.'")</script>';
+    }
 }

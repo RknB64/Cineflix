@@ -36,12 +36,12 @@ $newSalle->nb_place;
 
 $st = new StreamBD();
 $str = new Stream();
-$str->id_film = 1 ; 
+$str->id_film = 1;
 
 
 // Achat
 $ac = new AchatBD();
-$ach= new Achat();
+$ach = new Achat();
 $ach->id_billet = 1;
 // etc
 
@@ -50,14 +50,11 @@ $ach->id_billet = 1;
 
 $st = new StreamBD();
 $str = new Stream();
-$str->id_film = 1 ; 
+$str->id_film = 1;
 
 
 // Achat
 $ac = new AchatBD();
-$ach= new Achat();
+$ach = new Achat();
 $ach->id_billet = 1;
 // etc
-
-
-

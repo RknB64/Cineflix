@@ -58,3 +58,10 @@
         </div>
     </div>
 </div>
+
+<script>
+    // définie les variables utilisées dans le js
+    const villesAvecCinemas = <?php echo json_encode($villesAvecCinemas); ?>;
+    const cinemasAvecSeances = <?php echo json_encode($detailFilm->cinemas); ?>;
+</script>
+<script src="static/js/detailFilm.js"></script>
