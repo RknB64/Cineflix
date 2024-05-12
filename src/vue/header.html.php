@@ -43,6 +43,7 @@ if (isset($_GET['action']) && $_GET['action'] !== 'connexion') {
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="static/js/film.js"></script>
     <script src="static/js/ajaxAutocompleteVille.js"></script>
+    <script src="static/js/SearchFilm_SelonCinema.js"></script>
 
     <style>
         /* styles pour search resulte */

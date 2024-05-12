@@ -21,7 +21,7 @@ $(document).ready(function() {
                         // return false;
                         response.forEach(function(film) {
                             filmsHTML += `
-                                        <div class="filmCards px-3 d-flex flex-wrap row-cols-md-5 align-content-start">
+                                        
                                             <div class="filmCard border border-light-50 border-1 rounded px-2 py-2 my-1 shadow">
                                                 <img src="static/img/${film.id_affiche}.jpg" class="card-img rounded-start" alt="${film.titre}">
                                                 

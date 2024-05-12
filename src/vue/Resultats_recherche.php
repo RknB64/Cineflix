@@ -45,13 +45,9 @@
 
 <?php foreach ($results as $item) : ?>
     <!-- Container to display films for each cinema (hidden by default) -->
-    <div class="films-container mt-3 d-none" id="films-container-<?= $item->id ?>">
-        <div class="row row-cols-1 row-cols-md-7 g-3">
-           
+    <div class="films-container px-3 d-flex flex-wrap row-cols-md-5 align-content-start gap-3" id="films-container-<?= $item->id ?>">
+        <div class="bg-light g-4">
+            <!-- Film items will be dynamically added here -->
         </div>
-
-
-
-
     </div>
 <?php endforeach; ?>
