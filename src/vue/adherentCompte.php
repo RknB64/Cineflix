@@ -59,12 +59,15 @@
                             <input type="text" readonly class="form-control-plaintext" id="name-label" value=<?= $adherent->nom ?>>
                             <label for="floatingPlaintextInput">Nom</label>
                         </div>
-                        <form class="row g-3 my-auto" action="?action=compte" method="post">
+                        <form class="row g-3 my-auto" action="?action=compte" method="post" id="confirmForm">
                             <div class="col-auto">
                                 <input type="text" class="form-control" name="compte-mod-nom" id="compte-mod-nom" placeholder="Nouveau nom" required>
+                                <div class="invalid-feedback">
+                                    Veuillez compléter ce champ.
+                                </div>
                             </div>
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-success mb-3">Modifier</button>
+                                <button type="button" id="btnConfirm" class="btn btn-success mb-3" disabled onclick="verifierEtOuvrirModal()">Modifier</button>
                             </div>
                         </form>
                     </li>
@@ -137,4 +140,4 @@
 </div>
 
 <?php
-// echo file_get_contents(RACINE . '/vue/component/confirmModal.php', true);
+echo file_get_contents(RACINE . '/vue/component/confirmModal.html', true);
