@@ -48,6 +48,10 @@ class Router
                 new RechercheController();
                 break;
 
+            case 'compte':
+                new AdherentCompteController($requestMethod);
+                break;
+
             default:
                 new Page404Controller();
                 break;
