@@ -4,7 +4,6 @@ class AdherentCompteController extends Controller
 {
 
     // Classes PDO utilisées
-    private AdherentBD $adhBd;
 
     // Variables utilisées par la vue
     private Adherent $adherent;
@@ -35,10 +34,7 @@ class AdherentCompteController extends Controller
     private function getAdherent()
     {
         if (isset($_SESSION['current_adherent'])) {
-            $this->adhBd = new AdherentBD();
-            $this->adherent = new Adherent();
-            $this->adherent = $this->adhBd->selectById($_SESSION['current_adherent']->id);
-            // $this->adherent = $_SESSION['current_adherent'];
+            $this->adherent = $_SESSION['current_adherent'];
             // echo '<pre>';
             // print_r($_SESSION);
             // print_r($_POST);
@@ -54,35 +50,27 @@ class AdherentCompteController extends Controller
     private static function handlePosts()
     {
         $adhBdToMod = new AdherentBD();
-        $adhToMod = new Adherent();
         $adhToMod = $adhBdToMod->selectById($_SESSION['current_adherent']->id);
 
         if (isset($_POST['compte-mod-nom'])) {
             $adhToMod->nom = Utilities::sanitaze($_POST['compte-mod-nom']);
-            $adhBdToMod->update($adhToMod);
-            $_SESSION['current_adherent']->nom = $adhToMod->nom;
         }
 
         if (isset($_POST['compte-mod-prenom'])) {
             $adhToMod->prenom = Utilities::sanitaze($_POST['compte-mod-prenom']);
-            $adhBdToMod->update($adhToMod);
-            $_SESSION['current_adherent']->prenom = $adhToMod->prenom;
         }
 
         if (isset($_POST['compte-mod-mail']) && !UserManager::isEmailInBD($_POST['compte-mod-mail']) && filter_var($_POST['compte-mod-mail'], FILTER_VALIDATE_EMAIL)) {
             $adhToMod->mail = Utilities::sanitaze($_POST['compte-mod-mail']);
-            $adhBdToMod->update($adhToMod);
         }
 
         if (isset($_POST['compte-mod-mdp']) && isset($_POST['compte-conf-mdp']) && $_POST['compte-mod-mdp'] === $_POST['compte-conf-mdp']) {
             $adhToMod->password = password_hash(Utilities::sanitaze($_POST['compte-mod-mdp']), PASSWORD_DEFAULT);
-            $adhBdToMod->update($adhToMod);
         }
 
-        // echo '<pre>';
-        // print_r($_SESSION);
-        // print_r($_POST);
-        // die();
-        header('location: ?action=compte');
+        $adhBdToMod->update($adhToMod);
+        $_SESSION['current_adherent'] = $adhToMod;
+
+        header("Refresh:0");
     }
 }
