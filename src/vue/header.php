@@ -96,6 +96,11 @@ if (isset($_GET['action']) && $_GET['action'] !== 'connexion') {
                     <li class="nav-item">
                         <a class="nav-link text-white" href="?action=streaming">STREAMING</a>
                     </li>
+                    <?php if (UserManager::isCurrentUserAdmin()) : ?>
+                        <li>
+                            <a href="?action=admin" class="nav-link text-white">ADMIN</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
                 <form class="d-flex" role="recherche" id="search-box" method="GET">
                     <div>

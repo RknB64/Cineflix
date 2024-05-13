@@ -61,4 +61,15 @@ class UserManager
 
         return $hash;
     }
+
+    public static function isCurrentUserAdmin(): bool
+    {
+        $isAdmin = false;
+
+        if (isset($_SESSION['current_adherent'])) {
+            $isAdmin = $_SESSION['current_adherent']->estAdmin;
+        }
+
+        return $isAdmin;
+    }
 }

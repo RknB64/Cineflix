@@ -22,7 +22,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="?table=film">Film</a>
+                            <a class="nav-link" href="?action=admin&table=film">Film</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="?table=stream">Stream</a>
@@ -113,13 +113,13 @@
                                 switch ($table) {
                                     case 'film':
                                         echo '
-                                        <td>' . $item['titre'] . '</td>
-                                        <td>' . $item['description'] . '</td>
-                                        <td>' . $item['duree'] . '</td>
-                                        <td>' . $item['etat'] . '</td>
-                                        <td>' . $item['date_sortie'] . '</td>
-                                        <td>' . $item['id_affiche'] . '</td>
-                                        <td>' . $item['date_expiration'] . '</td>
+                                        <td>' . $item->titre . '</td>
+                                        <td>' . $item->description . '</td>
+                                        <td>' . $item->duree . '</td>
+                                        <td>' . $item->etat . '</td>
+                                        <td>' . $item->date_sortie . '</td>
+                                        <td>' . $item->id_affiche . '</td>
+                                        <td>' . $item->date_expiration . '</td>
                                              ';
                                         break;
 

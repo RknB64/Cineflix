@@ -48,6 +48,10 @@ class Router
                 new RechercheController();
                 break;
 
+            case 'admin':
+                new AdministrationController();
+                break;
+
             default:
                 new Page404Controller();
                 break;
