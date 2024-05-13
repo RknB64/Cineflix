@@ -48,7 +48,7 @@ class UserRegister extends UserManager
         if ($valid_mail && $valid_mdp) {
             $ad->password = $hash_mdp;
             $isAdded = $adBD->add($ad);
-            header('location: /');
+            header('location: ?');
             die();
         } else {
             $message = "";
