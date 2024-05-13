@@ -1,121 +1,120 @@
 <?php
 
-include_once("./controleur/config.php");
-require_once "./modele/DbConnect.php";
+class FilmBD extends MyPdo
+{
+    public const TABLE        = "film";
+    public const ID           = "id";
+    public const CLASS_OBJ    = "Film";
 
-class FilmBD extends DbConnect {
+    private static array $columns = array(
+        "titre",
+        "description",
+        "duree",
+        "etat",
+        "id_affiche",
+        "date_sortie",
+        "date_expiration"
+    );
 
-
-    //CREATE
-
-    public static function addFilm($table, $titre, $desc, $droit, $date, $duree, $affiche, $etat) {
-      try {
-        $db = self::connexion();
-        $query = $db->prepare("INSERT INTO $table (titre, description, duree, etat, id_affiche, date_sortie, date_expiration)
-                              VALUES (:titre, :desc, :duree, :etat, :affiche, :dateSortie, :droit)");
-        $query->bindValue(':titre', $titre, PDO::PARAM_STR);
-        $query->bindValue(':desc', $desc, PDO::PARAM_STR);
-        $query->bindValue(':droit', $droit, PDO::PARAM_STR); //Apparemment on passe la date en string => on verra au test
-        $query->bindValue(':dateSortie', $date, PDO::PARAM_STR);
-        $query->bindValue(':duree', $duree, PDO::PARAM_STR);
-        $query->bindValue(':affiche', $affiche, PDO::PARAM_INT); //Id_affiche int ou string ?
-        $query->bindValue(':etat', $etat, PDO::PARAM_STR);
-        $query->execute();
-
-      } catch (PDOException $e) {
-        die( "Erreur !: " . $e->getMessage() );
-      }
-
-      $query->closeCursor();
+    protected function className(): string
+    {
+        return self::CLASS_OBJ;
     }
 
-  
+    protected function table(): string
+    {
+        return self::TABLE;
+    }
 
-  
-    public static function getFilms($table) {
+    protected function columns(): array
+    {
+        return self::$columns;
+    }
 
-      $resultat=null;
-      try {
+    protected function id(): string
+    {
+        return self::ID;
+    }
+
+    public function selectFilmsDispo(): ?array
+    {
         $db = self::connexion();
-        $query = $db->prepare("SELECT * FROM $table");
-        $query->execute();
+        $resultat = null;
 
-        $ligne = $query->fetch(PDO::FETCH_ASSOC);
-        while ($ligne) {
-            $resultat[] = $ligne;
-            $ligne = $query->fetch(PDO::FETCH_ASSOC);
+        try {
+            $query = $db->prepare("SELECT * FROM " . $this->table() . " WHERE date_expiration >= NOW()
+                                                                        AND etat = 'cinema';");
+            $query->execute();
+
+            while ($ligne = $query->fetch(PDO::FETCH_ASSOC)) {
+
+                $resultat[] = $this->createObject($ligne);
+            }
+        } catch (PDOException $e) {
+            die("Erreur !: " . $e->getMessage());
+        } finally {
+            $db = null;
         }
-      } catch (PDOException $e) {
-          die( "Erreur !: " . $e->getMessage() );
-      }
-      $query->closeCursor();
-      return $resultat;
+
+        return $resultat;
     }
-  
-  public static function getFilmByTitle($table, $title) {
 
-      $resultat=null;
-
-      try {
+    public function selectFilmsDispoAccueil(): ?array
+    {
         $db = self::connexion();
-        $query = $db->prepare("SELECT * FROM $table WHERE titre = :title");
-        $query->bindValue(':title', $title, PDO::PARAM_STR);
-        $query->execute();
+        $resultat = null;
 
-        $ligne = $query->fetch(PDO::FETCH_ASSOC); while ($ligne) {
-            $resultat[] = $ligne;
-            $ligne = $query->fetch(PDO::FETCH_ASSOC);
+        try {
+            $query = $db->prepare("SELECT * FROM " . $this->table() . " WHERE date_expiration >= NOW()
+                                                                        AND etat = 'cinema'
+                                                                        ORDER BY date_sortie DESC;");
+            $query->execute();
+
+            while ($ligne = $query->fetch(PDO::FETCH_ASSOC)) {
+
+                $resultat[] = $this->createObject($ligne);
+            }
+        } catch (PDOException $e) {
+            die("Erreur !: " . $e->getMessage());
+        } finally {
+            $db = null;
         }
-      } catch (PDOException $e) {
-          die( "Erreur !: " . $e->getMessage() );
-      }
 
-      $query->closeCursor();
-      return $resultat;
-  }
-
-
-  //UPDATE
-
-  public static function updateFilm($table, $id, $titre, $desc, $droit, $date, $duree, $affiche, $etat) {
-    try {
-      $db = self::connexion();
-      $query = $db->prepare("UPDATE $table SET titre = :titre, description = :desc, duree = :duree, etat = :etat,
-                            id_affiche = :affiche, date_sortie = :dateSortie, date_expiration = :droit)
-                            WHERE id = :id");
-      $query->bindValue(':id', $id, PDO::PARAM_INT);
-      $query->bindValue(':titre', $titre, PDO::PARAM_STR);
-      $query->bindValue(':desc', $desc, PDO::PARAM_STR);
-      $query->bindValue(':droit', $droit, PDO::PARAM_STR);
-      $query->bindValue(':dateSortie', $date, PDO::PARAM_STR);
-      $query->bindValue(':duree', $duree, PDO::PARAM_STR);
-      $query->bindValue(':affiche', $affiche, PDO::PARAM_INT);
-      $query->bindValue(':etat', $etat, PDO::PARAM_STR);
-      $query->execute();
-
-    } catch (PDOException $e) {
-      die( "Erreur !: " . $e->getMessage() );
+        return $resultat;
     }
 
-    $query->closeCursor();
-  }
 
-  //DELETE
 
-  public static function deleteFilm($table, $id) {
-    try {
-      $db = self::connexion();
-      $query = $db->prepare("DELETE FROM $table WHERE id = :id");
-      $query->bindValue(':id', $id, PDO::PARAM_INT);
-      $query->execute();
+    public function getFilmsByCinemaId(int $cinemaId): ?array
+    {
+        $db = self::connexion();
+        $films = null;
 
-    } catch (PDOException $e) {
-      die( "Erreur !: " . $e->getMessage() );
+        try {
+            // Prepare the SQL query to fetch films based on cinema ID
+            $query = $db->prepare("SELECT DISTINCT film.*
+                               FROM cinema
+                               INNER JOIN salle ON cinema.id = salle.id_cinema
+                               INNER JOIN seance ON salle.id = seance.id_salle
+                               INNER JOIN film ON seance.id_film = film.id
+                               WHERE cinema.id = :cinemaId");
+
+            // Bind the cinema ID parameter
+            $query->bindParam(':cinemaId', $cinemaId, PDO::PARAM_INT);
+
+            // Execute the query
+            $query->execute();
+
+            // Fetch the results
+            $films = $query->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            // Handle any potential errors
+            die("Error: " . $e->getMessage());
+        } finally {
+            $db = null;
+        }
+
+        // Return the films data
+        return $films;
     }
-
-    $query->closeCursor();
-  }
-  
 }
-
-?>

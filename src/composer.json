@@ -1,0 +1,6 @@
+{
+    "name": "cineflix/composer",
+    "require": {
+        "spipu/html2pdf": "^5.2"
+    }
+}

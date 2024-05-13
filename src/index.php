@@ -1,25 +1,17 @@
 <?php
 
+require dirname(__FILE__) . '/controleur/config.php';
+require_once AUTOLOAD;
+
+$requestMethod = $_SERVER['REQUEST_METHOD'];
+
+
 $action = null;
 
-require dirname(__FILE__) . '/controleur/config.php';
-require dirname(__FILE__) . '/modele/DbConnect.php';
-require dirname(__FILE__) . '/cls/router.php';
-
 if (isset($_GET["action"])) {
-	$action = $_GET["action"];
-	$fichier = redirect($action);
-} elseif (isset($_GET["table"])) {
-	$table = $_GET["table"];
-	$fichier = tableRedirect($table);
+    $action = $_GET["action"];
+    $fichier = Router::redirect($action, $requestMethod);
 
-	$fichier = 'admin/ReadCtrl.php';
 } else {
-
-	$fichier = 'accueil.controller.php';
+    new AccueilController();
 }
-
-require RACINE . "/controleur/" . $fichier;
-
-
-

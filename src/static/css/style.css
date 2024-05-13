@@ -1,3 +1,6 @@
+
+
+
 .carousel-inner {
     height: 0;
     padding-bottom: 50%; /* this sets carousel aspect ratio (4:1 here) */
@@ -17,6 +20,7 @@
     object-fit: contain; /* or 'contain' if you want stretch instead of crop */
 }
 
+
 footer{
     display: flex;
     flex-direction:row;
@@ -26,4 +30,24 @@ footer{
     margin-left: 20px;
     margin-bottom: 20px;
     justify-content: space-evenly;
+}
+
+
+
+.search-results {
+    position: absolute !important;
+    top: 100%  !important; /* Position below the search box */
+    left: 0 !important;
+    width: 100% !important;
+    background-color: #fff !important;
+    border: 1px solid #ced4da !important;
+    border-top: none !important;
+    z-index: 1000 !important; /* Ensure it's above other content */
+    /* Style for selected item */
+}
+
+.search-results li.selected {
+        background-color: #ffa200 !important;
+        color: #fff !important;
+        cursor: pointer !important;
 }
