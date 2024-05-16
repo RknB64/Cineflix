@@ -4,6 +4,7 @@ class AdherentCompteController extends Controller
 {
 
     // Classes PDO utilisées
+    private AdherentBD $adherentBD;
 
     // Variables utilisées par la vue
     private Adherent $adherent;
@@ -13,14 +14,20 @@ class AdherentCompteController extends Controller
 
     public function __construct(string $requestMethod)
     {
-        $this->getAdherent();
+        if (isset($_SESSION['current_adherent'])) {
+            $this->adherent = $_SESSION['current_adherent'];
+        } else {
+            Router::redirect('accueil');
+            die();
+        }
 
         $this->requestMethod = $requestMethod;
         $this->titre    = 'Mon Compte';
         $this->view     = 'adherentCompte';
 
         if ($this->requestMethod === 'POST') {
-            self::handlePosts();
+            $this->adherentBD = new AdherentBD();
+            self::handlePosts($this->adherentBD);
         }
 
         $this->data = array(
@@ -31,19 +38,9 @@ class AdherentCompteController extends Controller
         $this->render($this->view, $this->data);
     }
 
-    private function getAdherent()
+    private static function handlePosts(AdherentBD $adherentBD)
     {
-        if (isset($_SESSION['current_adherent'])) {
-            $this->adherent = $_SESSION['current_adherent'];
-        } else {
-            Router::redirect('page404');
-        }
-    }
-
-    private static function handlePosts()
-    {
-        $adhBdToMod = new AdherentBD();
-        $adhToMod = $adhBdToMod->selectById($_SESSION['current_adherent']->id);
+        $adhToMod = $adherentBD->selectById($_SESSION['current_adherent']->id);
 
         if (!isset($_POST['supp-compte-check'])) {
 
@@ -62,13 +59,13 @@ class AdherentCompteController extends Controller
             if (isset($_POST['compte-mod-mdp']) && isset($_POST['compte-conf-mdp']) && $_POST['compte-mod-mdp'] === $_POST['compte-conf-mdp']) {
                 $adhToMod->password = password_hash(Utilities::sanitaze($_POST['compte-mod-mdp']), PASSWORD_DEFAULT);
             }
-            $adhBdToMod->update($adhToMod);
+            $adherentBD->update($adhToMod);
             $_SESSION['current_adherent'] = $adhToMod;
         } else {
-            $adhBdToMod->delete($adhToMod->id);
+            $adherentBD->delete($adhToMod->id);
             session_destroy();
         }
 
-        $_SESSION['current_adherent'] === null ? header('location: ?') : header('Refresh:0');
+        header('Refresh:0');
     }
 }

@@ -62,9 +62,6 @@
                         <form class="row g-3 my-auto" action="?action=compte" method="post" id="formModNom">
                             <div class="col-auto">
                                 <input type="text" class="form-control" name="compte-mod-nom" id="compte-mod-nom" placeholder="Nouveau nom" required>
-                                <div class="invalid-feedback">
-                                    Veuillez compléter ce champ.
-                                </div>
                             </div>
                             <div class="col-auto">
                                 <button type="button" id="btn-mod-nom" class="btn btn-success mb-3" disabled onclick="confirmationModalNom()">Modifier</button>
@@ -117,11 +114,7 @@
                         </form>
                     </li>
                     <li class="list-group-item">
-                        <!-- <div class="form-floating mb-3">
-                            <input type="text" readonly class="form-control-plaintext" id="name-label" value="Mot de passe">
-                            <label for="floatingPlaintextInput" hidden>mdp</label>
-                        </div> -->
-                        <form class="row g-3 my-auto d-flex justify-content-end" id="formSuppCompte">
+                        <form class="row g-3 my-auto d-flex justify-content-end" id="formSuppCompte" method="post">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" name="supp-compte-check" id="supp-compte-check" required>
                                 <label class="form-check-label" for="flexCheckDefault">

@@ -87,7 +87,7 @@ function confirmationModalSupp(){
 function ouvrirModal(champs) {
     const champ = document.getElementById(champs);
     champsToMod = champs;
-    console.log(champsToMod)
+    
     switch (champsToMod) {
         case champsNom:
             form = 'formModNom';
@@ -108,7 +108,6 @@ function ouvrirModal(champs) {
             form = null;
             break;
     }
-    console.log(form)
 
     if (champ.checkValidity()) {
         $('#confirmationModal').modal('show');

@@ -127,6 +127,7 @@ $loggedIn = isset($_SESSION['current_adherent'])
                         <?php if ($loggedIn) { ?>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="?action=compte">Mon Compte</a></li>
+                                <li><a class="dropdown-item" href="#">Mes films</a></li>
                                 <li><a class="dropdown-item" href="?action=logout">Se déconnecter</a></li>
                             </ul>
                         <?php } ?>

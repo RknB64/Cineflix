@@ -48,7 +48,10 @@ class UserRegister extends UserManager
         if ($valid_mail && $valid_mdp) {
             $ad->password = $hash_mdp;
             $isAdded = $adBD->add($ad);
-            header('location: ?');
+            Router::redirect('accueil');
+            // Le $session current url ramenait à la page d'inscription si on se connecte juste après
+            // De cette manière, on est renvoyé à l'accueil et ce n'est pas bizarre
+            // Prévoir soit un popup de confirmation de création de compte ou une page de confirmation
             die();
         } else {
             $message = "";
