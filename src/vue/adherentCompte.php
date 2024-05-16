@@ -59,7 +59,7 @@
                             <input type="text" readonly class="form-control-plaintext" id="name-label" value=<?= $adherent->nom ?>>
                             <label for="floatingPlaintextInput">Nom</label>
                         </div>
-                        <form class="row g-3 my-auto" action="?action=compte" method="post" id="confirmForm">
+                        <form class="row g-3 my-auto" action="?action=compte" method="post" id="formModNom">
                             <div class="col-auto">
                                 <input type="text" class="form-control" name="compte-mod-nom" id="compte-mod-nom" placeholder="Nouveau nom" required>
                                 <div class="invalid-feedback">
@@ -67,7 +67,7 @@
                                 </div>
                             </div>
                             <div class="col-auto">
-                                <button type="button" id="btnConfirm" class="btn btn-success mb-3" disabled onclick="verifierEtOuvrirModal()">Modifier</button>
+                                <button type="button" id="btn-mod-nom" class="btn btn-success mb-3" disabled onclick="confirmationModalNom()">Modifier</button>
                             </div>
                         </form>
                     </li>
@@ -76,12 +76,12 @@
                             <input type="text" readonly class="form-control-plaintext" id="prenom-label" value=<?= $adherent->prenom ?>>
                             <label for="floatingPlaintextInput">Prénom</label>
                         </div>
-                        <form class="row g-3 my-auto" action="?action=compte" method="post">
+                        <form class="row g-3 my-auto" action="?action=compte" method="post" id="formModPrenom">
                             <div class="col-auto">
                                 <input type="text" class="form-control" name="compte-mod-prenom" id="compte-mod-prenom" placeholder="Nouveau prénom" required>
                             </div>
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-success mb-3">Modifier</button>
+                                <button type="button" id="btn-mod-prenom" class="btn btn-success mb-3" disabled onclick="confirmationModalPrenom()">Modifier</button>
                             </div>
                         </form>
                     </li>
@@ -90,12 +90,12 @@
                             <input type="email" readonly class="form-control-plaintext" id="email-label" value=<?= $adherent->mail ?>>
                             <label for="floatingPlaintextInput">E-mail</label>
                         </div>
-                        <form class="row g-3 my-auto" action="?action=compte" method="post">
+                        <form class="row g-3 my-auto" action="?action=compte" method="post" id="formModMail">
                             <div class="col-auto">
                                 <input type="email" class="form-control" name="compte-mod-mail" id="compte-mod-mail" placeholder="Nouvel e-mail" required>
                             </div>
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-success mb-3">Modifier</button>
+                                <button type="button" id="btn-mod-mail" class="btn btn-success mb-3" disabled onclick="confirmationModalMail()">Modifier</button>
                             </div>
                         </form>
                     </li>
@@ -112,7 +112,7 @@
                                 <input type="password" class="form-control" name="compte-conf-mdp" id="compte-conf-mdp" placeholder="Confirmer le mot de passe" required>
                             </div>
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-success mb-3">Modifier</button>
+                                <button type="button" id="btn-mod-mdp" class="btn btn-success mb-3" disabled onclick="confirmationModalMdp()">Modifier</button>
                             </div>
                         </form>
                     </li>
