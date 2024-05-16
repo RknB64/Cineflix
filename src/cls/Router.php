@@ -8,9 +8,9 @@ class Router
     {
         switch ($action) {
 
-		    case 'accueil':
+            case 'accueil':
                 new AccueilController();
-				break;
+                break;
 
             case 'catalogueCinema':
                 new CatalogueCinemaController();
@@ -36,16 +36,20 @@ class Router
                 new AchatController();
                 break;
 
-			case 'connexion':
+            case 'connexion':
                 new ConnexionController();
-				break;
-				
-			case 'logout':
+                break;
+
+            case 'logout':
                 new LogoutController();
-				break;
+                break;
 
             case 'recherche':
                 new RechercheController();
+                break;
+
+            case 'compte':
+                new AdherentCompteController($requestMethod);
                 break;
 
             default:
