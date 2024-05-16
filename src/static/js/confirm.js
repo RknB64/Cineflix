@@ -1,10 +1,20 @@
 // Initialisation des variables
-let champsNom = 'compte-mod-nom';
-let btnNom = 'btn-mod-nom';
-let champsPrenom = 'compte-mod-prenom';
-let btnPrenom = 'btn-mod-prenom';
-let champsEmail = 'compte-mod-mail';
-let btnEmail = 'btn-mod-mail';
+const champsNom = 'compte-mod-nom';
+const btnNom = 'btn-mod-nom';
+const docChampsNom = document.getElementById(champsNom);
+const champsPrenom = 'compte-mod-prenom';
+const btnPrenom = 'btn-mod-prenom';
+const docChampsPrenom = document.getElementById(champsPrenom);
+const champsEmail = 'compte-mod-mail';
+const btnEmail = 'btn-mod-mail';
+const docChampsMail = document.getElementById(champsEmail);
+const champMdp = 'compte-mod-mdp';
+const confMdp = 'compte-conf-mdp';
+const btnMdp = 'btn-mod-mdp';
+const docChampsMdp = document.getElementById(confMdp);
+const checkSupp = 'supp-compte-check';
+const btnSupp = 'btn-supp-compte';
+const docChampsSupp = document.getElementById(checkSupp);
 let champsToMod = null;
 let form = null;
 
@@ -28,10 +38,30 @@ function verifierChampVide(champs, btn) {
     champ.value.trim() === '' ? bouton.disabled = true : bouton.disabled = false;
 }
 
-// Ecouteur d'événement de champs vide
-document.getElementById(champsNom).addEventListener('input', verifChampVideNom);
-document.getElementById(champsPrenom).addEventListener('input', verifChampVidePrenom);
-document.getElementById(champsEmail).addEventListener('input', verifChampVideMail);
+function verifChampVideMdp(){
+    const champ = document.getElementById(champMdp);
+    const champConf = document.getElementById(confMdp)
+    const bouton = document.getElementById(btnMdp);
+
+    champ.value.trim() === '' && champConf.value.trim() === '' ? bouton.disabled = true : bouton.disabled = false;
+}
+
+function verifierChecked() {
+    const champ = document.getElementById(checkSupp);
+    const bouton = document.getElementById(btnSupp);
+
+    champ.checked ? bouton.disabled = false : bouton.disabled = true;
+}
+
+
+// Ecouteurs d'événement de champs vide
+if (docChampsNom && docChampsPrenom && docChampsMail && docChampsMdp && docChampsSupp){
+    docChampsNom.addEventListener('input', verifChampVideNom);
+    docChampsPrenom.addEventListener('input', verifChampVidePrenom);
+    docChampsMail.addEventListener('input', verifChampVideMail);
+    docChampsMdp.addEventListener('input', verifChampVideMdp);
+    docChampsSupp.addEventListener('input', verifierChecked);
+}
 
 // Ouverture modal de confirmation
 function confirmationModalNom(){
@@ -44,6 +74,14 @@ function confirmationModalPrenom(){
 
 function confirmationModalMail(){
     ouvrirModal(champsEmail);
+}
+
+function confirmationModalMdp(){
+    ouvrirModal(champMdp);
+}
+
+function confirmationModalSupp(){
+    ouvrirModal(checkSupp);
 }
 
 function ouvrirModal(champs) {
@@ -59,6 +97,12 @@ function ouvrirModal(champs) {
             break;
         case champsEmail:
             form = 'formModMail';
+            break;
+        case champMdp:
+            form = 'formModMdp';
+            break;
+        case checkSupp:
+            form = 'formSuppCompte';
             break;
         default:
             form = null;

@@ -104,7 +104,7 @@
                             <input type="text" readonly class="form-control-plaintext" id="name-label" value="Mot de passe">
                             <label for="floatingPlaintextInput" hidden>mdp</label>
                         </div>
-                        <form class="row g-3 my-auto" action="?action=compte" method="post">
+                        <form class="row g-3 my-auto" action="?action=compte" method="post" id="formModMdp">
                             <div class="col-auto">
                                 <input type="password" class="form-control" name="compte-mod-mdp" id="compte-mod-mdp" placeholder="Nouveau mot de passe" required>
                             </div>
@@ -121,15 +121,15 @@
                             <input type="text" readonly class="form-control-plaintext" id="name-label" value="Mot de passe">
                             <label for="floatingPlaintextInput" hidden>mdp</label>
                         </div> -->
-                        <form class="row g-3 my-auto d-flex justify-content-end">
+                        <form class="row g-3 my-auto d-flex justify-content-end" id="formSuppCompte">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required>
+                                <input class="form-check-input" type="checkbox" value="" name="supp-compte-check" id="supp-compte-check" required>
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Cochez cette case pour supprimer le compte (NB : cette action est irréversible.)
                                 </label>
                             </div>
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-danger mb-3">Supprimer le compte</button>
+                                <button type="button" id="btn-supp-compte" class="btn btn-danger mb-3" disabled onclick="confirmationModalSupp()">Modifier</button>
                             </div>
                         </form>
                     </li>

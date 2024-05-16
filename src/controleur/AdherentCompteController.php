@@ -35,13 +35,6 @@ class AdherentCompteController extends Controller
     {
         if (isset($_SESSION['current_adherent'])) {
             $this->adherent = $_SESSION['current_adherent'];
-            // echo '<pre>';
-            // print_r($_SESSION);
-            // print_r($_POST);
-            // print_r($_GET);
-            // print_r($_SERVER);
-            // print_r($this->adherent);
-            // die();
         } else {
             Router::redirect('page404');
         }
@@ -52,25 +45,30 @@ class AdherentCompteController extends Controller
         $adhBdToMod = new AdherentBD();
         $adhToMod = $adhBdToMod->selectById($_SESSION['current_adherent']->id);
 
-        if (isset($_POST['compte-mod-nom'])) {
-            $adhToMod->nom = Utilities::sanitaze($_POST['compte-mod-nom']);
+        if (!isset($_POST['supp-compte-check'])) {
+
+            if (isset($_POST['compte-mod-nom'])) {
+                $adhToMod->nom = Utilities::sanitaze($_POST['compte-mod-nom']);
+            }
+
+            if (isset($_POST['compte-mod-prenom'])) {
+                $adhToMod->prenom = Utilities::sanitaze($_POST['compte-mod-prenom']);
+            }
+
+            if (isset($_POST['compte-mod-mail']) && !UserManager::isEmailInBD($_POST['compte-mod-mail']) && filter_var($_POST['compte-mod-mail'], FILTER_VALIDATE_EMAIL)) {
+                $adhToMod->mail = Utilities::sanitaze($_POST['compte-mod-mail']);
+            }
+
+            if (isset($_POST['compte-mod-mdp']) && isset($_POST['compte-conf-mdp']) && $_POST['compte-mod-mdp'] === $_POST['compte-conf-mdp']) {
+                $adhToMod->password = password_hash(Utilities::sanitaze($_POST['compte-mod-mdp']), PASSWORD_DEFAULT);
+            }
+            $adhBdToMod->update($adhToMod);
+            $_SESSION['current_adherent'] = $adhToMod;
+        } else {
+            $adhBdToMod->delete($adhToMod->id);
+            session_destroy();
         }
 
-        if (isset($_POST['compte-mod-prenom'])) {
-            $adhToMod->prenom = Utilities::sanitaze($_POST['compte-mod-prenom']);
-        }
-
-        if (isset($_POST['compte-mod-mail']) && !UserManager::isEmailInBD($_POST['compte-mod-mail']) && filter_var($_POST['compte-mod-mail'], FILTER_VALIDATE_EMAIL)) {
-            $adhToMod->mail = Utilities::sanitaze($_POST['compte-mod-mail']);
-        }
-
-        if (isset($_POST['compte-mod-mdp']) && isset($_POST['compte-conf-mdp']) && $_POST['compte-mod-mdp'] === $_POST['compte-conf-mdp']) {
-            $adhToMod->password = password_hash(Utilities::sanitaze($_POST['compte-mod-mdp']), PASSWORD_DEFAULT);
-        }
-
-        $adhBdToMod->update($adhToMod);
-        $_SESSION['current_adherent'] = $adhToMod;
-
-        header("Refresh:0");
+        $_SESSION['current_adherent'] === null ? header('location: ?') : header('Refresh:0');
     }
 }
