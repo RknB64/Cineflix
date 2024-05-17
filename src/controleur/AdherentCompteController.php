@@ -14,8 +14,8 @@ class AdherentCompteController extends Controller
 
     public function __construct(string $requestMethod)
     {
-        if (isset($_SESSION['current_adherent'])) {
-            $this->adherent = $_SESSION['current_adherent'];
+        if (CurrentUser::isLoggedIn()) {
+            $this->adherent = CurrentUser::getAdherent();
         } else {
             Router::redirect('accueil');
             die();
@@ -40,7 +40,7 @@ class AdherentCompteController extends Controller
 
     private static function handlePosts(AdherentBD $adherentBD)
     {
-        $adhToMod = $adherentBD->selectById($_SESSION['current_adherent']->id);
+        $adhToMod = $adherentBD->selectById(CurrentUser::getId());
 
         if (!isset($_POST['supp-compte-check'])) {
 
@@ -60,7 +60,7 @@ class AdherentCompteController extends Controller
                 $adhToMod->password = password_hash(Utilities::sanitaze($_POST['compte-mod-mdp']), PASSWORD_DEFAULT);
             }
             $adherentBD->update($adhToMod);
-            $_SESSION['current_adherent'] = $adhToMod;
+            CurrentUser::updateAdherent($adhToMod);
         } else {
             $adherentBD->delete($adhToMod->id);
             session_destroy();

@@ -31,23 +31,3 @@ footer{
     margin-bottom: 20px;
     justify-content: space-evenly;
 }
-
-
-
-.search-results {
-    position: absolute !important;
-    top: 100%  !important; /* Position below the search box */
-    left: 0 !important;
-    width: 100% !important;
-    background-color: #fff !important;
-    border: 1px solid #ced4da !important;
-    border-top: none !important;
-    z-index: 1000 !important; /* Ensure it's above other content */
-    /* Style for selected item */
-}
-
-.search-results li.selected {
-        background-color: #ffa200 !important;
-        color: #fff !important;
-        cursor: pointer !important;
-}
