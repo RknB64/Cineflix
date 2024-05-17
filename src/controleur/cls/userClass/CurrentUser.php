@@ -23,7 +23,7 @@ class CurrentUser
 
     public static function updateAdherent(Adherent $adherent): void
     {
-        $_SESSION[self::SESSION_LOGGED_IN] = $adherent;
+        $_SESSION[self::SESSION_ADHERENT] = $adherent;
     }
 
     public static function logout()
