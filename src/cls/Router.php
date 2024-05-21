@@ -52,6 +52,10 @@ class Router
                 new AdherentCompteController($requestMethod);
                 break;
 
+            case 'admin':
+                new AdminController();
+                break;
+
             default:
                 new Page404Controller();
                 break;
