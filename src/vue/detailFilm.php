@@ -1,4 +1,4 @@
-<?php if ($detailFilm->seances == null) { ?>
+<?php if ($detailFilm->etat == 'streaming') { ?>
 
     <div class="card w-auto mb-3 my-2 mx-2" data-bs-theme="dark">
         <div class="row g-0">
@@ -14,11 +14,13 @@
                     <hr>
                     <form id="formulaire-streaming" action="?action=mes-streams" method="post">
                         <div class="d-flex justify-content-end mt-1">
-                            <input type="text" hidden id="id-stream" name="id-stream" value=<?= $detailFilm->id ?>>
-                            <?php if (!$streamBought) { ?>
-                                <input class="btn btn-secondary" id="achat-stream" name="achat-stream" type="submit" value="ACHETER POUR 15 POINTS">
-                            <?php } else { ?>
-                                <input class="btn btn-secondary" id="achat-stream" name="achat-stream" type="submit" value="Déjà acheté" disabled>
+                            <input type="text" hidden id="achat-stream" name="id-stream" value=<?= $detailFilm->id ?>>
+                            <?php if (!$streamBought && $enoughPoints) { ?>
+                                <button type="button" id="btn-achat-stream" class="btn btn-secondary" onclick="confirmationModalAchatStream()">ACHETER POUR 15 POINTS</button>
+                            <?php } else if (!$streamBought && !$enoughPoints) { ?>
+                                <input class="btn btn-secondary" id="enough-points" value="Pas assez de points !" disabled>
+                            <?php  } else { ?>
+                                <input class="btn btn-secondary" id="achat-done" value="Déjà acheté" disabled>
                             <?php } ?>
                         </div>
                     </form>
@@ -103,4 +105,6 @@
     </script>
     <script src="static/js/detailFilm.js"></script>
 
-<?php } ?>
+<?php }
+
+echo file_get_contents(RACINE . '/vue/component/confirmModal.html', true);

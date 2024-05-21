@@ -11,6 +11,7 @@ class DetailFilmController extends Controller
     private FilmDetail  $detailFilm;
     private array       $villesAvecCinemas;
     private bool        $streamBought = false;
+    private bool        $enoughPoints = true;
 
     // Variables utilisées par le controller
     private array       $adherentStream;
@@ -31,6 +32,7 @@ class DetailFilmController extends Controller
 
         if (CurrentUser::isLoggedIn() && $this->detailFilm->seances === array()) {
             $this->adherent = CurrentUser::getAdherent();
+            $this->enoughPoints = $this->adherent->points >= 15;
             $this->streamBD = new StreamBD();
             $adherentStream = $this->streamBD->selectAdherentFilmsStreaming($this->adherent);
             $this->adherentStream = array();
@@ -43,9 +45,9 @@ class DetailFilmController extends Controller
             $this->data = array(
                 'titre'               => $this->titre,
                 'detailFilm'          => $this->detailFilm,
-                'villesAvecCinemas'   => $this->villesAvecCinemas,
                 'adherentStream'      => $this->adherentStream,
-                'streamBought'        => $this->streamBought
+                'streamBought'        => $this->streamBought,
+                'enoughPoints'        => $this->enoughPoints
             );
         } else {
 
@@ -53,7 +55,6 @@ class DetailFilmController extends Controller
                 'titre'               => $this->titre,
                 'detailFilm'          => $this->detailFilm,
                 'villesAvecCinemas'   => $this->villesAvecCinemas,
-                'streamBought'        => $this->streamBought
             );
         }
 

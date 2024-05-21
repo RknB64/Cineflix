@@ -65,7 +65,7 @@ class AdherentStreamingController extends Controller
     {
         $adhToMod = $adherentBD->selectById(CurrentUser::getId());
 
-        if (isset($_POST['achat-stream'])) {
+        if (isset($_POST['id-stream'])) {
 
             $streamBD = new StreamBD();
             $stream = new Stream();
