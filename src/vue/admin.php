@@ -26,7 +26,7 @@
         </div>
         <table class="table">
           <a href="?action=create" class="btn btn-primary">
-            <i class="bi bi-plus"></i> 
+            <i class="bi bi-plus"></i>
             Ajouter
           </a>
           <!-- Table headings -->
@@ -100,10 +100,13 @@
 
 
                   <?php if ($table === 'adherent') : ?>
-                    <a href="" class="btn btn-warning">
-                      <i class="bi bi-pencil"></i> <!-- Pencil icon for update -->
-                      Toggle admin
-                    </a>
+                    <form action="?admin" method="post" class="d-inline">
+                      <input type="hidden" name="id"></input>
+                      <button type="submit" href="" class="btn btn-warning">
+                        <i class="bi bi-pencil"></i> <!-- Pencil icon for update -->
+                        Toggle admin
+                      </button>
+                    </form>
                   <?php endif; ?>
 
                   <a href="" class="btn btn-danger">
