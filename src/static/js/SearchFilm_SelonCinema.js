@@ -5,7 +5,10 @@ $(document).ready(function() {
         var filmsContainer = $('#films-container-' + cinemaId);
 
         // Check if the films container is visible
-        if (filmsContainer.hasClass('d-none')) {
+        if (filmsContainer.data('loaded')) {
+
+            filmsContainer.toggleClass('d-none');
+        }else {
             // AJAX request to fetch films for the selected cinema
             $.ajax({
                 url: '?action=recherche&cinema=' + cinemaId,
@@ -40,16 +43,13 @@ $(document).ready(function() {
                         
                     }
                     // Display the generated HTML content in the films container
-                    filmsContainer.html(filmsHTML).removeClass('d-none');
+                    filmsContainer.html(filmsHTML).removeClass('d-none').data('loaded',true);
                 },
                 error: function(xhr, status, error) {
                     console.error('Error:', error);
                 }
             });
-        } else {
-            // Hide the films container if it's already visible
-            filmsContainer.addClass('d-none');
-        }
+        } 
     });
 });
 
