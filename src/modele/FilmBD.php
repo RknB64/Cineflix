@@ -117,4 +117,30 @@ class FilmBD extends MyPdo
         // Return the films data
         return $films;
     }
+
+
+    // Fonctions Streaming
+    public function selectFilmsStreaming(): ?array
+    {
+        $db = self::connexion();
+        $resultat = null;
+
+        try {
+            $query = $db->prepare("SELECT * FROM " . $this->table() . " WHERE date_expiration >= NOW()
+                                                                        AND etat = 'streaming'
+                                                                        ORDER BY date_sortie DESC;");
+            $query->execute();
+
+            while ($ligne = $query->fetch(PDO::FETCH_ASSOC)) {
+
+                $resultat[] = $this->createObject($ligne);
+            }
+        } catch (PDOException $e) {
+            die("Erreur !: " . $e->getMessage());
+        } finally {
+            $db = null;
+        }
+
+        return $resultat;
+    }
 }

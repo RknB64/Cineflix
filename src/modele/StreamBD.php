@@ -32,4 +32,27 @@ class StreamBD extends MyPdo
     {
         return self::ID;
     }
+
+    public function selectAdherentFilmsStreaming(Adherent $adherent): ?array
+    {
+        $db = self::connexion();
+        $resultat = null;
+
+        try {
+            $query = $db->prepare("SELECT * FROM " . $this->table() . " WHERE id_adherent = " . $adherent->id .
+                " AND date_expiration >= NOW(6) ORDER BY date_achat DESC;");
+            $query->execute();
+
+            while ($ligne = $query->fetch(PDO::FETCH_ASSOC)) {
+
+                $resultat[] = $this->createObject($ligne);
+            }
+        } catch (PDOException $e) {
+            die("Erreur !: " . $e->getMessage());
+        } finally {
+            $db = null;
+        }
+
+        return $resultat;
+    }
 }
