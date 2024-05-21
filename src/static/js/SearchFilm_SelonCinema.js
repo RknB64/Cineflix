@@ -5,7 +5,10 @@ $(document).ready(function() {
         var filmsContainer = $('#films-container-' + cinemaId);
 
         // Check if the films container is visible
-        if (filmsContainer.hasClass('d-none')) {
+        if (filmsContainer.data('loaded')) {
+
+            filmsContainer.toggleClass('d-none');
+        }else {
             // AJAX request to fetch films for the selected cinema
             $.ajax({
                 url: '?action=recherche&cinema=' + cinemaId,
@@ -30,7 +33,7 @@ $(document).ready(function() {
                                                         <h5 class="card-title">${film.titre}</h5>
                                                         <p class="card-text">${film.description}</p>
                                                         <p class="card-text"><small class="">Durée: ${film.duree}</small></p>
-                                                        <a href="?action=film-details&&id=${film.id}" class="btn btn-primary" role="button">Voir la bande-annonce</a>
+                                                        <a href="?action=detailFilm&&id=${film.id}" class="btn btn-dark" role="button">Réserve ta place !</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -40,16 +43,13 @@ $(document).ready(function() {
                         
                     }
                     // Display the generated HTML content in the films container
-                    filmsContainer.html(filmsHTML).removeClass('d-none');
+                    filmsContainer.html(filmsHTML).removeClass('d-none').data('loaded',true);
                 },
                 error: function(xhr, status, error) {
                     console.error('Error:', error);
                 }
             });
-        } else {
-            // Hide the films container if it's already visible
-            filmsContainer.addClass('d-none');
-        }
+        } 
     });
 });
 
