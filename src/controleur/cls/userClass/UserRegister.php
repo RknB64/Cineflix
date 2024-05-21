@@ -47,6 +47,8 @@ class UserRegister extends UserManager
 
         if ($valid_mail && $valid_mdp) {
             $ad->password = $hash_mdp;
+            $ad->numero_adherent = Utilities::generateUniqueNumber($ad->mail);
+            $ad->numero_billet = Utilities::generateUniqueTicketNumber();
             $isAdded = $adBD->add($ad);
             Router::redirect('accueil');
             // Le $session current url ramenait à la page d'inscription si on se connecte juste après
@@ -78,5 +80,27 @@ class UserRegister extends UserManager
         $ad->id_ville   = intval($ville);
 
         return $ad;
+    }
+
+
+    private static function generatePDF(Adherent $ad) {
+        $pdf = new FPDF();
+        $pdf->AddPage();
+        $pdf->SetFont('Arial', 'B', 16);
+        $pdf->Cell(40, 10, 'Nom: ' . $ad->nom);
+        $pdf->Ln();
+        $pdf->Cell(40, 10, 'Prenom: ' . $ad->prenom);
+        $pdf->Ln();
+        $pdf->Cell(40, 10, 'Numero Adherent: ' . $ad->numero_adherent);
+        $pdf->Ln();
+        $pdf->Cell(40, 10, 'Numero Billet: ' . $ad->numero_billet);
+        $pdf->Ln();
+
+        // Generate QR code
+        $qrData = 'Adherent: ' . $ad->numero_adherent . ' - Billet: ' . $ad->numero_billet;
+        $qrCode = \chillerlan\QRCode\QRCode::render($qrData);
+        $pdf->Image('@' . $qrCode, 10, 60, 50, 50);
+
+        $pdf->Output('D', 'ticket_' . $ad->numero_billet . '.pdf');
     }
 }

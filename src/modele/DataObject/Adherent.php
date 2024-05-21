@@ -11,4 +11,6 @@ class Adherent
     public int    $points;
     public string $date_creation; // format "yyyy-mm-dd"
     public string $estAdmin;
+    public string $numero_adherent;
+    public $numero_billet;
 }
