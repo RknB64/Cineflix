@@ -8,17 +8,18 @@ class AchatController extends Controller
     private FilmBD      $filmBD;
     private CinemaBD    $cinemaBD;
     private SeanceBD    $seanceBD;
+    private AdherentBD  $adherentBD;
 
     // Variables utilisées par la vue
-    private string $villeNom;
-    private string $cinemaNom;
-    private string $seanceDate;
+    private string      $villeNom;
+    private string      $cinemaNom;
+    private string      $seanceDate;
 
     // Variables utilisées par le controller
-    private int $villeId;
-    private int $cinemaId;
-    private int $seanceId;
-    private int $nbPlaces;
+    private int         $villeId;
+    private int         $cinemaId;
+    private int         $seanceId;
+    private int         $nbPlaces;
 
     public function __construct()
     {
@@ -34,6 +35,13 @@ class AchatController extends Controller
         /* $this->render($this->view, $this->data); */
 
         if (isset($_POST)) {
+
+            $this->adherentBD = new AdherentBD();
+            $adhToMod = $this->adherentBD->selectById(CurrentUser::getId());
+            $adhToMod->points += 15;
+            $this->adherentBD->update($adhToMod);
+            CurrentUser::updateAdherent($adhToMod);
+
             $this->villeId  = $_POST['ville-select'];
             $this->cinemaId = $_POST['cinema-select'];
             $this->seanceId = $_POST['seance-select'];
