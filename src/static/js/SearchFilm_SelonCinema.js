@@ -30,7 +30,7 @@ $(document).ready(function() {
                                                         <h5 class="card-title">${film.titre}</h5>
                                                         <p class="card-text">${film.description}</p>
                                                         <p class="card-text"><small class="">Durée: ${film.duree}</small></p>
-                                                        <a href="?action=film-details&&id=${film.id}" class="btn btn-primary" role="button">Voir la bande-annonce</a>
+                                                        <a href="?action=detailFilm&&id=${film.id}" class="btn btn-dark" role="button">Réserve ta place !</a>
                                                     </div>
                                                 </div>
                                             </div>
