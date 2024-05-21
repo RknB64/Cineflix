@@ -10,7 +10,7 @@ class Adherent
   public string $password;
   public int    $points;
   public string $date_creation; // format "yyyy-mm-dd"
-  public string $estAdmin;
+  public int    $estAdmin;
 
 
   public function getVilleName(): ?string

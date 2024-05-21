@@ -90,7 +90,7 @@
                           <td>' . $item->prenom . '</td>
                           <td>' . $item->mail . '</td>
                           <td>' . $item->date_creation . '</td>
-                          <td>' . ($item->estAdmin ? 'Oui' : 'Non') . '</td>
+                          <td id="estAdmin-"'.$item->id .'>' . ($item->estAdmin ? 'Oui' : 'Non') . '</td>
                           <td>' . $item->getVilleName() . '</td>
                       ';
                     break;
@@ -100,13 +100,10 @@
 
 
                   <?php if ($table === 'adherent') : ?>
-                    <form action="?admin" method="post" class="d-inline">
-                      <input type="hidden" name="id"></input>
-                      <button type="submit" href="" class="btn btn-warning">
-                        <i class="bi bi-pencil"></i> <!-- Pencil icon for update -->
-                        Toggle admin
+                        <button onclick="ajaxToggleAdmin(event)" class="btn btn-warning" data-idadherent="<?= $item->id ?>">
+                            <i class="bi bi-pencil"></i> <!-- Pencil icon for update -->
+                            Toggle admin
                       </button>
-                    </form>
                   <?php endif; ?>
 
                   <a href="" class="btn btn-danger">
