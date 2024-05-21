@@ -44,40 +44,46 @@
                     <?php
                     if (count($detailFilm->seances) !== 0) {
                     ?>
-                        <form id="formulaire-cinema" action="?action=achat" method="post">
-                            <div class="d-flex d-inline-block col-md-6">
-                                <select class="form-select col-md-3" id="ville-select" name="ville-select" aria-label="Default select example">
-                                    <option value="" selected disabled hidden>Selectionner une ville</option>
-                                    <?php
-                                    foreach ($detailFilm->villes as $key => $ville) {
-                                    ?>
-                                        <option value=<?= $ville->id ?>><?= $ville->nom ?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
-                                <select class="form-select col-md-3" id="cinema-select" name="cinema-select" aria-label="Default select example">
-                                </select>
-                            </div>
-                            <div class="btn-group d-inline-block my-1" id="seance-select" name="seance" role="group" aria-label="Basic radio toggle button group">
-                            </div>
-                            <div class="d-flex d-inline-block">
-                                <label class="form-label col-md-4" id="place-select-label">Nombre de places</label>
-                                <select class="form-select" id="place-select" name="place-select" aria-label="Default select example">
-                                    <option value="" selected disabled hidden>Selectionner</option>
-                                    <?php
-                                    for ($i = 0; $i < 10; $i++) {
-                                    ?>
-                                        <option value=<?= $i + 1 ?>><?= $i + 1 ?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
+                        <?php if (CurrentUser::isLoggedIn()) { ?>
+                            <form id="formulaire-cinema" action="?action=achat" method="post">
+                                <div class="d-flex d-inline-block col-md-6">
+                                    <select class="form-select col-md-3" id="ville-select" name="ville-select" aria-label="Default select example">
+                                        <option value="" selected disabled hidden>Selectionner une ville</option>
+                                        <?php
+                                        foreach ($detailFilm->villes as $key => $ville) {
+                                        ?>
+                                            <option value=<?= $ville->id ?>><?= $ville->nom ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                    <select class="form-select col-md-3" id="cinema-select" name="cinema-select" aria-label="Default select example">
+                                    </select>
+                                </div>
+                                <div class="btn-group d-inline-block my-1" id="seance-select" name="seance" role="group" aria-label="Basic radio toggle button group">
+                                </div>
+                                <div class="d-flex d-inline-block">
+                                    <label class="form-label col-md-4" id="place-select-label">Nombre de places</label>
+                                    <select class="form-select" id="place-select" name="place-select" aria-label="Default select example">
+                                        <option value="" selected disabled hidden>Selectionner</option>
+                                        <?php
+                                        for ($i = 0; $i < 10; $i++) {
+                                        ?>
+                                            <option value=<?= $i + 1 ?>><?= $i + 1 ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="d-flex justify-content-end mt-1">
+                                    <input class="btn btn-secondary" id="achat-place" type="submit" value="ACHETER" formtarget="_blank">
+                                </div>
+                            </form>
+                        <?php } else { ?>
                             <div class="d-flex justify-content-end mt-1">
-                                <input class="btn btn-secondary" id="achat-place" type="submit" value="ACHETER" formtarget="_blank">
+                                <button type="button" class="btn btn btn-secondary" data-bs-toggle="modal" data-bs-target="#loginModal">Se connecter pour acheter</button>
                             </div>
-                        </form>
+                        <?php } ?>
                     <?php
                     } else {
                     ?>
