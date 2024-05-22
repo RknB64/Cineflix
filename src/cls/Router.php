@@ -48,12 +48,12 @@ class Router
                 new RechercheController();
                 break;
 
-            case 'admin':
-                new AdministrationController();
-                break;
-
             case 'compte':
                 new AdherentCompteController($requestMethod);
+                break;
+
+            case 'admin':
+                new AdminController();
                 break;
 
             default:

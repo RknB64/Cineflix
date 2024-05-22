@@ -14,18 +14,26 @@ class AjaxRequestController extends Controller
     public function __construct()
     {
         $this->titre = '';
-        $this->view = 'component/ajaxCompletionList';
 
         $this->request = $_POST['request'];
 
+        /* die($this->request . " ". AjaxHandler::TOGGLE_ADMIN); */
         switch ($this->request) {
 
             case AjaxHandler::AUTOCOMPLETE_VILLE:
+                $this->view = 'component/ajaxCompletionList';
                 $this->villeBD = new VilleBD();
                 $colName = 'nom';
 
                 $this->data = $this->autocomplete($this->villeBD, $colName);
                 $this->render($this->view, $this->data, false);
+                break;
+
+            case "toggle-admin":
+                $isUpdated = AjaxHandler::toggleAdmin($_POST['idAdherent']);
+                // on set le code de réponse selon si l'update à réussi ou non. (code 500 va run le block error dans l'ajax)
+                $code = $isUpdated ? 200 : 500;
+                http_response_code($code);
                 break;
 
             default:
