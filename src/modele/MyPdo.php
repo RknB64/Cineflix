@@ -136,7 +136,7 @@ abstract class MyPdo extends DbConnect
         try {
             $query = $db->prepare("UPDATE " . $this->table() .
                 " SET " . $columnsFormated .
-                " WHERE id=" . $this->id());
+                " WHERE id=" . $object->id);
 
             $newValues = array_map(fn ($property) => $object->$property, $columns);
 

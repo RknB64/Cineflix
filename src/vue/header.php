@@ -44,30 +44,8 @@ if (isset($_GET['action']) && $_GET['action'] !== 'connexion') {
     <script src="static/js/film.js"></script>
     <script src="static/js/ajaxAutocompleteVille.js"></script>
     <script src="static/js/SearchFilm_SelonCinema.js"></script>
+    <script src="static/js/confirm.js" defer></script>
 
-    <style>
-        /* styles pour search resulte */
-
-        .search-results {
-            position: absolute;
-            top: 100%;
-            /* Position below the search box */
-            left: 0;
-            width: 100%;
-            background-color: #fff;
-            border: 1px solid #ced4da;
-            border-top: none;
-            z-index: 1000;
-            /* Ensure it's above other content */
-            /* Style for selected item */
-        }
-
-        .search-results li.selected {
-            background-color: #ffa200;
-            color: #fff;
-            cursor: pointer;
-        }
-    </style>
 </head>
 
 <script>
@@ -116,24 +94,42 @@ if (isset($_GET['action']) && $_GET['action'] !== 'connexion') {
                     </div>
 
                 </form>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" class="bi bi-person-circle" viewBox="0 0 16 16">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
-                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
-                    </svg>
-                </button>
-                <?php if (isset($_SESSION['current_adherent'])) : ?>
-                    <a href="?action=logout" class="btn btn-outline-light">Logout</a>
-                <?php endif; ?>
+                <?php if (!CurrentUser::isLoggedIn()) { ?>
+                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
+                    <?php } else { ?>
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <?php } ?>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                        </svg>
+                    </button>
+
+                    <?php if (CurrentUser::isLoggedIn()) { ?>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="?action=compte">Mon Compte</a></li>
+                            <?php if (CurrentUser::isAdmin()) { ?>
+                                <li><a class="dropdown-item" href="#">Administration</a></li>
+                            <?php } else { ?>
+                                <li><a class="dropdown-item" href="#">Mes films</a></li>
+                            <?php } ?>
+                            <li><a class="dropdown-item" href="?action=logout">Se déconnecter</a></li>
+                        </ul>
+                    <?php } ?>
+
+
+                       
+
+                            
             </div>
         </div>
         <!-- session qui a le bom de utilsateur -->
         <!-- si la session exist  -->
-        <?php if (isset($_SESSION['current_adherent'])) : ?>
-            <?php if ($_SESSION['current_adherent']->estAdmin == 1) : ?>
-                <p style="color: white;">Bienvenue, Admin <?php echo $_SESSION['current_adherent']->nom; ?></p>
+        <?php if (CurrentUser::isLoggedIn()) : ?>
+            <?php if (CurrentUser::isAdmin()) : ?>
+                <p style="color: white;">Bienvenue, Admin <?php echo CurrentUser::getNom(); ?></p>
             <?php else : ?>
-                <p style="color: white;">Bienvenue, <?php echo $_SESSION['current_adherent']->nom; ?></p>
+                <p style="color: white;">Bienvenue, <?php echo CurrentUser::getNom(); ?></p>
             <?php endif; ?>
         <?php else : ?>
             <p style="color: white;">Bienvenue, Guest!</p>
