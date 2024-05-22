@@ -1,3 +1,6 @@
+
+<script src="static/js/ajaxAdherentOperations.js" defer></script>
+
 <body>
   <div class="container-fluid bg-white">
     <div class="row">
@@ -66,7 +69,7 @@
           <tbody>
             <!-- Table data -->
             <?php foreach ($data as $item) : ?>
-              <tr>
+                <tr id="<?= 'tr-'.$item->id ?>">
                 <?php
                 // Switch statement to display table data based on the selected table
                 switch ($table) {
@@ -100,16 +103,17 @@
 
 
                   <?php if ($table === 'adherent') : ?>
-                        <button onclick="ajaxToggleAdmin(event)" class="btn btn-warning" data-idadherent="<?= $item->id ?>">
-                            <i class="bi bi-pencil"></i> <!-- Pencil icon for update -->
-                            Toggle admin
-                      </button>
+                    <button onclick="ajaxToggleAdmin(event)" class="btn btn-warning" data-idadherent="<?= $item->id ?>">
+                        <i class="bi bi-pencil"></i> <!-- Pencil icon for update -->
+                        Toggle admin
+                    </button>
                   <?php endif; ?>
 
-                  <a href="" class="btn btn-danger">
-                    <i class="bi bi-trash"></i> <!-- Trash icon for delete -->
-                    Supprimer
-                  </a>
+                    <button onclick="ajaxDeleteAdherent(event)" class="btn btn-danger" data-id="<?= $item->id ?>">
+                        <i class="bi bi-trash"></i> <!-- Pencil icon for update -->
+                        Supprimer
+                    </button>
+
                 </td>
               </tr>
             <?php endforeach; ?>

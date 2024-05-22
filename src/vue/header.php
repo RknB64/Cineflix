@@ -45,10 +45,6 @@ if (isset($_GET['action']) && $_GET['action'] !== 'connexion') {
     <script src="static/js/ajaxAutocompleteVille.js"></script>
     <script src="static/js/SearchFilm_SelonCinema.js"></script>
     <script src="static/js/confirm.js" defer></script>
-<<<<<<< HEAD
-=======
-    <script src="static/js/ajaxToggleAdmin.js" defer></script>
->>>>>>> test-ajax
 
 </head>
 

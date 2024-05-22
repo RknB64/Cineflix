@@ -20,7 +20,7 @@ class AjaxRequestController extends Controller
         /* die($this->request . " ". AjaxHandler::TOGGLE_ADMIN); */
         switch ($this->request) {
 
-            case AjaxHandler::AUTOCOMPLETE_VILLE:
+            case "autocomplete-ville":
                 $this->view = 'component/ajaxCompletionList';
                 $this->villeBD = new VilleBD();
                 $colName = 'nom';
@@ -36,9 +36,12 @@ class AjaxRequestController extends Controller
                 http_response_code($code);
                 break;
 
-            default:
-                // TODO
+            case "delete-adherent":
+                $isDeleted = AjaxHandler::deleteAdherent($_POST['idAdherent']);
+                $code = $isDeleted ? 200 : 500;
+                http_response_code($code);
                 break;
+
         }
     }
 

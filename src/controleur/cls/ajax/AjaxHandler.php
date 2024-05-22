@@ -3,10 +3,6 @@
 class AjaxHandler
 {
 
-    // constante pour orienter les requêtes
-    public const AUTOCOMPLETE_VILLE = "autocomplete-ville";
-    public const TOGGLE_ADMIN = "toggle-admin";
-
     public static function autocomplete(string $userInput, object $objectBD, string $colName): ?array
     {
         $result = null;
@@ -25,5 +21,15 @@ class AjaxHandler
         $adherent->estAdmin = $adherent->estAdmin ? 0 : 1;
 
         return $adherentBD->update($adherent);
+    }
+
+    public static function deleteAdherent(int $idAdherent): bool {
+
+        if ($idAdherent !== CurrentUser::getId()) {
+            $adherentBD = new AdherentBD();
+            return $adherentBD->delete($idAdherent);
+        } else {
+            return false;
+        }
     }
 }
