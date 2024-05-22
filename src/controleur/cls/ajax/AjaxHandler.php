@@ -22,8 +22,7 @@ class AjaxHandler
         $adherentBD = new AdherentBD();
         $adherent = $adherentBD->selectById($idAdherent);
 
-        $adherent->isAdmin = 1;
-        echo $adherent;
+        $adherent->estAdmin = $adherent->estAdmin ? 0 : 1;
 
         return $adherentBD->update($adherent);
     }

@@ -16,9 +16,11 @@ function ajaxToggleAdmin(event) {
     error: function() {
       alert("Erreur d'ajout")
     },
-    success: function(data) {
-      console.log( data );
-      $('#estAdmin-' + idAdherent).innerText = "blaaa";
+    success: function() {
+
+      const tr = $('#estAdmin-' + idAdherent);
+      let text = tr.html() === 'Oui' ? 'Non' : 'Oui';
+      tr.html(text)
     }
   });
 

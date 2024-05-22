@@ -90,7 +90,7 @@
                           <td>' . $item->prenom . '</td>
                           <td>' . $item->mail . '</td>
                           <td>' . $item->date_creation . '</td>
-                          <td id="estAdmin-"'.$item->id .'>' . ($item->estAdmin ? 'Oui' : 'Non') . '</td>
+                          <td id="estAdmin-'.$item->id .'">' . ($item->estAdmin ? 'Oui' : 'Non') . '</td>
                           <td>' . $item->getVilleName() . '</td>
                       ';
                     break;
