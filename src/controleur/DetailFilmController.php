@@ -4,12 +4,17 @@ class DetailFilmController extends Controller
 {
 
     // Classes PDO utilisées
+    private StreamBD    $streamBD;
 
     // Variables utilisées par la vue
+    private Adherent    $adherent;
     private FilmDetail  $detailFilm;
     private array       $villesAvecCinemas;
+    private bool        $streamBought = false;
+    private bool        $enoughPoints = true;
 
     // Variables utilisées par le controller
+    private array       $adherentStream;
 
     public function __construct()
     {
@@ -25,11 +30,33 @@ class DetailFilmController extends Controller
         $this->detailFilm = new FilmDetail($_GET["id"]);
         $this->villesAvecCinemas = $this->getVillesData();
 
-        $this->data = array(
-            'titre'               => $this->titre,
-            'detailFilm'          => $this->detailFilm,
-            'villesAvecCinemas'   => $this->villesAvecCinemas,
-        );
+        if (CurrentUser::isLoggedIn() && $this->detailFilm->seances === array()) {
+            $this->adherent = CurrentUser::getAdherent();
+            $this->enoughPoints = $this->adherent->points >= 15;
+            $this->streamBD = new StreamBD();
+            $adherentStream = $this->streamBD->selectAdherentFilmsStreaming($this->adherent);
+            $this->adherentStream = array();
+            if ($adherentStream !== null) $this->adherentStream = $adherentStream;
+            if ($this->adherentStream !== array()) {
+                foreach ($this->adherentStream as $key => $stream) {
+                    if ($stream->id_film === $this->detailFilm->id and $stream->date_expiration > date('Y-m-d H:i:s')) $this->streamBought = true;
+                }
+            }
+            $this->data = array(
+                'titre'               => $this->titre,
+                'detailFilm'          => $this->detailFilm,
+                'adherentStream'      => $this->adherentStream,
+                'streamBought'        => $this->streamBought,
+                'enoughPoints'        => $this->enoughPoints
+            );
+        } else {
+
+            $this->data = array(
+                'titre'               => $this->titre,
+                'detailFilm'          => $this->detailFilm,
+                'villesAvecCinemas'   => $this->villesAvecCinemas,
+            );
+        }
 
         $this->render($this->view, $this->data);
     }

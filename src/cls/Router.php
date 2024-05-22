@@ -20,6 +20,10 @@ class Router
                 new StreamingController();
                 break;
 
+            case 'mes-streams':
+                new AdherentStreamingController($requestMethod);
+                break;
+
             case 'inscription':
                 new InscriptionController($requestMethod);
                 break;
