@@ -1,5 +1,5 @@
 
-<script src="static/js/ajaxAdherentOperations.js" defer></script>
+<script src="static/js/ajaxAdminOperation.js" defer></script>
 
 <body>
   <div class="container-fluid bg-white">
@@ -28,10 +28,13 @@
           <h1 class="h2">Liste des <?php echo ucfirst($table); ?>s</h1>
         </div>
         <table class="table">
-          <a href="?action=create" class="btn btn-primary">
-            <i class="bi bi-plus"></i>
-            Ajouter
-          </a>
+
+            <?php if ($table !== 'adherent') : ?>
+              <a href="?action=create" class="btn btn-primary">
+                <i class="bi bi-plus"></i>
+                Ajouter
+              </a>
+            <?php endif; ?>
           <!-- Table headings -->
           <thead>
             <tr>
