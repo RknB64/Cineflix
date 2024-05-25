@@ -108,6 +108,10 @@ abstract class MyPdo extends DbConnect
             $newValues = array_map(fn ($property) => $object->$property, $columns);
 
             $isAdded = $query->execute($newValues);
+
+            // ajoute le nouvel id à l'objet
+            $object->id = $db->lastInsertId();
+
         } catch (PDOException $e) {
 
             die("Erreur !: " . $e->getMessage()); // TODO enlever les die()
