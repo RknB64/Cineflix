@@ -5,6 +5,7 @@ class FilmDetail
     public int    $id;
     public string $titre;
     public string $description;
+    public string $etat;
     public string $duree;
     public int    $id_affiche;
     public string $date_sortie;
@@ -23,6 +24,7 @@ class FilmDetail
         $this->id = $id;
         $this->titre = $detailFilm->titre;
         $this->description = $detailFilm->description;
+        $this->etat = $detailFilm->etat;
         $this->duree = $detailFilm->duree;
         $this->id_affiche = $detailFilm->id_affiche;
         $this->date_sortie = $detailFilm->date_sortie;

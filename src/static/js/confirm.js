@@ -18,6 +18,8 @@ const docChampsSupp = document.getElementById(checkSupp);
 let champsToMod = null;
 let form = null;
 
+const btnAchatStream = 'btn-achat-stream';
+
 // Vérification des champs vides
 function verifChampVideNom(){
     verifierChampVide(champsNom, btnNom);
@@ -84,6 +86,10 @@ function confirmationModalSupp(){
     ouvrirModal(checkSupp);
 }
 
+function confirmationModalAchatStream(){
+    ouvrirModal(btnAchatStream);
+}
+
 function ouvrirModal(champs) {
     const champ = document.getElementById(champs);
     champsToMod = champs;
@@ -103,6 +109,9 @@ function ouvrirModal(champs) {
             break;
         case checkSupp:
             form = 'formSuppCompte';
+            break;
+        case btnAchatStream:
+            form = 'formulaire-streaming';
             break;
         default:
             form = null;
