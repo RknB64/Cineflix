@@ -109,7 +109,7 @@ if (isset($_GET['action']) && $_GET['action'] !== 'connexion') {
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="?action=compte">Mon Compte</a></li>
                             <?php if (CurrentUser::isAdmin()) { ?>
-                                <li><a class="dropdown-item" href="#">Administration</a></li>
+                                <li><a class="dropdown-item" href="?action=admin">Administration</a></li>
                             <?php } else { ?>
                                 <li><a class="dropdown-item" href="#">Mes films</a></li>
                             <?php } ?>
