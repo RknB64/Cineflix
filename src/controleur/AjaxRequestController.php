@@ -42,6 +42,12 @@ class AjaxRequestController extends Controller
                 http_response_code($code);
                 break;
 
+            case "add-film":
+                $newAdherent = AjaxHandler::addFilm($_POST);
+                $code = $newAdherent !== null ? 200 : 500;
+                http_response_code($code);
+                echo json_encode($newAdherent);
+                break;
         }
     }
 

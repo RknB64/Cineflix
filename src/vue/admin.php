@@ -53,7 +53,7 @@
                       <th>État</th>
                       <th>Date de Sortie</th>
                       <th>Affiche</th>
-                      <th>Date dExpiration</th>
+                      <th>Date d\'expiration</th>
                       ';
                   break;
 
@@ -76,6 +76,7 @@
           </thead>
           <tbody>
             <!-- Table data -->
+            <!-- formulaire pour ajouter un film -->
             <?php foreach ($data as $item) : ?>
                 <tr id="<?= 'tr-'.$item->id ?>">
                 <?php
@@ -111,19 +112,47 @@
 
 
                   <?php if ($table === 'adherent') : ?>
-                    <button onclick="AjaxAdmin.ajaxToggleAdmin(event)" class="btn btn-warning" data-idadherent="<?= $item->id ?>">
+                    <button onclick="AjaxAdmin.toggleAdmin(event)" class="btn btn-warning" data-idadherent="<?= $item->id ?>">
                         <i class="bi bi-pencil"></i> <!-- Pencil icon for update -->
                         Toggle admin
                     </button>
                   <?php endif; ?>
 
-                    <button onclick="AjaxAdmin.ajaxDelete(event, {table: '<?=$table?>' })" class="btn btn-danger" data-id="<?= $item->id ?>">
+                    <button onclick="AjaxAdmin.delete(event, {table: '<?=$table?>' })" class="btn btn-danger" data-id="<?= $item->id ?>">
                         <i class="bi bi-trash"></i> <!-- Pencil icon for update -->
                     </button>
 
                 </td>
               </tr>
             <?php endforeach; ?>
+
+            <?php if($table === 'film'): ?>
+                <tr id="film-form-tr">
+                    <form id="film-form">
+
+
+                                <td></td>
+                                <td><input name="titre" class="form-control" type="text" placeholder="titre"></td>
+                                <td><input name="description" class="form-control" type="text" placeholder="description"></td>
+                                <td><input name="duree" class="form-control" type="text" placeholder="durée"></td>
+                                <td> <select name="etat" class="form-control">
+                                    <option value="cinema">cinema</option>
+                                    <option value="streaming">streaming</option>
+                                </select>
+                                </td>
+                                <td><input name="date_sortie" class="form-control" type="date"></td>
+                                <td><input name="id_affiche" class="form-control" type="number"></td>
+                                <td><input name="date_expiration" class="form-control" type="date"></td>
+                                <td>
+                                    <div onclick="AjaxAdmin.addFilm()" class="btn btn-primary" >
+                                        <i class="bi bi-plus"></i>
+                                    </div>
+                                </td>
+
+                    </form>
+                </tr>
+            <?php endif; ?>
+
 
           </tbody>
         </table>

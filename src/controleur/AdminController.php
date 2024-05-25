@@ -1,6 +1,7 @@
 
 <?php
 
+// Note : Les modifications sur les films et les adhérents sur cette vue sont réalisés avex ajax par le fichier ajaxAdminOperation.js
 class AdminController extends Controller
 {
 
