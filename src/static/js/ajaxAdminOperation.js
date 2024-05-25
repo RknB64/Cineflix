@@ -1,53 +1,69 @@
 
-function ajaxToggleAdmin(event) {
+class AjaxAdmin {
 
-  const idAdherent = event.target.dataset.idadherent;
+  constructor() {
 
-  $.ajax({
-    type: "POST",
-    url: "?action=ajaxRequest",
-    data: {
-      idAdherent: idAdherent,
-      request: 'toggle-admin'
-    },
-    beforeSend: function() {
-      console.log( idAdherent );
-    },
-    error: function() {
-      alert("Erreur, veuillez réessayer")
-    },
-    success: function() {
+  }
 
-      const td = $('#estAdmin-' + idAdherent);
-      let text = td.html() === 'Oui' ? 'Non' : 'Oui';
-      td.html(text)
+  static ajaxToggleAdmin(event) {
+
+    const idAdherent = event.target.dataset.idadherent;
+
+    $.ajax({
+      type: "POST",
+      url: "?action=ajaxRequest",
+      data: {
+        idAdherent: idAdherent,
+        request: 'toggle-admin'
+      },
+      beforeSend: function() {
+        console.log(idAdherent);
+      },
+      error: function() {
+        alert("Erreur, veuillez réessayer")
+      },
+      success: function() {
+
+        const td = $('#estAdmin-' + idAdherent);
+        let text = td.html() === 'Oui' ? 'Non' : 'Oui';
+        td.html(text)
+      }
+    });
+
+  }
+
+  static ajaxDelete(event, params) {
+    switch (params.table) {
+      case 'adherent':
+        this.ajaxDeleteAdherent(event);
+        break;
     }
-  });
+  }
 
-}
+  static ajaxDeleteAdherent(event) {
 
-function ajaxDeleteAdherent(event) {
+    const idAdherent = event.target.dataset.id;
 
-  const idAdherent = event.target.dataset.id;
+    $.ajax({
+      type: "POST",
+      url: "?action=ajaxRequest",
+      data: {
+        idAdherent: idAdherent,
+        request: 'delete-adherent'
+      },
+      beforeSend: function() {
+        console.log(idAdherent);
+      },
+      error: function() {
+        alert("Erreur, veuillez réessayer")
+      },
+      success: function(data) {
+        console.log(data);
 
-  $.ajax({
-    type: "POST",
-    url: "?action=ajaxRequest",
-    data: {
-      idAdherent: idAdherent,
-      request: 'delete-adherent'
-    },
-    beforeSend: function() {
-      console.log( idAdherent );
-    },
-    error: function() {
-      alert("Erreur, veuillez réessayer")
-    },
-    success: function(data) {
-      console.log( data );
+        $('#tr-' + idAdherent).remove();
+      }
+    });
 
-      $('#tr-' + idAdherent).remove();
-    }
-  });
+  }
 
 }

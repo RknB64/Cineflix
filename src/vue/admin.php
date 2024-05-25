@@ -111,15 +111,14 @@
 
 
                   <?php if ($table === 'adherent') : ?>
-                    <button onclick="ajaxToggleAdmin(event)" class="btn btn-warning" data-idadherent="<?= $item->id ?>">
+                    <button onclick="AjaxAdmin.ajaxToggleAdmin(event)" class="btn btn-warning" data-idadherent="<?= $item->id ?>">
                         <i class="bi bi-pencil"></i> <!-- Pencil icon for update -->
                         Toggle admin
                     </button>
                   <?php endif; ?>
 
-                    <button onclick="ajaxDeleteAdherent(event)" class="btn btn-danger" data-id="<?= $item->id ?>">
+                    <button onclick="AjaxAdmin.ajaxDelete(event, {table: '<?=$table?>' })" class="btn btn-danger" data-id="<?= $item->id ?>">
                         <i class="bi bi-trash"></i> <!-- Pencil icon for update -->
-                        Supprimer
                     </button>
 
                 </td>
