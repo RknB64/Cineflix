@@ -88,9 +88,9 @@
                           <td>' . $item->description . '</td>
                           <td>' . $item->duree . '</td>
                           <td>' . $item->etat . '</td>
-                          <td>' . $item->date_sortie . '</td>
+                          <td>' . (new DateTime($item->date_sortie))->format('d/m/y') . '</td>
                           <td>' . $item->id_affiche . '</td>
-                          <td>' . $item->date_expiration . '</td>
+                          <td>' . (new DateTime($item->date_expiration))->format('d/m/y') . '</td>
                         ';
                     break;
 
@@ -100,7 +100,7 @@
                           <td>' . $item->nom . '</td>
                           <td>' . $item->prenom . '</td>
                           <td>' . $item->mail . '</td>
-                          <td>' . $item->date_creation . '</td>
+                          <td>' . (new DateTime($item->date_creation))->format('d/m/y') . '</td>
                           <td id="estAdmin-'.$item->id .'">' . ($item->estAdmin ? 'Oui' : 'Non') . '</td>
                           <td>' . $item->getVilleName() . '</td>
                       ';
