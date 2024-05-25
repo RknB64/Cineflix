@@ -1,40 +1,45 @@
+<?php
+/*
+* Cette vue utilise les fonctions ajax situées dans le fichier ajaxAdminOperation.js
+* pour toutes les opérations sur les adhérents et les films
+*/
+?>
 
 <script src="static/js/ajaxAdminOperation.js" defer></script>
 
 <body>
-  <div class="container-fluid bg-white">
-    <div class="row">
+  <div class="bg-white">
+    <div class="d-flex">
       <!-- Sidebar -->
-      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-        <div class="sidebar-sticky">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link active" href="">Dashboard</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="?action=admin&table=film">Film</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="?action=admin&table=adherent">Adherent</a>
-            </li>
-          </ul>
+    <div id="admin-sidebar" class="d-flex flex-column p-3 bg-light" style="width: 280px;">
+        <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
+          <i class="bi bi-pencil-square mx-3"></i>
+          <span class="fs-4">Administration</span>
         </div>
-      </nav>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item">
+            <a class="nav-link link-dark <?= $table === 'film' ? 'active text-white' : '' ?>" href="?action=admin&table=film"> 
+                <i class="bi bi-film"></i>
+                Films
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link-dark <?= $table === 'adherent' ? 'active text-white' : '' ?>" href="?action=admin&table=adherent">
+              <i class="bi bi-person-fill"></i>
+              Adhérents
+            </a>
+          </li>
+        </ul>
+        <hr>
+      </div>
 
       <!-- Main Content -->
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">Liste des <?php echo ucfirst($table); ?>s</h1>
         </div>
-        <table class="table">
-
-            <?php if ($table !== 'adherent') : ?>
-              <a href="?action=create" class="btn btn-primary">
-                <i class="bi bi-plus"></i>
-                Ajouter
-              </a>
-            <?php endif; ?>
+        <table class="table table-responsive">
           <!-- Table headings -->
           <thead>
             <tr>
