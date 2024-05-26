@@ -126,6 +126,7 @@
               </tr>
             <?php endforeach; ?>
 
+            <!-- formulaire pour ajouter un film -->
             <?php if($table === 'film'): ?>
                 <tr id="film-form-tr">
                     <form id="film-form">

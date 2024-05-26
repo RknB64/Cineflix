@@ -1,4 +1,6 @@
-
+/**
+* @description Collection de fonctions pour réaliser les opérations d'administration depuis la page admin
+**/
 class AjaxAdmin {
 
   static toggleAdmin(event) {
@@ -20,6 +22,7 @@ class AjaxAdmin {
       },
       success: function() {
 
+        // change la case admin de la table
         const td = $('#estAdmin-' + idAdherent);
         let text = td.html() === 'Oui' ? 'Non' : 'Oui';
         td.html(text)
@@ -29,19 +32,20 @@ class AjaxAdmin {
   }
 
   static delete(event, params) {
+    console.log(params.table);
     switch (params.table) {
       case 'adherent':
         this.deleteAdherent(event);
         break;
       case 'film':
-        // TODO
+        this.deleteFilm(event);
         break;
     }
   }
 
   static deleteAdherent(event) {
 
-    const idAdherent = event.target.dataset.id;
+    const idAdherent = event.currentTarget.dataset.id;
 
     $.ajax({
       type: "POST",
@@ -62,6 +66,32 @@ class AjaxAdmin {
 
   }
 
+  static deleteFilm(event) {
+
+    const idFilm = event.currentTarget.dataset.id;
+    console.log(idFilm);
+
+    $.ajax({
+      type: "POST",
+      url: "?action=ajaxRequest",
+      data: {
+        idFilm: idFilm,
+        request: 'delete-film'
+      },
+      beforeSend: function() {
+      },
+      error: function() {
+        alert("Erreur, veuillez réessayer")
+      },
+      success: function(response) {
+        console.log(response);
+        $('#tr-' + idFilm).remove();
+      }
+    });
+
+  }
+
+  // ajoute un film dans la bd, puis dans la table
   static addFilm() {
 
     const form = document.querySelector('#film-form');
@@ -82,27 +112,49 @@ class AjaxAdmin {
         console.log(e);
         alert("Erreur, vérifiez les informations fournies et réessayez")
       },
-      success: function(newAdherent) {
-        console.log( newAdherent );
-        const formJq = $("#film-form");
-        formJq.trigger("reset");
+      success: function(newFilm) {
+        this.addFilmToTable(newFilm);
+      }.bind(this)
 
-        const tr = document.createElement('tr');
-        tr.id = 'tr-'+newAdherent.id;
-
-        Object.entries(newAdherent).forEach(info => {
-          const key = info[0];
-          const value = info[1];
-
-          const td = document.createElement('td');
-          td.innerText = value;
-          tr.append(td);
-        });
-        const firstTr = document.querySelector("#film-form-tr");
-        firstTr.before(tr);
-      }
     });
+  }
 
+  // ajoute un film dans la table
+  static addFilmToTable(newFilm) {
+
+    const formJq = $("#film-form");
+    formJq.trigger("reset");
+
+    const tr = document.createElement('tr');
+    tr.id = 'tr-' + newFilm.id;
+
+    Object.entries(newFilm).forEach(info => {
+      const value = info[1];
+
+      const td = document.createElement('td');
+      td.innerText = value;
+      tr.append(td);
+    });
+    tr.append(this.getDeleteButton(newFilm.id, 'film'));
+    const firstTr = document.querySelector("#film-form-tr");
+    firstTr.before(tr);
+  }
+
+  // renvoi un td contenant le bouton pour supprimer la ligne
+  static getDeleteButton(objectId, table) {
+    const td = document.createElement('td');
+
+    const button = document.createElement('button');
+    button.setAttribute('onclick', `AjaxAdmin.delete(event, {table: '${table}' })`);
+    button.setAttribute('data-id', objectId);
+    button.classList.add('btn', 'btn-danger');
+    const icon = document.createElement('i');
+    icon.classList.add('bi', 'bi-trash');
+
+    button.appendChild(icon);
+    td.appendChild(button);
+
+    return td;
   }
 
 }

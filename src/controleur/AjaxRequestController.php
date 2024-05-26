@@ -17,7 +17,6 @@ class AjaxRequestController extends Controller
 
         $this->request = $_POST['request'];
 
-        /* die($this->request . " ". AjaxHandler::TOGGLE_ADMIN); */
         switch ($this->request) {
 
             case "autocomplete-ville":
@@ -38,6 +37,12 @@ class AjaxRequestController extends Controller
 
             case "delete-adherent":
                 $isDeleted = AjaxHandler::deleteAdherent($_POST['idAdherent']);
+                $code = $isDeleted ? 200 : 500;
+                http_response_code($code);
+                break;
+
+            case "delete-film":
+                $isDeleted = AjaxHandler::deleteFilm($_POST['idFilm']);
                 $code = $isDeleted ? 200 : 500;
                 http_response_code($code);
                 break;

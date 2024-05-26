@@ -26,13 +26,18 @@ class AjaxHandler
 
     public static function deleteAdherent(int $idAdherent): bool
     {
-
         if ($idAdherent !== CurrentUser::getId()) {
             $adherentBD = new AdherentBD();
             return $adherentBD->delete($idAdherent);
         } else {
             return false;
         }
+    }
+
+    public static function deleteFilm(int $idFilm): bool
+    {
+        $filmBD = new FilmBD();
+        return $filmBD->delete($idFilm);
     }
 
     public static function addFilm($post): ?object
