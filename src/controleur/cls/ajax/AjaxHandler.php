@@ -48,12 +48,15 @@ class AjaxHandler
         $film->duree            = Utilities::sanitaze($post['duree']);
         $film->etat             = Utilities::sanitaze($post['etat']);
         $film->date_sortie      = Utilities::sanitaze($post['date_sortie']);
-        $film->date_expiration  = Utilities::sanitaze($post['date_expiration']);
         $film->id_affiche       = intval($post['id_affiche']);
+        $film->date_expiration  = Utilities::sanitaze($post['date_expiration']);
 
         $filmBd = new FilmBD();
 
         if ($filmBd->add($film)) {
+            // format les dates avant de les renvoyer à la vue
+            $film->date_sortie = Utilities::formatDate($film->date_sortie);
+            $film->date_expiration = Utilities::formatDate($film->date_expiration);
             return $film;
         } else {
             return null;

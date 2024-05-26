@@ -47,7 +47,7 @@
                 case 'film':
                   echo '
                       <th>id</th>
-                      <th>Title</th>
+                      <th>Titre</th>
                       <th>Description</th>
                       <th>Durée</th>
                       <th>État</th>

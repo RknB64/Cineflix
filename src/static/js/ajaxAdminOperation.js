@@ -122,22 +122,40 @@ class AjaxAdmin {
   // ajoute un film dans la table
   static addFilmToTable(newFilm) {
 
-    const formJq = $("#film-form");
-    formJq.trigger("reset");
+    $("#film-form").trigger("reset");
 
     const tr = document.createElement('tr');
     tr.id = 'tr-' + newFilm.id;
 
-    Object.entries(newFilm).forEach(info => {
-      const value = info[1];
 
-      const td = document.createElement('td');
-      td.innerText = value;
-      tr.append(td);
-    });
+    let td = document.createElement('td');
+    td.innerText = newFilm.id;
+    tr.append(td);
+    td = document.createElement('td');
+    td.innerText = newFilm.titre;
+    tr.append(td);
+    td = document.createElement('td');
+    td.innerText = newFilm.description;
+    tr.append(td);
+    td = document.createElement('td');
+    td.innerText = newFilm.duree;
+    tr.append(td);
+    td = document.createElement('td');
+    td.innerText = newFilm.etat;
+    tr.append(td);
+    td = document.createElement('td');
+    td.innerText = newFilm.date_sortie;
+    tr.append(td);
+    td = document.createElement('td');
+    td.innerText = newFilm.id_affiche;
+    tr.append(td);
+    td = document.createElement('td');
+    td.innerText = newFilm.date_expiration;
+    tr.append(td);
+
     tr.append(this.getDeleteButton(newFilm.id, 'film'));
-    const firstTr = document.querySelector("#film-form-tr");
-    firstTr.before(tr);
+    const lastTr = document.querySelector("#film-form-tr");
+    lastTr.before(tr);
   }
 
   // renvoi un td contenant le bouton pour supprimer la ligne

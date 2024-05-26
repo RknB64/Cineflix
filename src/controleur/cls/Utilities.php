@@ -16,4 +16,10 @@ class Utilities
     {
         echo '<script>alert("'.$message.'")</script>';
     }
+
+
+    public static function formatDate(string $date): string
+    {
+        return (new DateTime($date))->format('d/m/y');
+    }
 }
