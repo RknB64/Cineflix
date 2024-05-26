@@ -7,8 +7,6 @@ class AdminController extends Controller
 
     // Classes PDO utilisées
     private FilmBD      $filmBD;
-    private StreamBD    $streamBD;
-    private AchatBD     $achatBD;
     private AdherentBD  $adherentBD;
 
     // Variables utilisées par la vue
@@ -29,23 +27,18 @@ class AdminController extends Controller
         $this->view     = 'admin';
 
         $this->filmBD       = new FilmBD();
-        $this->streamBD     = new StreamBD();
-        $this->achatBD      = new AchatBD();
         $this->adherentBD   = new AdherentBD();
 
-        $this->table = isset($_GET['table']) ? $_GET['table'] : 'admin';
+        $this->table = isset($_GET['table']) ? $_GET['table'] : 'film';
 
 
         // Load the data based on the selected table
         switch ($this->table) {
-            case 'stream':
-                $this->data = $this->streamBD->selectAll();
-                break;
-            case 'achat':
-                $this->data = $this->achatBD->selectAll();
-                break;
             case 'adherent':
                 $this->data = $this->adherentBD->selectAll();
+                break;
+            case 'film':
+                $this->data = $this->filmBD->selectAll();
                 break;
             default:
                 $this->data = $this->filmBD->selectAll();
