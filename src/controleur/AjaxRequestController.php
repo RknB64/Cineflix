@@ -48,7 +48,7 @@ class AjaxRequestController extends Controller
                 break;
 
             case "add-film":
-                $newAdherent = AjaxHandler::addFilm($_POST);
+                $newAdherent = AjaxHandler::addFilm($_POST, $_FILES);
                 $code = $newAdherent !== null ? 200 : 500;
                 http_response_code($code);
                 echo json_encode($newAdherent);

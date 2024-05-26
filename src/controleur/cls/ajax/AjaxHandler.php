@@ -40,16 +40,18 @@ class AjaxHandler
         return $filmBD->delete($idFilm);
     }
 
-    public static function addFilm($post): ?object
+    public static function addFilm($post, $files): ?object
     {
         $film = new Film();
+
         $film->titre            = Utilities::sanitaze($post['titre']);
         $film->description      = Utilities::sanitaze($post['description']);
         $film->duree            = Utilities::sanitaze($post['duree']);
         $film->etat             = Utilities::sanitaze($post['etat']);
         $film->date_sortie      = Utilities::sanitaze($post['date_sortie']);
-        $film->id_affiche       = intval($post['id_affiche']);
         $film->date_expiration  = Utilities::sanitaze($post['date_expiration']);
+
+        $film->id_affiche       = Utilities::addFilmImage($files["image"]);
 
         $filmBd = new FilmBD();
 

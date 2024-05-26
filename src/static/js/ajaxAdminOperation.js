@@ -106,13 +106,15 @@ class AjaxAdmin {
       contentType: false,
       dataType: 'json',
       beforeSend: function() {
-        console.log();
       },
-      error: function(e) {
-        console.log(e);
-        alert("Erreur, vérifiez les informations fournies et réessayez")
+      error: function(xhr, status, error) {
+        console.log("Status:", status);
+        console.log("Error:", error);
+        console.log("Response Text:", xhr.responseText);
+        alert("Erreur, vérifiez les informations fournies et réessayez");
       },
       success: function(newFilm) {
+        console.log(newFilm);
         this.addFilmToTable(newFilm);
       }.bind(this)
 
