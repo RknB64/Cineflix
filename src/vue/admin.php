@@ -129,26 +129,25 @@
             <!-- formulaire pour ajouter un film -->
             <?php if($table === 'film'): ?>
                 <tr id="film-form-tr">
-                    <form id="film-form">
+                    <form id="film-form" enctype="multipart/form-data">
 
-
-                                <td></td>
-                                <td><input name="titre" class="form-control" type="text" placeholder="titre"></td>
-                                <td><input name="description" class="form-control" type="text" placeholder="description"></td>
-                                <td><input name="duree" class="form-control" type="text" placeholder="durée"></td>
-                                <td> <select name="etat" class="form-control">
-                                    <option value="cinema">cinema</option>
-                                    <option value="streaming">streaming</option>
-                                </select>
-                                </td>
-                                <td><input name="date_sortie" class="form-control" type="date"></td>
-                                <td><input name="id_affiche" class="form-control" type="number"></td>
-                                <td><input name="date_expiration" class="form-control" type="date"></td>
-                                <td>
-                                    <div onclick="AjaxAdmin.addFilm()" class="btn btn-primary" >
-                                        <i class="bi bi-plus"></i>
-                                    </div>
-                                </td>
+                        <td></td>
+                        <td><input name="titre" class="form-control" type="text" placeholder="titre"></td>
+                        <td><input name="description" class="form-control" type="text" placeholder="description"></td>
+                        <td><input name="duree" class="form-control" type="text" placeholder="durée"></td>
+                        <td> <select name="etat" class="form-control">
+                            <option value="cinema">cinema</option>
+                            <option value="streaming">streaming</option>
+                        </select>
+                        </td>
+                        <td><input name="date_sortie" class="form-control" type="date"></td>
+                        <td><input name="image" class="form-control" type="file"></td>
+                        <td><input name="date_expiration" class="form-control" type="date"></td>
+                        <td>
+                            <div onclick="AjaxAdmin.addFilm()" class="btn btn-primary" >
+                                <i class="bi bi-plus"></i>
+                            </div>
+                        </td>
 
                     </form>
                 </tr>
