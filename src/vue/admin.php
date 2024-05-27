@@ -161,23 +161,6 @@
     </div>
   </div>
 
-  <!-- Bootstrap JS (optional) -->
-  <script>
-    // Function to get URL parameters
-    function getUrlParameter(name) {
-      name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]');
-      var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-      var results = regex.exec(location.search);
-      return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-    };
-
-    // Check for success parameter in URL
-    var successParam = getUrlParameter('success');
-    if (successParam === '1') {
-      // If success parameter is present, show the success alert
-      alert('Film created successfully!');
-    }
-  </script>
 </body>
 
 </html>
