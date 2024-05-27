@@ -55,6 +55,8 @@ class DetailFilmController extends Controller
                 'titre'               => $this->titre,
                 'detailFilm'          => $this->detailFilm,
                 'villesAvecCinemas'   => $this->villesAvecCinemas,
+                'streamBought'        => $this->streamBought,
+                'enoughPoints'        => $this->enoughPoints
             );
         }
 
