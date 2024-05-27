@@ -26,10 +26,11 @@ const CLASSES  = UserRegister::CLASSES;
             <?php foreach ($formFields as $field) : ?>
 
                 <div class="w-75 mx-auto mb-3">
+                    <?php $id = 'inscription_'. $field[NAME] ?>
                     <?php if ($field[TYPE] != 'hidden') : ?>
                         <label for='<?= $id ?>'> <?= $field[LABEL] ?> </label>
                     <?php endif; ?>
-                    <input class="<?= "form-control " . $field[CLASSES] ?>" type="<?= $field[TYPE] ?>" name="<?= $field[NAME] ?>" id="<?= 'inscription_' . $field[NAME] ?>" <?= $field[PROPERTIES] ?>>
+                    <input class="<?= "form-control " . $field[CLASSES] ?>" type="<?= $field[TYPE] ?>" name="<?= $field[NAME] ?>" id="<?= $id ?>" <?= $field[PROPERTIES] ?>>
 
 
                 </div>
