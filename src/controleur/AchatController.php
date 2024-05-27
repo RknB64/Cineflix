@@ -73,6 +73,7 @@ class AchatController extends Controller
             $film = ($this->filmBD->selectById($seance->id_film))->titre;
 
             PdfForm::generateBillet($film, $this->cinemaNom, $this->villeNom, $day, $dayNum, $month, $hour, $minute, $this->nbPlaces,$adherent->numero_billet);
+            PdfForm::generateBillet($film, $this->cinemaNom, $this->villeNom, $day, $dayNum, $month, $hour, $minute, $this->nbPlaces,$adherent->numero_billet);
         } else {
             echo 'pas de session';
         }
