@@ -30,7 +30,7 @@ class DetailFilmController extends Controller
         $this->detailFilm = new FilmDetail($_GET["id"]);
         $this->villesAvecCinemas = $this->getVillesData();
 
-        if (CurrentUser::isLoggedIn() && $this->detailFilm->seances === array()) {
+        if (CurrentUser::isLoggedIn()) {
             $this->adherent = CurrentUser::getAdherent();
             $this->enoughPoints = $this->adherent->points >= 15;
             $this->streamBD = new StreamBD();
