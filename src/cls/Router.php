@@ -3,7 +3,6 @@ session_start();
 
 class Router
 {
-
     public static function redirect($action, $requestMethod = '')
     {
         switch ($action) {
