@@ -10,3 +10,5 @@ Les comptes suivant sont disponibles afin de tester l'application :
 |---|---|---|
 | Utilisateur | user@mail.com | cine |
 | Admin | admin@mail.com | cine |
+
+Note : pour tester l'ajout d'un film depuis l'administration, seul les formats jpg et jpeg sont supportés.
