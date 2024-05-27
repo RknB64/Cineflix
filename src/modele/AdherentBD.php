@@ -8,6 +8,7 @@ class AdherentBD extends MyPdo
     public const CLASS_OBJ    = "Adherent";
 
     private static array $columns = array(
+       
         "nom",
         "prenom",
         "mail",
@@ -16,6 +17,10 @@ class AdherentBD extends MyPdo
         "points",
         "date_creation",
         "estAdmin",
+        "numero_adherent",
+        "numero_billet",
+        
+        
     );
 
     // @Override
@@ -25,7 +30,14 @@ class AdherentBD extends MyPdo
         $ad->estAdmin = 0;
         $ad->date_creation = date('Y-m-d H:i:s');
         $ad->points = 0;
+        
+        if (empty($ad->numero_adherent)) {
 
+            $ad->numero_adherent = Utilities::generateUniqueNumber($ad->mail);
+          
+        }
+
+        
         // appelle la fonction add de MyPdo
         return parent::add($ad);
     }

@@ -35,13 +35,14 @@ class AchatController extends Controller
         /* $this->render($this->view, $this->data); */
 
         if (isset($_POST)) {
-
+            $adherent = CurrentUser::getAdherent();
             $this->adherentBD = new AdherentBD();
             $adhToMod = $this->adherentBD->selectById(CurrentUser::getId());
             $adhToMod->points += 15;
             $this->adherentBD->update($adhToMod);
             CurrentUser::updateAdherent($adhToMod);
 
+            $adherent = CurrentUser::getAdherent();
             $this->villeId  = $_POST['ville-select'];
             $this->cinemaId = $_POST['cinema-select'];
             $this->seanceId = $_POST['seance-select'];
@@ -71,7 +72,7 @@ class AchatController extends Controller
             $film = new Film();
             $film = ($this->filmBD->selectById($seance->id_film))->titre;
 
-            PdfForm::generateBillet($film, $this->cinemaNom, $this->villeNom, $day, $dayNum, $month, $hour, $minute, $this->nbPlaces);
+            PdfForm::generateBillet($film, $this->cinemaNom, $this->villeNom, $day, $dayNum, $month, $hour, $minute, $this->nbPlaces,$adherent->numero_billet);
         } else {
             echo 'pas de session';
         }
