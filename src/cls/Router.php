@@ -3,7 +3,6 @@ session_start();
 
 class Router
 {
-
     public static function redirect($action, $requestMethod = '')
     {
         switch ($action) {
@@ -54,6 +53,10 @@ class Router
 
             case 'compte':
                 new AdherentCompteController($requestMethod);
+                break;
+
+            case 'admin':
+                new AdminController();
                 break;
 
             default:

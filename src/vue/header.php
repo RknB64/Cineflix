@@ -74,6 +74,11 @@ if (isset($_GET['action']) && $_GET['action'] !== 'connexion') {
                     <li class="nav-item">
                         <a class="nav-link text-white" href="?action=streaming">STREAMING</a>
                     </li>
+                    <?php if (UserManager::isCurrentUserAdmin()) : ?>
+                        <li>
+                            <a href="?action=admin" class="nav-link text-white">ADMIN</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
                 <form class="d-flex" role="recherche" id="search-box" method="GET">
                     <div>
@@ -98,18 +103,23 @@ if (isset($_GET['action']) && $_GET['action'] !== 'connexion') {
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
                             <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
                         </svg>
-                        </button>
-                        <?php if (CurrentUser::isLoggedIn()) { ?>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="?action=compte">Mon Compte</a></li>
-                                <?php if (CurrentUser::isAdmin()) { ?>
-                                    <li><a class="dropdown-item" href="#">Administration</a></li>
-                                <?php } else { ?>
-                                    <li><a class="dropdown-item" href="?action=mes-streams">Mes films</a></li>
-                                <?php } ?>
-                                <li><a class="dropdown-item" href="?action=logout">Se déconnecter</a></li>
-                            </ul>
-                        <?php } ?>
+                    </button>
+
+                    <?php if (CurrentUser::isLoggedIn()) { ?>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="?action=compte">Mon Compte</a></li>
+                            <?php if (CurrentUser::isAdmin()) { ?>
+                                <li><a class="dropdown-item" href="?action=admin">Administration</a></li>
+                            <?php } ?>
+                            <li><a class="dropdown-item" href="?action=mes-streams">Mes films</a></li>
+                            <li><a class="dropdown-item" href="?action=logout">Se déconnecter</a></li>
+                        </ul>
+                    <?php } ?>
+
+
+                       
+
+                            
             </div>
         </div>
         <!-- session qui a le bom de utilsateur -->

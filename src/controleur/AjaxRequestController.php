@@ -14,13 +14,13 @@ class AjaxRequestController extends Controller
     public function __construct()
     {
         $this->titre = '';
-        $this->view = 'component/ajaxCompletionList';
 
         $this->request = $_POST['request'];
 
         switch ($this->request) {
 
-            case AjaxHandler::AUTOCOMPLETE_VILLE:
+            case "autocomplete-ville":
+                $this->view = 'component/ajaxCompletionList';
                 $this->villeBD = new VilleBD();
                 $colName = 'nom';
 
@@ -28,8 +28,30 @@ class AjaxRequestController extends Controller
                 $this->render($this->view, $this->data, false);
                 break;
 
-            default:
-                // TODO
+            case "toggle-admin":
+                $isUpdated = AjaxHandler::toggleAdmin($_POST['idAdherent']);
+                // on set le code de réponse selon si l'update à réussi ou non. (code 500 va run le block error dans l'ajax)
+                $code = $isUpdated ? 200 : 500;
+                http_response_code($code);
+                break;
+
+            case "delete-adherent":
+                $isDeleted = AjaxHandler::deleteAdherent($_POST['idAdherent']);
+                $code = $isDeleted ? 200 : 500;
+                http_response_code($code);
+                break;
+
+            case "delete-film":
+                $isDeleted = AjaxHandler::deleteFilm($_POST['idFilm']);
+                $code = $isDeleted ? 200 : 500;
+                http_response_code($code);
+                break;
+
+            case "add-film":
+                $newAdherent = AjaxHandler::addFilm($_POST, $_FILES);
+                $code = $newAdherent !== null ? 200 : 500;
+                http_response_code($code);
+                echo json_encode($newAdherent);
                 break;
         }
     }

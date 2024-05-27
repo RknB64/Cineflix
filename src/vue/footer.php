@@ -5,6 +5,7 @@
 </body>
 <footer class="border border-light-50 border-1 rounded px-2 py-2 shadow text-white">
 
+    <span>Admin</span>
     <span>About us</span>
     <span>CGU</span>
     <span>Politique de confidentialité</span>

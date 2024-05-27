@@ -108,6 +108,9 @@ abstract class MyPdo extends DbConnect
             $newValues = array_map(fn ($property) => $object->$property, $columns);
 
             $isAdded = $query->execute($newValues);
+
+            // ajoute le nouvel id à l'objet
+            $object->id = $db->lastInsertId();
         } catch (PDOException $e) {
 
             die("Erreur !: " . $e->getMessage()); // TODO enlever les die()
@@ -238,6 +241,44 @@ abstract class MyPdo extends DbConnect
         return $resultat;
     }
 
+
+    /**
+     * Retourne la valeur max d'une colonne donnée, et null en cas d'erreur
+     * Ne fonctionne que sur les colonnes de type *int*
+     *
+     * @param string $column Nom de la colonne où chercher la valeur
+     * @return int || null
+     **/
+    public function getMaxValue(string $column): ?int
+    {
+        $db = self::connexion();
+        $resultat = null;
+
+        // vérifie que la colonne existe dans la table
+        if (!in_array($column, $this->columns()) && $column !== $this->id()) {
+            return null;
+        }
+
+        try {
+            $query = $db->prepare("SELECT MAX($column) AS max FROM " . $this->table());
+            $query->execute();
+
+            $resultat = $query->fetch(PDO::FETCH_ASSOC)["max"];
+
+            // vérifie que le résultat est un int
+            if (is_numeric($resultat)) {
+                $resultat = (int)$resultat;
+            } else {
+                $resultat = null;
+            }
+        } catch (PDOException $e) {
+            die("Erreur !: " . $e->getMessage());
+        } finally {
+            $db = null;
+        }
+
+        return $resultat;
+    }
 
     // retourne à partir d'une ligne de query, l'objet associé.
     // repose sur le fait que le nom des variables des objets sont les mêmes que le nom des colonnes sql
