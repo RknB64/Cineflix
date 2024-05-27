@@ -5,9 +5,13 @@ define('DB_USERNAME', 'root');
 define('DB_PASSWORD', 'root@sio');
 define('DB_DATABASE', 'db_cineflix');
 
+/* define('DB_USERNAME', 'promo24'); */
+/* define('DB_PASSWORD', 'user@sio24'); */
+/* define('DB_DATABASE', 'promo24_thibault'); */
+
 // use mariadb for docker, and local host for vm
-// define('DB_HOST', 'mariadb');
-define('DB_HOST', 'localhost');
+ define('DB_HOST', 'mariadb');
+/* define('DB_HOST', 'localhost'); */
 
 define("RACINE", dirname(__DIR__));
 define("AUTOLOAD", RACINE . "/cls/autoload.php");
